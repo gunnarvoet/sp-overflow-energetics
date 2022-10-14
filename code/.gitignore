@@ -1,0 +1,7 @@
+*.ipynb
+purgatory/
+data/
+fig/
+notebooks/
+*.egg-info
+nslib.egg-info/
