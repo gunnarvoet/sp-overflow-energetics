@@ -1,0 +1,75 @@
+path:
+  data: data/
+  input: $data/in/
+  output: $data/out/
+  fig: fig/
+obs:
+  input:
+    towyo: $input/towyo/nc/
+    bathy: $input/bathy/sp_bathy.nc
+    ctd: $input/ctd_ladcp/
+    mp_t1: $input/mp/sp_mp_t01.nc
+  output:
+    towyo_2012_in: $output/ty2012in.nc
+    towyo_2014_in: $output/ty2014in.nc
+    # These are the towyo data with additional output variables
+    towyo_2012: $output/ty2012.nc
+    towyo_2014: $output/ty2014.nc
+    downstream_density_nc: $output/ctd_downstream.nc
+    ape12_nc: $output/ape12.nc
+    ape14_nc: $output/ape14.nc
+    ape12s_nc: $output/ape12s.nc
+    ape14s_nc: $output/ape14s.nc
+    energy_budget: $output/towyo_energy_budget.nc
+model:
+  input:
+    full_model_run: $input/model/full/
+  output:
+    data: $output/model_data.nc
+    energy: $output/model_energy.nc
+    snapshot: $output/model_snapshot.nc
+    energy_snapshot: $output/model_energy_snapshot.nc
+    energy_budget_results_layer: $output/model_energy_budget_results_layer.nc
+    energy_budget_results_layer_08: $output/model_energy_budget_results_layer_08.nc
+    energy_budget_results_layer_08_25: $output/model_energy_budget_results_layer_08_25.nc
+    energy_budget_results_box: $output/model_energy_budget_results_box.nc
+    small_scale_fluxes: $output/model_small_scale_fluxes.nc
+    small_scale_vwf_integrated: $output/model_small_scale_vwf_integrated.nc
+    hp_fluxes: $output/model_hp_fluxes.nc
+    hp_vwf_integrated: $output/model_hp_vwf_integrated.nc
+    sorted_initial_density: $output/sorted_initial_density_field.nc
+    refrho_sorted: $output/refrho_sorted.nc
+parameters:
+  towyo:
+    interfacesg4: 45.94
+    # horizontal integration limits for energy budget [km]
+    # define a range for each
+    energy_budget_upstream_range: [0, 5]
+    energy_budget_dnstream_range: [12, 17]
+  model:
+    # horizontal integration limits for energy budget [km]
+    integration_horizontal_min: 0.0
+    integration_horizontal_max: 17.0
+    # time indices for model analysis period
+    time_min: 100
+    time_max: 150
+    # time index for extracting model snapshot
+    snapshot_ind: 0
+  google_drive_ids:
+    # model data stored on google drive. download with gdown.
+    model_full:
+      # full model data
+      file: sp-model.tar.gz
+      id: 1pOq3UZyrCOaPC_oteM0MbQf0K4mlPOSA
+      file_test: sp-model-test.tar.gz
+      id_test: 1zeo7K-KZ2VWX2jF-PKJXsa0x3GzENag0
+    model_extracted:
+      # extracted data for analysis period
+      file: model_data.nc
+      id: 1TaZde0qcJAxWMfDyC84gDXE1V6rRF8_J
+    model_sorted_initial_density:
+      file: sorted_initial_density_field.nc
+      id: 1U0KNx10ZP9-oJJQ9AnSlXW4EkBLP65DY
+    model_refrho_sorted:
+      file: refrho_sorted.nc
+      id: 1bX-H6F-oEGHL9rGrrBRDiCTppdjGiWLP
