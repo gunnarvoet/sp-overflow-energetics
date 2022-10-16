@@ -8,3 +8,8 @@
 	url = https://github.com/gunnarvoet/sp-data-archive-bathy
 	datalad-id = af35625c-3419-48ad-acae-089bb80dcaec
 	datalad-url = https://github.com/gunnarvoet/sp-data-archive-bathy
+[submodule "data/in/ctd_ladcp"]
+	path = data/in/ctd_ladcp
+	url = https://github.com/gunnarvoet/sp-data-archive-ctd
+	datalad-id = 971063c1-62d6-482e-a151-d012b144f0a5
+	datalad-url = https://github.com/gunnarvoet/sp-data-archive-ctd
