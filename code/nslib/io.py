@@ -1,5 +1,5 @@
 """
-Read and write data.
+Read and write data and figures.
 """
 
 import collections.abc
@@ -9,9 +9,8 @@ from pathlib import Path
 
 import gsw
 import gvpy as gv
-import munch
+import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
 import scipy.signal as sg
 import xarray as xr
 import yaml
@@ -127,18 +126,16 @@ def load_towyo(year: int, cast: int) -> xr.Dataset:
     return t
 
 
-def load_mp_t1() -> munch.Munch:
-    """Load MP T1 .mat file.
+def load_mp_t1() -> xr.Dataset:
+    """Load MP T01.
 
     Returns
     -------
-    mp : munch.Munch
-        Dictionary with MP data.
+    mp : xr.Dataset
+        MP data
     """
     cfg = load_config()
-    matfile = cfg.path.data.joinpath(cfg.obs.mp_t1_mat)
-    tmp = gv.io.loadmat(matfile)
-    mp = tmp["mp"]
+    mp = xr.open_dataset(cfg.obs.input.mp_t1)
     return mp
 
 
@@ -166,6 +163,9 @@ def write_towyo_results(a, file):
 
 def load_ctd_profiles() -> xr.Dataset:
     """Load 2012 and 2014 CTD profiles.
+
+    - Merge into one Dataset.
+    - Calculate potential density referenced to 4000 dbar.
 
     Returns
     -------
@@ -284,3 +284,31 @@ def close_nc(file, remove=True):
             print(f"closing nc file: {file.name}")
             tmp = xr.open_dataset(file)
             tmp.close()
+
+
+def save_png(fname, subdir=None, **kwargs):
+    """Save figure as png to the path defined in config.yml.
+
+    Parameters
+    ----------
+    fname : str
+        Figure name without file extension.
+    """
+    cfg = load_config()
+    if subdir is not None:
+        figdir = cfg.path.fig.joinpath(subdir)
+    else:
+        figdir = cfg.path.fig
+    gv.plot.png(fname, figdir=figdir, **kwargs)
+
+
+def save_pdf(fname, subdir=None):
+    fname = fname + ".pdf"
+    cfg = load_config()
+    if subdir is not None:
+        figdir = cfg.path.fig.joinpath(subdir)
+        figdir.mkdir(exist_ok=True)
+    else:
+        figdir = cfg.path.fig
+    print("saving pdf to {}/".format(figdir))
+    plt.savefig(figdir.joinpath(fname), bbox_inches="tight", dpi=200)

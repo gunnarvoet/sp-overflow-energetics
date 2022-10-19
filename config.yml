@@ -8,7 +8,8 @@ obs:
     towyo: $input/towyo/nc/
     bathy: $input/bathy/sp_bathy.nc
     ctd: $input/ctd_ladcp/
-    mp_t1: $input/mp/sp_mp_t01.nc
+    mp: $input/mp/nc/
+    mp_t1: $input/mp/nc/sp_mp_T01.nc
   output:
     towyo_2012_in: $output/ty2012in.nc
     towyo_2014_in: $output/ty2014in.nc
