@@ -149,7 +149,8 @@ $(MODEL-ENERGY-BUDGET): code/model_energy_budget.py $(DATA_MODEL) data/out/model
 # PLOTS ==========================================================={{{
 ## plots               : Generate all plots
 .PHONY : plots
-plots : plot-map plot-mp plot-energetics plot-model plot-ty-sketch plot-bernoulli
+plots : plot-map plot-mp plot-energetics plot-model plot-ty-sketch plot-ty-overview\
+	    plot-bernoulli plot-momentum-flux plot-form-drag 
 
 # MAPS {{{
 ##   plot-map          : Plot maps
@@ -211,6 +212,13 @@ $(ENERGETICS_SKETCH) : code/plot_towyo_sketch_energetics.py code/nslib/plt.py
 	$(PYTHON) $<
 # }}}
 
+# FORM DRAG {{{
+##   plot-form-drag    : Plot form drag
+plot-form-drag: fig/bottom_pressure.png
+fig/bottom_pressure.png: code/plot_bottom_pressure.py code/nslib/plt.py
+	$(PYTHON) $<
+# }}}
+
 # MOMENTUM FLUX {{{
 ##   plot-momentum-flux: Plot momentum flux estimates
 plot-momentum-flux: fig/momentum-flux.png
@@ -229,6 +237,7 @@ fig/bernoulli_transport.png: code/bernoulli_flux.py code/nslib/bernoulli.py
 ##   plot-model        : Plot model figures
 MODEL_PLOTS=fig/model_steadiness.png\
 			fig/model_snapshot.png\
+			fig/model_setup.png\
 			fig/model_internal_wave_fluxes.png
 plot-model : $(MODEL_PLOTS) $(DATA-MODEL)
 
@@ -240,6 +249,11 @@ fig/model_steadiness.png : code/plot_model_steadiness.py code/nslib/model.py
 ##   plot-mod-snapsh   : Plot model snapshot
 plot-mod-snapsh: fig/model_snapshot.png
 fig/model_snapshot.png : code/plot_model_snapshot.py code/nslib/model.py
+	$(PYTHON) $<
+
+##   plot-mod-setup    : Plot model setup
+plot-mod-setup: fig/model_setup.png
+fig/model_setup.png : code/model_setup.py
 	$(PYTHON) $<
 
 ##   plot-mod-iw-flux  : Plot model internal wave flux snapshot & time series

@@ -1710,6 +1710,7 @@ def PlotEnergeticsLayerBudgetResultsHorizontalTwoIsothermsSourcePositive(
 
 def PlotFormDrag():
     """Plot form drag."""
+    cfg = nsl.io.load_config()
     a = nsl.io.load_towyos()
     ty = a["t12"]
     fig, (ax1, ax2) = plt.subplots(
@@ -1725,10 +1726,11 @@ def PlotFormDrag():
         ty.p_anom,
         levels=np.arange(-160, 170, 10),
         cmap="PuOr",
-        antialiased=True,
+        # antialiased=True,
     )
     for c in h.collections:
         c.set_rasterized(True)
+        c.set_edgecolor("face")
 
     ax1.contour(
         ty.dist,
@@ -1766,18 +1768,15 @@ def PlotFormDrag():
     )
 
     # bottom pressure was saved in model_form_drag.py
-    mbp = xr.open_dataset("data/model_bottom_pressure.nc")
+    mbp = xr.open_dataset(cfg.model.output.bottom_pressure)
     mbp = mbp.swap_dims({"Y": "dist"})
     for g, p in mbp.bottom.groupby("T"):
         ax2.plot(p.dist, p + 60, color="k", alpha=0.01)
     (mbp.bottom.mean(dim="T") + 60).plot(ax=ax2, color="#F06292", label="model")
-    # (mbp.full.mean(dim="T") + 60).plot(
-    #     ax=ax2, color="#F06292", linestyle="--", label="model full"
-    # )
     (a["t12"].swap_dims({"x": "dist"}).BottomPressure - 150).plot(
         ax=ax2, label="towyo 2012"
     )
-    (a["t14"].swap_dims({"x": "dist"}).BottomPressure - 150).plot(
+    (a["t14"].swap_dims({"x": "dist"}).BottomPressure - 130).plot(
         ax=ax2, label="towyo 2014"
     )
     ax2.set(
