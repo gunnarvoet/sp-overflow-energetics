@@ -74,10 +74,10 @@ def drop_ctd():
     dl_drop(directory)
 
 
-def get_towyo():
+def get_mp():
     cfg = nsl.io.load_config()
-    directory = cfg.obs.input.towyo
-    dl_get(directory)
+    mp_file = cfg.obs.input.mp_t1
+    dl_get(mp_file)
 
 
 if __name__ == "__main__":
@@ -86,6 +86,9 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--bathy", help="retrieve bathymetric data", action="store_true"
+    )
+    parser.add_argument(
+        "--mp", help="retrieve MP data", action="store_true"
     )
     parser.add_argument(
         "--ctd", help="retrieve stationary CTD/LADCP data", action="store_true"
@@ -119,6 +122,9 @@ if __name__ == "__main__":
 
     if args.towyo:
         get_towyo()
+
+    if args.mp:
+        get_mp()
 
     if args.model_extracted:
         download_model_extracted()
