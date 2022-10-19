@@ -173,24 +173,25 @@ ENERGETICS_PLOTS=fig/energetics_fields.png\
 				 fig/energy_budget_results.png
 plot-energetics: $(ENERGETICS_PLOTS) $(DATA) $(DATA_MODEL_SNAPSHOTS)
 
-fig/energetics_fields.png: plot_energetics_fields.py\
-						   nslib/plt.py\
+fig/energetics_fields.png: code/plot_energetics_fields.py\
+						   code/nslib/plt.py\
 						   $(DATA_MODEL_SNAPSHOTS)
 	$(PYTHON) $<
-fig/energetics_fields_integrated.png: plot_energetics_fields_integrated.py\
-								   	  nslib/plt.py\
+
+fig/energetics_fields_integrated.png: code/plot_energetics_fields_integrated.py\
+								   	  code/nslib/plt.py\
 						   			  $(DATA_MODEL_SNAPSHOTS)
 	$(PYTHON) $<
-fig/vertical_wave_flux_integrated.png: plot_vertical_wave_flux_integrated.py\
-									   nslib/plt.py\
+fig/vertical_wave_flux_integrated.png: code/plot_vertical_wave_flux_integrated.py\
+									   code/nslib/plt.py\
 									   $(DATA-TOWYO)\
 						   			   $(DATA_MODEL_SNAPSHOTS)
 	$(PYTHON) $<
 
 ##   plot-enrg-bdgt    : Plot energy budget results
 plot-enrg-bdgt: fig/energy_budget_results.png
-fig/energy_budget_results.png: plot_energy_budget_results.py\
-	                           nslib/plt.py\
+fig/energy_budget_results.png: code/plot_energy_budget_results.py\
+	                           code/nslib/plt.py\
 							   $(MODEL-ENERGY-BUDGET) $(TOWYO-CALCS-OUT)
 	$(PYTHON) $<
 # }}}
