@@ -1,4 +1,5 @@
 import argparse
+import shutil
 import tarfile
 
 from datalad.api import get as dl_get
@@ -46,8 +47,8 @@ def download_model_extracted():
 def download_model_raw():
     cfg = nsl.io.load_config()
     id = cfg.parameters.google_drive_ids.model_full.id
-    out_dir = cfg.path.input
-    # out_dir.mkdir(parents=True, exist_ok=True)
+    out_dir = cfg.model.input.full_model_run
+    out_dir.mkdir(parents=True, exist_ok=True)
     tar_archive = out_dir.joinpath(cfg.parameters.google_drive_ids.model_full.file)
     gdown.download(id=id, output=tar_archive.as_posix(), quiet=False)
     # extract tar archive
@@ -56,6 +57,10 @@ def download_model_raw():
     tar.close()
     # remove tar file
     tar_archive.unlink()
+
+
+def clean_model_raw():
+    shutil.rmtree(cfg.model.input.full_model_run, ignore_errors=True)
 
 
 def get_bathy():

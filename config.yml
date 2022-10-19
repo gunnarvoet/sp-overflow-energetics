@@ -45,6 +45,8 @@ model:
     bottom_pressure: $output/model_bottom_pressure.nc
     ape: $output/model_ape.nc
     ape_zeta: $output/model_ape_zeta.nc
+    ape_full: $output/model_full_ape.nc
+    ape_full_zeta: $output/model_full_ape_zeta.nc
     ape_sorted: $output/model_ape_sorted.nc
 parameters:
   towyo:

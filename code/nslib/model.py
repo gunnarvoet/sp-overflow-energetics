@@ -31,8 +31,8 @@ def load_initial_density():
     cfg = nsl.io.load_config()
     DataDir = cfg.model.input.full_model_run
     # read grid parameters and state variables
-    b = xr.open_dataset(DataDir + "state.glob.nc")
-    grid = xr.open_dataset(DataDir + "grid.glob.nc")
+    b = xr.open_dataset(DataDir.joinpath("state.glob.nc"))
+    grid = xr.open_dataset(DataDir.joinpath("grid.glob.nc"))
     b = xr.merge([b, grid])
     # extract temperature
     th = b.Temp.isel(T=0).squeeze().drop(["X", "T"])
@@ -56,12 +56,12 @@ def load():
     """
     cfg = nsl.io.load_config()
     DataDir = cfg.model.input.full_model_run
-    grid = xr.open_dataset(DataDir + "grid.glob.nc")
+    grid = xr.open_dataset(DataDir.joinpath("grid.glob.nc"))
 
     # read grid parameters, diagnostics output and state variables
-    b6 = xr.open_dataset(DataDir + "diag1.glob.nc")
-    b6s = xr.open_dataset(DataDir + "state.glob.nc")
-    b62 = xr.open_dataset(DataDir + "diag2.glob.nc")
+    b6 = xr.open_dataset(DataDir.joinpath("diag1.glob.nc"))
+    b6s = xr.open_dataset(DataDir.joinpath("state.glob.nc"))
+    b62 = xr.open_dataset(DataDir.joinpath("diag2.glob.nc"))
 
     # clean up and merge datasets
     b6 = b6.drop("UVEL")
@@ -86,10 +86,8 @@ def load():
     b62 = b62.drop("diag_levels")
 
     tmp = np.squeeze(b6s.phi_nh.values)
-    if modelrun == "jesse":
-        tmp = (tmp[1:-1, :, :] + tmp[:-2, :, :]) / 2
-    else:
-        tmp = (tmp[1:, :, :] + tmp[:-1, :, :]) / 2
+    tmp = (tmp[1:-1, :, :] + tmp[:-2, :, :]) / 2
+    # tmp = (tmp[1:, :, :] + tmp[:-1, :, :]) / 2
     b6["phi_nh"] = (["T", "Z", "Y"], tmp)
 
     b = xr.merge([b6, b62, grid])
@@ -111,7 +109,7 @@ def load():
     b.time.attrs["units"] = "h"
 
     # Load reference profile
-    fileName = DataDir + "Tref"
+    fileName = DataDir.joinpath("Tref")
     b["tref"] = (["Z"], np.fromfile(fileName))
 
     # dimensions
@@ -129,7 +127,7 @@ def load():
     # Calculate height of water column (depth + eta)
     b["H"] = b.eta + b.Depth
 
-    b.attrs["modelrun"] = modelrun
+    b.attrs["modelrun"] = "full"
 
     return b
 
@@ -228,9 +226,9 @@ def calculate_pressure_anomaly_sorted_rho(b, cfg):
     cfg : box.Box
         Config read from `config.yml` via :class:`nslib.io.load_config`.
     """
-    model_id = cfg.model.id
-    file_sorted_profile = f"data/refrho_sorted_{model_id}.nc"
-    ref_rho_sorted = xr.open_dataarray(file_sorted_profile)
+    # model_id = cfg.model.id
+    # file_sorted_profile = f"data/refrho_sorted_{model_id}.nc"
+    ref_rho_sorted = xr.open_dataarray(cfg.model.output.refrho_sorted)
     # Calculate reference pressure from the sorted density profile. The free
     # ocean surface $\eta=0$.
     ref_p = np.cumsum(gravity * (ref_rho_sorted * 20))
@@ -344,26 +342,36 @@ def calculate_energetics(b):
     )
 
     # available potential energy
-    if cfg.model.output.ape.exists() is False:
+    if b.modelrun == "full":
+        apefile = cfg.model.output.ape_full
+        zetafile = cfg.model.output.ape_full_zeta
+    else:
+        apefile = cfg.model.output.ape
+        zetafile = cfg.model.output.ape_zeta
+    if apefile.exists() is False:
         LAPE, ZETA = LambAPEnew(b)
         lape = xr.DataArray(LAPE)
-        lape.to_netcdf(cfg.model.output.ape)
+        lape.to_netcdf(apefile)
         zeta = xr.DataArray(ZETA)
-        zeta.to_netcdf(cfg.model.output.ape_zeta)
+        zeta.to_netcdf(zetafile)
     else:
-        LAPE = xr.open_dataarray(cfg.model.output.ape).data
-        ZETA =  xr.open_dataarray(cfg.model.output.ape_zeta).data
+        LAPE = xr.open_dataarray(apefile).data
+        ZETA =  xr.open_dataarray(zetafile).data
     E["Epp"] = (["T", "Z", "Y"], LAPE)
 
     # Available potential energy calculated against a density profile based on
     # a sorted density field
-    if cfg.model.output.ape_sorted.exists() is False:
-        LAPE_sorted_rho, ZETA_sorted_rho = LambAPEnew(b, sorted_ref_rho=True)
-        lapes = xr.DataArray(LAPE_sorted_rho)
-        lapes.to_netcdf(cfg.model.output.ape_sorted)
+    if b.modelrun == "full":
+        # don't need this for the full run
+        E["Epp_sorted_rho"] = (["T", "Z", "Y"], np.ones_like(LAPE)*np.nan)
     else:
-        LAPE_sorted_rho = xr.open_dataarray(cfg.model.output.ape_sorted).data
-    E["Epp_sorted_rho"] = (["T", "Z", "Y"], LAPE_sorted_rho)
+        if cfg.model.output.ape_sorted.exists() is False:
+            LAPE_sorted_rho, ZETA_sorted_rho = LambAPEnew(b, sorted_ref_rho=True)
+            lapes = xr.DataArray(LAPE_sorted_rho)
+            lapes.to_netcdf(cfg.model.output.ape_sorted)
+        else:
+            LAPE_sorted_rho = xr.open_dataarray(cfg.model.output.ape_sorted).data
+        E["Epp_sorted_rho"] = (["T", "Z", "Y"], LAPE_sorted_rho)
 
     # Buoyancy Flux and BT/BC Conversion
     E["BuoyancyFlux"] = gravity * b.rhop * b.WC
@@ -624,52 +632,6 @@ def sorted_background_density(rerun_sort=False, plot=False):
     ref_rho_sorted.to_netcdf(file_sorted_profile)
 
     return ref_rho_sorted
-
-
-def LambAPE(b):
-    refrho = b.rho.isel(T=0, Y=-1).data
-    # need to reread the model data if not analyzing from the model
-    # initialization but a later point in time.
-    if b.modelrun == "jesse100150":
-        read_rhoref = False
-        if read_rhoref:
-            # need to read model at beginning. do this only once and save the
-            # reference profile.
-            print("reading reference density profile at model start time")
-            model_id = "jesse"
-            tmp = load(model_id)
-            trange = range(5)
-            tmp = tmp.isel(T=trange)
-            tmp = calculate_density(tmp)
-            refrho = tmp.rho.isel(T=0, Y=-1)
-            refrho.to_netcdf("data/refrho.nc")
-        else:
-            refrho = xr.open_dataarray("data/refrho.nc")
-        # interpolate to model dataset in case we are using a subset
-        refrho = refrho.interp_like(b).data
-    refz = b.Z.data
-    LAPE = b.rho.data * np.nan
-    ZETA = b.rho.data * np.nan
-    # loop over all time steps
-    for i, ti in tqdm(enumerate(b["T"])):
-        # loop over all columns in density matrix
-        for j, rho in enumerate(b.rho.isel(T=i).data.T):
-            for k, (r, z) in enumerate(zip(rho, refz)):
-                if ~np.isnan(r):
-                    # find index of density in reference density profile
-                    i2 = gv.misc.nearidx(refrho, r)
-                    # find index of reference density
-                    iz = gv.misc.nearidx(np.abs(refz), np.abs(z))
-                    if iz < i2:
-                        H = -1 * (refz[iz:i2] - z)
-                        drho = r - refrho[iz:i2]
-                    else:
-                        H = -1 * (refz[i2:iz] - z)
-                        drho = r - refrho[i2:iz]
-                    LAPE[i, k, j] = gravity * integrate.trapz(drho, H)
-                    # zeta is depth in perturbed state minus depth in reference state
-                    ZETA[i, k, j] = refz[iz] - refz[i2]
-    return LAPE, ZETA
 
 
 def LambAPEnew(b, sorted_ref_rho=False):
