@@ -1730,6 +1730,7 @@ def plot_snapshot(b: xr.Dataset, ti: int, zlim: float = 3000):
         -tmpth.Z,
         np.ma.masked_equal(tmpth.values, 0),
         cmap="Spectral_r",
+        rasterized=True,
     )
     colbaropts = dict(pad=0.02)
 
@@ -1767,6 +1768,7 @@ def plot_snapshot(b: xr.Dataset, ti: int, zlim: float = 3000):
         vmin=-0.4,
         vmax=0.4,
         cmap="RdBu_r",
+        rasterized=True,
     )
     contour_th(ax[1], tmpth)
     contour_interface(ax[1], tmpth)
@@ -1780,6 +1782,7 @@ def plot_snapshot(b: xr.Dataset, ti: int, zlim: float = 3000):
         vmin=-0.05,
         vmax=0.05,
         cmap="RdBu_r",
+        rasterized=True,
     )
     contour_th(ax[2], tmpth)
     contour_interface(ax[2], tmpth)
@@ -1793,11 +1796,12 @@ def plot_snapshot(b: xr.Dataset, ti: int, zlim: float = 3000):
         vmin=-10,
         vmax=-5,
         cmap=cmocean.cm.speed,
+        rasterized=True,
     )
     contour_th(ax[3], tmpth)
     contour_interface(ax[3], tmpth)
     plt.colorbar(
-        h3, ax=ax[3], extend="both", label=r"$\epsilon$ [W/kg]", **colbaropts
+        h3, ax=ax[3], extend="both", label=r"$\mathrm{log}_{10}(\epsilon)$ [W/kg]", **colbaropts
     )
 
     for axi in ax:
