@@ -38,9 +38,13 @@ model:
     small_scale_vwf_integrated: $output/model_small_scale_vwf_integrated.nc
     hp_fluxes: $output/model_hp_fluxes.nc
     hp_vwf_integrated: $output/model_hp_vwf_integrated.nc
-    refrho: $output/refrho.nc
     sorted_initial_density: $output/sorted_initial_density_field.nc
+    refrho: $output/refrho.nc
     refrho_sorted: $output/refrho_sorted.nc
+    bottom_pressure: $output/model_bottom_pressure.nc
+    ape: $output/model_ape.nc
+    ape_zeta: $output/model_ape_zeta.nc
+    ape_sorted: $output/model_ape_sorted.nc
 parameters:
   towyo:
     interfacesg4: 45.94

@@ -322,7 +322,8 @@ def calculate_velocities(b):
     return b
 
 
-def calculate_energetics(b, recalculateAPE=False):
+def calculate_energetics(b):
+    cfg = nsl.io.load_config()
     # full kinetic Energy
     Ek = 1 / 2 * rho0 * (b.VC ** 2 + b.WC ** 2) * b.BathyMask
     # barotropic horizontal kinetic energy
@@ -343,28 +344,25 @@ def calculate_energetics(b, recalculateAPE=False):
     )
 
     # available potential energy
-    if recalculateAPE:
+    if cfg.model.output.ape.exists() is False:
         LAPE, ZETA = LambAPEnew(b)
-        pickle.dump(
-            LAPE, open("data/LambAPE2_" + b.modelrun + ".p", "wb"), protocol=-1
-        )
-        pickle.dump(
-            ZETA,
-            open("data/LambAPE2_ZETA_" + b.modelrun + ".p", "wb"),
-            protocol=-1,
-        )
+        lape = xr.DataArray(LAPE)
+        lape.to_netcdf(cfg.model.output.ape)
+        zeta = xr.DataArray(ZETA)
+        zeta.to_netcdf(cfg.model.output.ape_zeta)
     else:
-        LAPE = pickle.load(open("data/LambAPE2_" + b.modelrun + ".p", "rb"))
-        ZETA = pickle.load(
-            open("data/LambAPE2_ZETA_" + b.modelrun + ".p", "rb")
-        )
+        LAPE = xr.open_dataarray(cfg.model.output.ape).data
+        ZETA =  xr.open_dataarray(cfg.model.output.ape_zeta).data
     E["Epp"] = (["T", "Z", "Y"], LAPE)
 
     # Available potential energy calculated against a density profile based on
     # a sorted density field
-    LAPE_sorted_rho = pickle.load(
-        open("data/LambAPE2_" + b.modelrun + "_sorted_rho.p", "rb")
-    )
+    if cfg.model.output.ape_sorted.exists() is False:
+        LAPE_sorted_rho, ZETA_sorted_rho = LambAPEnew(b, sorted_ref_rho=True)
+        lapes = xr.DataArray(LAPE_sorted_rho)
+        lapes.to_netcdf(cfg.model.output.ape_sorted)
+    else:
+        LAPE_sorted_rho = xr.open_dataarray(cfg.model.output.ape_sorted).data
     E["Epp_sorted_rho"] = (["T", "Z", "Y"], LAPE_sorted_rho)
 
     # Buoyancy Flux and BT/BC Conversion
@@ -446,100 +444,6 @@ def calculate_energetics(b, recalculateAPE=False):
             axis=1,
         ),
     )
-
-    return E
-
-
-def calculate_energetics_iw_approach(b, recalculateAPE=False):
-    """Calculate energy terms following internal wave approach with background
-    stratifcation from sorted initial density field.
-
-    Parameters
-    ----------
-    b : xr.Dataset
-        Model data
-
-    recalculateAPE : bool
-        Recalculate available potential energy
-
-    Returns
-    -------
-    E : xr.Dataset
-        Energy terms
-    """
-    # full kinetic Energy
-    Ek = 1 / 2 * rho0 * (b.VC ** 2 + b.WC ** 2) * b.BathyMask
-    # barotropic horizontal kinetic energy
-    Ehk0 = 0.5 * rho0 * b.V ** 2
-    # bring to matrix form for plotting
-    Ehk0m = Ehk0 * b.BathyMask
-    Ehk0m = Ehk0m.transpose("T", "Z", "Y")
-    # baroclinic kinetic Energy
-    # Ekp = 0.5 * rho0 * (b.v ** 2 + b.WC ** 2) * b.BathyMask
-    Ekp = 0.5 * rho0 * (b.v ** 2 + b.wp ** 2) * b.BathyMask
-    # cross term
-    Ehk0p = 0.5 * rho0 * b.v * b.V * b.BathyMask
-    # perturbation potential energy
-    Ep0 = 0.5 * rho0 * gBaro * b.eta ** 2
-    # combine energy terms into one dataset
-    E = xr.Dataset(
-        {"Ek": Ek, "Ehk0": Ehk0, "Ekp": Ekp, "Ehk0p": Ehk0p, "Ep0": Ep0}
-    )
-
-    # available potential energy
-    if recalculateAPE:
-        LAPE, ZETA = LambAPEnew(b, sorted_ref_rho=True)
-        pickle.dump(
-            LAPE,
-            open("data/LambAPE2_" + b.modelrun + "_sorted_rho.p", "wb"),
-            protocol=-1,
-        )
-        pickle.dump(
-            ZETA,
-            open("data/LambAPE2_ZETA_" + b.modelrun + "_sorted_rho.p", "wb"),
-            protocol=-1,
-        )
-    else:
-        LAPE = pickle.load(
-            open("data/LambAPE2_" + b.modelrun + "_sorted_rho.p", "rb")
-        )
-        ZETA = pickle.load(
-            open("data/LambAPE2_ZETA_" + b.modelrun + "_sorted_rho.p", "rb")
-        )
-    E["Epp"] = (["T", "Z", "Y"], LAPE)
-
-    # Buoyancy Flux and BT/BC Conversion
-    E["BuoyancyFlux"] = gravity * b.rhop * b.WC
-    E["Conversion"] = gravity * b.rhop * b.W
-    E["nhConversion"] = np.gradient(b.q, b.Z, axis=1) * b.W
-
-    # Internal Wave Fluxes
-    E["IWEnergyFluxHoriz"] = b.v * (b.PP)
-    E["nhIWEnergyFluxHoriz"] = b.v * b.q
-    E["IWEnergyFluxVert"] = b.wp * b.PP
-    E["nhIWEnergyFluxVert"] = b.wp * b.q
-
-    # Bottom drag
-    # find bottom cells
-    tmp = b.HFacC.values
-    BottomCells = np.zeros_like(b.Y.values, dtype="int")
-    for i, column in enumerate(tmp.T):
-        indices = np.argwhere(column > 0)
-        BottomCells[i] = indices[-1]
-    BottomDrag = np.zeros_like(b.eta) * np.nan
-    for j, d in enumerate(BottomCells):
-        # not sure how the Kang formulation ensures that this is always
-        # positive... putting abs around it...
-        BottomDrag[:, j] = np.abs(
-            rho0
-            * Cd
-            * abs(b.VC.values[:, d, j])
-            * (
-                b.v.values[:, d, j] * b.VC.values[:, d, j]
-                + b.WC.values[:, d, j] ** 2
-            )
-        )
-    E["BottomDrag"] = (["T", "Y"], BottomDrag)
 
     return E
 
@@ -771,7 +675,10 @@ def LambAPE(b):
 def LambAPEnew(b, sorted_ref_rho=False):
     cfg = nsl.io.load_config()
     # read reference density from model initialization
-    ref_rho = xr.open_dataarray(cfg.model.output.refrho)
+    if sorted_ref_rho:
+        ref_rho = xr.open_dataarray(cfg.model.output.refrho_sorted)
+    else:
+        ref_rho = xr.open_dataarray(cfg.model.output.refrho)
     # interpolate to model dataset in case we are using a subset
     ref_rho = ref_rho.interp_like(b).data
     # TODO: make sure deepest refrho depth level covers deepest rho.
