@@ -223,7 +223,7 @@ def PlotEnergeticsTerms(a, b, E, fluxes, cfg):
     PlotEnergeticsTermsIntegrated
     """
     # extract snapshot from model small scale fluxes
-    ti = cfg.model.snapshot_ind
+    ti = cfg.parameters.model.snapshot_ind
     flux = fluxes.isel(time=ti)
     # set up axes
     hs = 0.1
@@ -466,6 +466,7 @@ def _plot_energetics_fields(
             vmin=vmin,
             vmax=vmax,
             add_colorbar=False,
+            rasterized=True,
         )
         _plot_interface(ty, ax=axx)
         axx.invert_yaxis()
@@ -499,6 +500,7 @@ def _plot_energetics_fields_model(
         vmin=vmin,
         vmax=vmax,
         add_colorbar=False,
+        rasterized=True,
     )
     plt.colorbar(h, cax=cax, **cbar_kwargs)
     # b.th.plot.contour(ax=axx, levels=[0.9], colors="k", linewidths=0.5)
