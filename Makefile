@@ -113,7 +113,7 @@ $(TOWYO-CALCS-OUT) &: code/02_nb_towyo_analysis.py code/nslib/towyo.py $(DATA_TO
 ##   model-calcs       : Calculate energetics terms for model data
 MODEL-CALCS-OUT=data/out/model_bottom_pressure.nc\
 				data/out/model_energy.nc\
-				$(MODEL-WAVE-FLUXES)
+				$(MODEL-WAVE-FLUXES) $(MODEL-SNAPSHOTS)
 
 model-calcs : $(MODEL-CALCS-OUT)
 
@@ -122,8 +122,14 @@ MODEL-WAVE-FLUXES=data/out/model_small_scale_fluxes.nc\
 				  data/out/model_small_scale_vwf_integrated.nc\
 				  data/out/model_hp_fluxes.nc\
 				  data/out/model_hp_vwf_integrated.nc
-model-wave-fluxes    : $(MODEL-WAVE-FLUXES)
-$(MODEL-WAVE-FLUXES) : code/model_wave_flux_calcs.py code/nslib/model_wave_fluxes.py
+model-wave-fluxes : $(MODEL-WAVE-FLUXES)
+$(MODEL-WAVE-FLUXES) &: code/model_wave_flux_calcs.py code/nslib/model_wave_fluxes.py
+	$(PYTHON) $<
+
+##   model-snapshots   : Save model snapshots
+MODEL-SNAPSHOTS=data/out/model_snapshot.nc data/out/model_energy_snapshot.nc
+model-snapshots: $(MODEL-SNAPSHOTS)
+$(MODEL-SNAPSHOTS) &: code/model_extract_snapshot.py
 	$(PYTHON) $<
 
 data/out/model_bottom_pressure.nc: code/model_form_drag.py $(DATA_MODEL) data/out/model_energy.nc
@@ -213,19 +219,18 @@ plot-model : $(MODEL_PLOTS) $(DATA-MODEL)
 
 ##   plot-mod-stead    : Plot model steadiness
 plot-mod-stead: fig/model_steadiness.png
-fig/model_steadiness.png : plot_model_steadiness.py nslib/model.py
+fig/model_steadiness.png : code/plot_model_steadiness.py code/nslib/model.py
 	$(PYTHON) $<
 
 ##   plot-mod-snapsh   : Plot model snapshot
 plot-mod-snapsh: fig/model_snapshot.png
-fig/model_snapshot.png : plot_model_snapshot.py nslib/model.py
+fig/model_snapshot.png : code/plot_model_snapshot.py code/nslib/model.py
 	$(PYTHON) $<
 
 ##   plot-mod-iw-flux  : Plot model internal wave flux snapshot & time series
 plot-mod-iw-flux: fig/model_internal_wave_fluxes.png
-fig/model_internal_wave_fluxes.png: plot_model_internal_wave_fluxes.py nslib/model.py
+fig/model_internal_wave_fluxes.png: code/plot_model_internal_wave_fluxes.py code/nslib/model.py
 	$(PYTHON) $<
 # }}}
 
 # }}}
-
