@@ -169,7 +169,7 @@ fig/T1_time_series.png: code/plot_mp_time_series.py
 ##   plot-energetics   : Plot energetics fields and integrated quantities
 ENERGETICS_PLOTS=fig/energetics_fields.png\
 				 fig/energetics_fields_integrated.png\
-				 fig/vertical_wave_flux_integrated.png\
+				 fig/vertical_wave_flux_and_vert_pressure_work_integrated.png\
 				 fig/energy_budget_results.png
 plot-energetics: $(ENERGETICS_PLOTS) $(DATA) $(DATA_MODEL_SNAPSHOTS)
 
@@ -182,7 +182,7 @@ fig/energetics_fields_integrated.png: code/plot_energetics_fields_integrated.py\
 								   	  code/nslib/plt.py\
 						   			  $(DATA_MODEL_SNAPSHOTS)
 	$(PYTHON) $<
-fig/vertical_wave_flux_integrated.png: code/plot_vertical_wave_flux_integrated.py\
+fig/vertical_wave_flux_and_vert_pressure_work_integrated.png: code/plot_vertical_wave_flux_integrated.py\
 									   code/nslib/plt.py\
 									   $(DATA-TOWYO)\
 						   			   $(DATA_MODEL_SNAPSHOTS)
@@ -201,6 +201,13 @@ fig/energy_budget_results.png: code/plot_energy_budget_results.py\
 ENERGETICS_SKETCH=fig/towyo_sketch_energetics.png
 plot-ty-sketch: $(ENERGETICS_SKETCH)
 $(ENERGETICS_SKETCH) : code/plot_towyo_sketch_energetics.py code/nslib/plt.py
+	$(PYTHON) $<
+# }}}
+
+# MOMENTUM FLUX {{{
+##   plot-momentum-flux: Plot momentum flux estimates
+plot-momentum-flux: fig/momentum-flux.png
+fig/momentum-flux.png: code/momentum-flux.py code/nslib/plt.py
 	$(PYTHON) $<
 # }}}
 

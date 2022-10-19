@@ -850,14 +850,14 @@ def PlotVerticalEnergyFlux(cfg, a):
         h1.append(htmp[0])
     # model integrated fluxes:
     # load horizontally integrated model wave energy flux time series
-    vwfi = xr.open_dataarray(cfg.model.small_scale_vwf_integrated)
+    vwfi = xr.open_dataarray(cfg.model.output.small_scale_vwf_integrated)
     vwfim = vwfi.mean(dim="time")
     h = gv.plot.vstep(vwfim / 1e3, vwfim.isot, ax=ax2, color="C6", label="model")
     h1.append(
         h[0],
     )
     # model wave energy flux time series based on high-pass filter
-    hpvwfi = xr.open_dataset(cfg.model.hp_vwf_integrated)
+    hpvwfi = xr.open_dataset(cfg.model.output.hp_vwf_integrated)
     hpvwfim = hpvwfi.vwf_int.mean(dim="time")
     h = gv.plot.vstep(
         hpvwfim / 1e3, hpvwfim.isot, ax=ax2, color="#F57C00", label="model hp"
@@ -1017,12 +1017,12 @@ def PlotVerticalEnergyFluxWithPressureWork(cfg, wppp_int, a):
         h1.append(htmp[0])
     # model integrated fluxes:
     # load horizontally integrated model wave energy flux time series
-    vwfi = xr.open_dataarray(cfg.model.small_scale_vwf_integrated)
+    vwfi = xr.open_dataarray(cfg.model.output.small_scale_vwf_integrated)
     vwfim = vwfi.mean(dim="time")
     h = gv.plot.vstep(vwfim / 1e3, vwfim.isot, ax=ax2, color="C6", label="model")
     h1.append(h[0])
     # model wave energy flux time series based on high-pass filter
-    hpvwfi = xr.open_dataset(cfg.model.hp_vwf_integrated)
+    hpvwfi = xr.open_dataset(cfg.model.output.hp_vwf_integrated)
     hpvwfim = hpvwfi.vwf_int.mean(dim="time")
     h = gv.plot.vstep(
         hpvwfim / 1e3, hpvwfim.isot, ax=ax2, color="#F57C00", label="model hp"
