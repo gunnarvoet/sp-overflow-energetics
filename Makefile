@@ -154,7 +154,14 @@ plots : plot-map plot-mp plot-energetics plot-model plot-ty-sketch plot-bernoull
 # MAPS {{{
 ##   plot-map          : Plot maps
 plot-map: fig/map_overview.png
-fig/map_overview.png: code/plot_overview_map.py
+fig/map_overview.png: code/plot_overview_map.py code/overview_map.py
+	$(PYTHON) $<
+# }}}
+
+# TOWYO-OVERVIEW {{{
+##   plot-ty-overview  : Plot towyo overview
+plot-ty-overview: fig/towyo_overview.png
+fig/towyo_overview.png: code/plot_towyo_overview.py
 	$(PYTHON) $<
 # }}}
 
