@@ -5,11 +5,11 @@ Energy and Momentum of a Density-Driven Overflow in the Samoan Passage
 
 A study of energetics and momentum of the Samoan Passage Northern Sill overflow based on towyo observations and a two-dimensional MITgcm model run.
 
-Observational datasets from the [Samoan Passage Data Archive](https://github.com/gunnarvoet/sp-data-archive) are installed via [DataLad](https://www.datalad.org/) / [git-annex](https://git-annex.branchable.com/). The Makefile contains the necessary steps to retrieve the data. To make use of this functionality, this repository must be cloned using DataLad, more on this [below](#datalad-datasets-and-how-to-use-them). Alternatively, data can be manually downloaded from the data archive.
+Observational datasets from the [Samoan Passage Data Archive](https://github.com/gunnarvoet/sp-data-archive) have been installed into [data/in/](data/in/) via [DataLad](https://www.datalad.org/) / [git-annex](https://git-annex.branchable.com/). The Makefile contains the necessary steps to retrieve the data. To make use of this functionality, this repository must be cloned using DataLad, more on this [below](#datalad-datasets-and-how-to-use-them). Alternatively, data can be manually downloaded from the data archive.
 
 Model data are stored on google drive and can be retrieved via `make` calls.
 
-Code to run all analysis steps and generate plots for the paper in [code](code). All steps are contained in the Makefile, type `make help` for an overview.
+Code to run all analysis steps and generate plots for the paper in [code/](code/). All steps are contained in the Makefile, type `make help` for an overview.
 
 ----------
 
