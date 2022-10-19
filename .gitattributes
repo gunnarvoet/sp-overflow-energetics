@@ -2,3 +2,4 @@
 **/.git* annex.largefiles=nothing
 * annex.largefiles=((mimeencoding=binary)and(largerthan=0))
 data/out/tpxo* annex.largefiles=nothing
+data/in/model/setup/track_towyo_long.mat annex.largefiles=nothing

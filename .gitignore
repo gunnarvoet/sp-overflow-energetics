@@ -1,2 +1,4 @@
 *.ipynb
 data/out/*.nc
+data/in/model/setup/*
+-data/in/model/setup/track_towyo_long.mat

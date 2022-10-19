@@ -25,6 +25,7 @@ obs:
 model:
   input:
     full_model_run: $input/model/full/
+    setup_files: $input/model/setup/
   output:
     data: $output/model_data.nc
     energy: $output/model_energy.nc
