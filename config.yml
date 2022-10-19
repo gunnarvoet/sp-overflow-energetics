@@ -38,6 +38,7 @@ model:
     small_scale_vwf_integrated: $output/model_small_scale_vwf_integrated.nc
     hp_fluxes: $output/model_hp_fluxes.nc
     hp_vwf_integrated: $output/model_hp_vwf_integrated.nc
+    refrho: $output/refrho.nc
     sorted_initial_density: $output/sorted_initial_density_field.nc
     refrho_sorted: $output/refrho_sorted.nc
 parameters:
@@ -74,3 +75,6 @@ parameters:
     model_refrho_sorted:
       file: refrho_sorted.nc
       id: 1bX-H6F-oEGHL9rGrrBRDiCTppdjGiWLP
+    model_refrho:
+      file: refrho.nc
+      id: 1Oe4Akd_g71dFBRdvscW_LJN0Xvr50NDj

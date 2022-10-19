@@ -33,6 +33,14 @@ def download_model_extracted():
     out = output_dir.joinpath(model_refrho_sorted.file)
     if out.exists() is False:
         gdown.download(id=id, output=out.as_posix(), quiet=False)
+    # reference density profile
+    model_refrho = (
+        cfg.parameters.google_drive_ids.model_refrho
+    )
+    id = model_refrho.id
+    out = output_dir.joinpath(model_refrho.file)
+    if out.exists() is False:
+        gdown.download(id=id, output=out.as_posix(), quiet=False)
 
 
 def download_model_raw():
