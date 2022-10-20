@@ -165,7 +165,9 @@ xx = np.where(ty.dist.values<25)
 StartIndex = 0
 while np.sum(np.where(np.isnan(ty.rho_anom_windowed.values[StartIndex,xx]))):
         StartIndex = StartIndex+1
-print('start index {}\nstart depth {}m'.format(StartIndex, ty.z.values[StartIndex]))
+# print('start index {}\nstart depth {}m'.format(StartIndex, ty.z.values[StartIndex]))
+
+nsl.io.res_save(ty_int_start_depth=ty.z.values[StartIndex])
 
 [t.ty.PressureAnomaly(StartIndex) for k, t in a.items()];
 # %%
@@ -318,6 +320,7 @@ print('integrate dissipation')
 # %%
 InterfaceSG4 = cfg.parameters.towyo.interfacesg4
 print(f'upper interface in towyo energy calcs is {InterfaceSG4} (sigma4)')
+nsl.io.res_save(ty_upper_int_limit=InterfaceSG4)
 
 # %% [markdown]
 # ### Energy

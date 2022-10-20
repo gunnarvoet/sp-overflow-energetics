@@ -17,6 +17,8 @@ from typing import Type
 from tqdm import tqdm  # a little progress bar
 import box
 
+import nslib as nsl
+
 
 @xr.register_dataarray_accessor("ta")
 class TowyoVar(object):
@@ -796,6 +798,12 @@ class Towyo(object):
         mask = self._obj.dist < maxdist
         self._obj["FormDrag"] = np.trapz(FormDragTMP[mask], self._obj.dist[mask] * 1000)
         self._obj["FormDragStress"] = self._obj.FormDrag / (maxdist * 1e3)
+        res_id = "TyA" if self._obj.attrs["name"] == "2012" else "TyB"
+        res = {
+            res_id + "FormDrag": f"{self._obj.FormDrag.data/1e4:1.1f}",
+            res_id + "FormDragStress": f"{self._obj.FormDragStress.data:1.1f}",
+        }
+        nsl.io.res_save(**res)
         print("Form Drag is {:1.0f} N/m".format(self._obj.FormDrag.values.tolist()))
         print(
             "Stress associated with form drag is {:1.2f} N/m^2".format(
