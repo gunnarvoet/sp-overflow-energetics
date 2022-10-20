@@ -53,6 +53,7 @@ def load_config() -> Box:
     # cfg.path.root = Path(cfg.path.root)
     cfg.path.data = cfg.path.root.joinpath(cfg.path.data)
     cfg.path.fig = cfg.path.root.joinpath(cfg.path.fig)
+    cfg.path.doc = cfg.path.root.joinpath(cfg.path.doc)
 
     def replace_variables(dict_in, var, rootpath):
         d = dict_in.copy()
@@ -71,6 +72,7 @@ def load_config() -> Box:
     cfg = replace_variables(cfg, "$data", cfg.path.data)
     cfg = replace_variables(cfg, "$input", cfg.path.input)
     cfg = replace_variables(cfg, "$output", cfg.path.output)
+    cfg = replace_variables(cfg, "$doc", cfg.path.doc)
 
     return cfg
 
@@ -312,3 +314,99 @@ def save_pdf(fname, subdir=None):
         figdir = cfg.path.fig
     print("saving pdf to {}/".format(figdir))
     plt.savefig(figdir.joinpath(fname), bbox_inches="tight", dpi=200)
+
+
+def res_save(**kwargs):
+    # can also add a dict using ** notation so either
+    # res_save(ka=res_a, kb=res_b) or res_save(**d)
+
+    # do not use underscores in variable names!
+
+    # Result values can either be individual items or tuples. The latter will
+    # be converted into value\,unit notation.
+
+    # - open yaml file
+    # - generate if it does not exist
+    # - see if the key exists
+    # - add or overwrite key
+    # - print diff if key existed previously
+    # - save yml file
+    # - write all yml entries to latex newcommands
+
+    def check_input(kwargs):
+        out_kwargs = {}
+        for k, v in kwargs.items():
+            if '_' in k:
+                k = _snake_case_to_camel_case(k)
+            if type(v) is tuple:
+                if type(v[0]) is not str:
+                    v = (f"{v[0]}", v[1])
+            elif type(v) is not str and type(v) is not tuple:
+                v = f"{v}"
+            out_kwargs[k] = v
+        return out_kwargs
+
+    kwargs = check_input(kwargs)
+
+    if RES_YML.exists():
+        with open(RES_YML) as file:
+            prev_res = yaml.load(file, Loader=yaml.FullLoader)
+        for k, v in kwargs.items():
+            # if '_' in k:
+            #     k = _snake_case_to_camel_case(k)
+            # if type(v) is tuple:
+            #     if type(v[0]) is not str:
+            #         v = (f"{v[0]}", v[1])
+            # elif type(v) is not str and type(v) is not tuple:
+            #     v = f"{v}"
+            if k in prev_res:
+                r = prev_res[k]
+                if r != v:
+                    print(f"[result replace] {k}: {r} -> {v}")
+                else:
+                    print(f"[result keep]    {k}: {r}")
+            else:
+                print(f"[result add]     {k}: {v}")
+            prev_res[k] = v
+        with open(RES_YML, "w") as file:
+            yaml.dump(prev_res, file)
+    else:
+        with open(RES_YML, "w") as file:
+            for k, v in kwargs.items():
+                print(f"[result add]     {k}: {v}")
+            yaml.dump(kwargs, file)
+    res_yml_to_latex()
+
+
+def res_remove(k):
+    with open(RES_YML) as file:
+        prev_res = yaml.load(file, Loader=yaml.FullLoader)
+    rem = prev_res.pop(k)
+    print(f"[res] removing {k}: {rem}")
+    with open(RES_YML, "w") as file:
+        yaml.dump(prev_res, file)
+    res_yml_to_latex()
+
+
+def res_yml_to_latex():
+    with open(RES_YML) as yfile:
+        res = yaml.load(yfile, Loader=yaml.FullLoader)
+    with open(RES_TEX, "w") as lfile:
+        for k, v in res.items():
+            if type(v) is tuple:
+                line = f"\\newcommand{{\\{k}}}{{{v[0]}\\,{v[1]}}}\n"
+            else:
+                line = f"\\newcommand{{\\{k}}}{{{v}}}\n"
+            lfile.write(line)
+
+
+def _res_paths():
+    cfg = load_config()
+    return cfg.res.yml, cfg.res.tex
+
+
+def _snake_case_to_camel_case(name):
+    return ''.join(word.title() for word in name.split('_'))
+
+
+RES_YML, RES_TEX = _res_paths()

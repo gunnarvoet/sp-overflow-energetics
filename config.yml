@@ -3,6 +3,7 @@ path:
   input: $data/in/
   output: $data/out/
   fig: fig/
+  doc: doc/
 obs:
   input:
     towyo: $input/towyo/nc/
@@ -85,3 +86,6 @@ parameters:
     model_refrho:
       file: refrho.nc
       id: 1Oe4Akd_g71dFBRdvscW_LJN0Xvr50NDj
+res:
+  yml: $output/results.yml
+  tex: $doc/results.tex
