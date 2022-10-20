@@ -1043,16 +1043,27 @@ def calculate_energy_budget_terms(ty, cfg):
         sg4bins=cfg.parameters.towyo.interfacesg4
     ).data
 
+    res_id = "TyA" if ty.attrs["name"] == "2012" else "TyB"
+    res = dict()
     print("\n", year, "\n------")
     print("towyo APE flux div: {:1.1e} W/m".format(apeflux_div))
+    res[res_id+"APEFluxDiv"] = f"{apeflux_div/1e3:1.1f}"
     print("towyo APEs flux div: {:1.1e} W/m".format(apesflux_div))
+    res[res_id+"APEsFluxDiv"] = f"{apesflux_div/1e3:1.1f}"
     print("towyo KE flux div: {:1.1e} W/m".format(keflux_div))
+    res[res_id+"KEFluxDiv"] = f"{keflux_div/1e3:1.1f}"
     print("towyo dissipation:", dissipation)
+    res[res_id+"Diss"] = f"{dissipation/1e3:1.1f}"
     print("bottom dissipation:", bottom_dissipation)
+    res[res_id+"BottomDiss"] = f"{bottom_dissipation/1e3:1.1f}"
     print("towyo IW flux div:", vertical_wave_flux)
+    res[res_id+"IWFluxDiv"] = f"{vertical_wave_flux/1e3:1.1f}"
     print("towyo vert pressure work div:", vertical_pressure_work_sorted)
+    res[res_id+"VertPressWorkDiv"] = f"{vertical_pressure_work_sorted/1e3:1.1f}"
     print("towyo horiz pressure work div:", PressureWorkHorizSorted_div)
+    res[res_id+"HorizPressWorkDiv"] = f"{PressureWorkHorizSorted_div/1e3:1.1f}"
     print("towyo eps + IW flux:", vertical_wave_flux + dissipation)
+    nsl.io.res_save(**res)
 
     bt = xr.Dataset(
         dict(
