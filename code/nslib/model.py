@@ -1685,6 +1685,15 @@ def plot_snapshot(b: xr.Dataset, ti: int, zlim: float = 3000):
     fig, ax = plt.subplots(nrows=4, ncols=1, figsize=(12, 15), sharex=True)
     for axi in ax:
         gv.plot.axstyle(axi, ticks="in", fontsize=11)
+        axi.grid(
+            b=True,
+            which="major",
+            axis="both",
+            color="0.5",
+            linewidth=0.1,
+            linestyle="-",
+            alpha=0.3,
+        )
 
     tmpth = b.th.where(b.Z < -zlim, drop=True)
     h = ax[0].pcolormesh(
@@ -1704,7 +1713,7 @@ def plot_snapshot(b: xr.Dataset, ti: int, zlim: float = 3000):
             levels=np.arange(0.7, 1.55, 0.05),
             colors="k",
             linewidths=0.5,
-            alpha=0.5,
+            alpha=0.3,
         )
 
     def contour_interface(ax, tmpth):
@@ -1714,8 +1723,8 @@ def plot_snapshot(b: xr.Dataset, ti: int, zlim: float = 3000):
             np.ma.masked_equal(tmpth.values, 0),
             levels=[0.8, 0.9],
             colors="k",
-            linewidths=1.5,
-            alpha=0.5,
+            linewidths=1.0,
+            alpha=0.6,
         )
 
     contour_th(ax[0], tmpth)

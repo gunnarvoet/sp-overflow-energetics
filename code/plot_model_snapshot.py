@@ -34,25 +34,18 @@ import nslib as nsl
 # %autoreload 2
 # %autosave 300
 
-# %% [markdown]
-# # Plot Model Snapshot
-
 # %%
 cfg = nsl.io.load_config()
 
 # %% [markdown]
-# ## Read model data
+# # Plot Model Snapshot
 
 # %%
 b = xr.open_dataset(cfg.model.output.data)
 
 # %%
-print('start: ', b.time[0].data, '\nend  : ', b.time[-1].data)
-
-# %% [markdown]
-# ## Plot Snapshot
-
-# %%
 nsl.model.plot_snapshot(b, ti=0, zlim=3600)
 nsl.io.save_png('model_snapshot')
 nsl.io.save_pdf('model_snapshot')
+
+# %%
