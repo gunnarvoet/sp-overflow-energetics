@@ -32,7 +32,6 @@ a = nsl.io.load_towyos()
 
 # %%
 b = xr.open_dataset(cfg.model.output.data)
-print('run: ', b.modelrun)
 print('start: ', b.time[0].data, '\nend  : ', b.time[-1].data)
 
 # %% [markdown]
@@ -139,7 +138,40 @@ momfi.std(dim='time').plot(y='isot');
 
 # %%
 print(momfi.mean(dim='time').min().data)
+print(momfi.min(dim='isot').std(dim='time').data)
 print(momfi.mean(dim='time').min().data / 17e3)
+
+# %%
+_ = nsl.io.Res(
+    name="ModelMomentumFlux",
+    value=f"{momfi.mean(dim='time').min().data/1e4:1.1f}",
+    unit="$10^4$\,N/m",
+    comment="model absolute maximum momentum flux",
+)
+
+# %%
+_ = nsl.io.Res(
+    name="ModelMomentumFluxSigma",
+    value=f"{momfi.min(dim='isot').std(dim='time').data/1e4:1.1f}",
+    unit="$10^4$\,N/m",
+    comment="model absolute maximum momentum flux standard deviation",
+)
+
+# %%
+_ = nsl.io.Res(
+    name="ModelMomentumFluxStress",
+    value=f"{momfi.mean(dim='time').min().data/17e3:1.1f}",
+    unit="N/m$^2$",
+    comment="model absolute maximum momentum flux stress",
+)
+
+# %%
+_ = nsl.io.Res(
+    name="ModelMomentumFluxStressSigma",
+    value=f"{momfi.min(dim='isot').std(dim='time').data/17e3:1.1f}",
+    unit="N/m$^2$",
+    comment="model absolute maximum momentum flux stress standard deviation",
+)
 
 # %%
 for k, t in a.items():
