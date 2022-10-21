@@ -13,7 +13,7 @@ The source code to run all analysis steps and generate plots for the manuscript 
 
 The source code for the manuscript is contained in [doc/](doc/).
 
-Analysis code is shared under the [MIT License](https://opensource.org/licenses/MIT). Manuscript code and figures are shared under the [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) license.
+Analysis code is shared under the [MIT License](https://opensource.org/licenses/MIT). The manuscript has not yet been peer-reviewed and is provided by the contributing Author(s) as a means to ensure timely dissemination of scholarly and technical Work on a noncommercial basis. Copyright and all rights therein are maintained by the Author(s) or by other copyright owners. It is understood that all persons copying this information will adhere to the terms and constraints invoked by each Author's copyright. The manuscript may not be reposted without explicit permission of the copyright owner.
 
 ----------
 
