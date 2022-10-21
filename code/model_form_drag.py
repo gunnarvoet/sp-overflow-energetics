@@ -201,26 +201,31 @@ print('Form drag power loss is {:1.1f} W/m'.format(FormDrag.mean()*U0))
 print('Form drag average power loss is {:1.3f} W/m^2'.format(FormDrag.mean()*U0/17e3))
 
 # %% [markdown]
-# Also calculate the velocity needed to match the energy loss terms. For now I am reading them off the table in the paper. Velocity needs to be about 6cm/s:
-
-# %%
-vel08 = -1000 / FormDrag.mean()
-print(vel08)
-
-# %%
-vel09 = -1100 / FormDrag.mean()
-print(vel09)
-
-# %% [markdown]
-# Now also including the vertical pressure work term. Velocities have to be between 8 [0.9deg layer] and 13 cm/s [0.8deg layer] to match.
+# Loss terms are 2.2 and 1.3kW/m. Velocities have to be between 8 [0.9deg layer] and 13 cm/s [0.8deg layer] to match.
 
 # %%
 vel08h = -2200 / FormDrag.mean()
 print(vel08h)
 
 # %%
+_ = nsl.io.Res(
+    name="ModelLowerFormDragMatchingVelocity",
+    value=f"{vel08h:1.2f}",
+    unit="m/s",
+    comment="model form drag matching velocity",
+)
+
+# %%
 vel09h = -1300 / FormDrag.mean()
 print(vel09h)
+
+# %%
+_ = nsl.io.Res(
+    name="ModelUpperFormDragMatchingVelocity",
+    value=f"{vel09h:1.2f}",
+    unit="m/s",
+    comment="model form drag matching velocity",
+)
 
 # %% [markdown]
 # Let's have a look at upstream velocities by averaging over the dense layer. Looks like 6 cm/s is at about 90 to 100 km upstream of the sill, 0.78 at about 25 to 40 km upstream. 13 cm/s as needed for the 0.8deg layer estimate are not reached upstream of the sill...
