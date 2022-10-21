@@ -799,11 +799,23 @@ class Towyo(object):
         self._obj["FormDrag"] = np.trapz(FormDragTMP[mask], self._obj.dist[mask] * 1000)
         self._obj["FormDragStress"] = self._obj.FormDrag / (maxdist * 1e3)
         res_id = "TyA" if self._obj.attrs["name"] == "2012" else "TyB"
-        res = {
-            res_id + "FormDrag": f"{self._obj.FormDrag.data/1e4:1.1f}",
-            res_id + "FormDragStress": f"{self._obj.FormDragStress.data:1.1f}",
-        }
-        nsl.io.res_save(**res)
+        # res = {
+        #     res_id + "FormDrag": f"{self._obj.FormDrag.data/1e4:1.1f}",
+        #     res_id + "FormDragStress": f"{self._obj.FormDragStress.data:1.1f}",
+        # }
+        # nsl.io.res_save(**res)
+        nsl.io.Res(
+            name=res_id + "FormDrag",
+            value=f"{self._obj.FormDrag.data/1e4:1.1f}",
+            unit="10$^4$\,N/m",
+            comment="towyo form drag in 10^4 N/m",
+        )
+        nsl.io.Res(
+            name=res_id + "FormDragStress",
+            value=f"{self._obj.FormDragStress.data:1.1f}",
+            unit="N/m$^2$",
+            comment="towyo form drag stress",
+        )
         print("Form Drag is {:1.0f} N/m".format(self._obj.FormDrag.values.tolist()))
         print(
             "Stress associated with form drag is {:1.2f} N/m^2".format(
@@ -909,7 +921,7 @@ class Towyo(object):
 
 
 # Energy Budget Terms
-def calculate_energy_budget_terms(ty, cfg):
+def calculate_energy_budget_terms(ty, cfg, save_results=True):
     """Calculate energy budget terms for a towyo section.
 
     Parameters
@@ -1044,26 +1056,73 @@ def calculate_energy_budget_terms(ty, cfg):
     ).data
 
     res_id = "TyA" if ty.attrs["name"] == "2012" else "TyB"
-    res = dict()
+    # Flip signs on all values being printed to the latex results file to that
+    # sources are positive and sinks negative.
     print("\n", year, "\n------")
-    print("towyo APE flux div: {:1.1e} W/m".format(apeflux_div))
-    res[res_id+"APEFluxDiv"] = f"{apeflux_div/1e3:1.1f}"
     print("towyo APEs flux div: {:1.1e} W/m".format(apesflux_div))
-    res[res_id+"APEsFluxDiv"] = f"{apesflux_div/1e3:1.1f}"
+    if save_results:
+        nsl.io.Res(
+            name=res_id + "APESFluxDiv",
+            value=f"{-apesflux_div/1e3:1.1f}",
+            unit="kW/m",
+            comment="towyo budget APE (from sorted background reference) flux divergence",
+        )
+
     print("towyo KE flux div: {:1.1e} W/m".format(keflux_div))
-    res[res_id+"KEFluxDiv"] = f"{keflux_div/1e3:1.1f}"
+    if save_results:
+        nsl.io.Res(
+            name=res_id + "KEFluxDiv",
+            value=f"{-keflux_div/1e3:1.1f}",
+            unit="kW/m",
+            comment="towyo budget KE flux divergence",
+        )
+
     print("towyo dissipation:", dissipation)
-    res[res_id+"Diss"] = f"{dissipation/1e3:1.1f}"
+    if save_results:
+        nsl.io.Res(
+            name=res_id + "Diss",
+            value=f"{-dissipation/1e3:1.1f}",
+            unit="kW/m",
+            comment="towyo budget turbulent dissipation",
+        )
+
     print("bottom dissipation:", bottom_dissipation)
-    res[res_id+"BottomDiss"] = f"{bottom_dissipation/1e3:1.1f}"
+    if save_results:
+        nsl.io.Res(
+            name=res_id + "BottomDiss",
+            value=f"{-bottom_dissipation/1e3:1.1f}",
+            unit="kW/m",
+            comment="towyo budget bottom dissipation",
+        )
+
     print("towyo IW flux div:", vertical_wave_flux)
-    res[res_id+"IWFluxDiv"] = f"{vertical_wave_flux/1e3:1.1f}"
+    if save_results:
+        nsl.io.Res(
+            name=res_id + "IWFluxDiv",
+            value=f"{-vertical_wave_flux/1e3:1.1f}",
+            unit="kW/m",
+            comment="towyo budget vertical wave flux divergence",
+        )
+
     print("towyo vert pressure work div:", vertical_pressure_work_sorted)
-    res[res_id+"VertPressWorkDiv"] = f"{vertical_pressure_work_sorted/1e3:1.1f}"
+    if save_results:
+        nsl.io.Res(
+            name=res_id + "VertPressWorkDiv",
+            value=f"{-vertical_pressure_work_sorted/1e3:1.1f}",
+            unit="kW/m",
+            comment="towyo budget vertical pressure work divergence",
+        )
+
     print("towyo horiz pressure work div:", PressureWorkHorizSorted_div)
-    res[res_id+"HorizPressWorkDiv"] = f"{PressureWorkHorizSorted_div/1e3:1.1f}"
+    if save_results:
+        nsl.io.Res(
+            name=res_id + "HorizPressWorkDiv",
+            value=f"{-PressureWorkHorizSorted_div/1e3:1.1f}",
+            unit="kW/m",
+            comment="towyo budget horizontal pressure work divergence",
+        )
+
     print("towyo eps + IW flux:", vertical_wave_flux + dissipation)
-    nsl.io.res_save(**res)
 
     bt = xr.Dataset(
         dict(
@@ -1104,6 +1163,8 @@ def calculate_matching_form_drag_velocity(a, bt, year):
         ty = a["t14"]
     bty = bt.sel(year=year)
 
+    res_id = "TyA" if ty.attrs["name"] == "2012" else "TyB"
+
     print("----")
     print(f"{year}")
     print("----\n")
@@ -1112,8 +1173,21 @@ def calculate_matching_form_drag_velocity(a, bt, year):
         bty.dissipation + bty.bottom_dissipation + bty.vertical_pressure_work_sorted
     )
     print(f"loss terms: {loss_terms.data}")
+    _ = nsl.io.Res(
+        name=res_id + "LossTerms",
+        value=f"{loss_terms.data/1e3:1.1f}",
+        unit="kW/m",
+        comment="towyo budget loss terms",
+    )
     vel = loss_terms.data / -ty.FormDrag.data
     print(f"velocity: {vel}\n")
+    _ = nsl.io.Res(
+        name=res_id + "FormDragMatchVelocity",
+        value=f"{vel:1.2f}",
+        unit="m/s",
+        comment="towyo velocity to match form drag energy loss to budget",
+    )
+    vel = loss_terms.data / -ty.FormDrag.data
 
     print("without vertical pressure work term:")
     loss_terms = bty.dissipation + bty.bottom_dissipation

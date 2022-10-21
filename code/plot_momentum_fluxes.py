@@ -143,8 +143,23 @@ print(momfi.mean(dim='time').min().data / 17e3)
 
 # %%
 for k, t in a.items():
-    print(t.mf2_along_isopycnal.where(t.sg4bins>45.94).min().data)
-    print(t.mf2_along_isopycnal.where(t.sg4bins>45.94).min().data / 17e3)
+    res_id = "TyA" if t.attrs["name"] == "2012" else "TyB"
+    momflux = t.mf2_along_isopycnal.where(t.sg4bins>45.94).min().data
+    print(momflux)
+    _ = nsl.io.Res(
+        name=res_id + "MomentumFlux",
+        value=f"{momflux/1e4:1.1f}",
+        unit="$10^4$\,N/m",
+        comment="absolute maximum momentum flux",
+    )
+    average_momflux = t.mf2_along_isopycnal.where(t.sg4bins>45.94).min().data / 17e3
+    print(average_momflux)
+    _ = nsl.io.Res(
+        name=res_id + "MomentumFluxAverage",
+        value=f"{average_momflux:1.1f}",
+        unit="N/m$^2$",
+        comment="absolute maximum momentum flux",
+    )
 
 # %% [markdown]
 # Plot both model and towyo momentum fluxes
@@ -156,5 +171,3 @@ nsl.io.save_png('momentum_flux')
 # %%
 nsl.plt.PlotMomentumFluxes(a, momfi, for_pdf=True)
 nsl.io.save_pdf('momentum_flux')
-
-# %%

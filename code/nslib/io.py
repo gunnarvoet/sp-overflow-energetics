@@ -316,88 +316,82 @@ def save_pdf(fname, subdir=None):
     plt.savefig(figdir.joinpath(fname), bbox_inches="tight", dpi=200)
 
 
-def res_save(**kwargs):
-    # can also add a dict using ** notation so either
-    # res_save(ka=res_a, kb=res_b) or res_save(**d)
+class Res:
 
-    # do not use underscores in variable names!
+    """Save result to latex newcommand."""
 
-    # Result values can either be individual items or tuples. The latter will
-    # be converted into value\,unit notation.
+    def __init__(self, name, value, unit=None, comment=None):
+        self._RES_YML, self._RES_TEX = RES_YML, RES_TEX
+        self.name = name
+        self.value = value
+        self.unit = unit
+        self.comment = comment
+        self.value_to_str()
+        self.check_name()
+        self.input_to_dict()
+        self.load_yml()
+        self.update_db()
+        self.write_yml()
+        self.write_latex()
 
-    # - open yaml file
-    # - generate if it does not exist
-    # - see if the key exists
-    # - add or overwrite key
-    # - print diff if key existed previously
-    # - save yml file
-    # - write all yml entries to latex newcommands
+    def value_to_str(self):
+        if type(self.value) is not str:
+            self.value = str(self.value)
 
-    def check_input(kwargs):
-        out_kwargs = {}
-        for k, v in kwargs.items():
-            if '_' in k:
-                k = _snake_case_to_camel_case(k)
-            if type(v) is tuple:
-                if type(v[0]) is not str:
-                    v = (f"{v[0]}", v[1])
-            elif type(v) is not str and type(v) is not tuple:
-                v = f"{v}"
-            out_kwargs[k] = v
-        return out_kwargs
+    def check_name(self):
+        if "_" in self.name:
+            self.name_original = self.name
+            self.name = _snake_case_to_camel_case(self.name)
 
-    kwargs = check_input(kwargs)
+    def input_to_dict(self):
+        self.dict_out = dict(value=self.value)
+        if self.unit is not None:
+            self.dict_out["unit"] = self.unit
+        if self.comment is not None:
+            self.dict_out["comment"] = self.comment
+        else:
+            self.dict_out["comment"] = ""
 
-    if RES_YML.exists():
-        with open(RES_YML) as file:
-            prev_res = yaml.load(file, Loader=yaml.FullLoader)
-        for k, v in kwargs.items():
-            # if '_' in k:
-            #     k = _snake_case_to_camel_case(k)
-            # if type(v) is tuple:
-            #     if type(v[0]) is not str:
-            #         v = (f"{v[0]}", v[1])
-            # elif type(v) is not str and type(v) is not tuple:
-            #     v = f"{v}"
-            if k in prev_res:
-                r = prev_res[k]
-                if r != v:
-                    print(f"[result replace] {k}: {r} -> {v}")
-                else:
-                    print(f"[result keep]    {k}: {r}")
+    def load_yml(self):
+        if self._RES_YML.exists():
+            with open(self._RES_YML) as file:
+                self.db = yaml.load(file, Loader=yaml.FullLoader)
+        else:
+            self.db = dict()
+
+    def update_db(self):
+        if self.name in self.db:
+            prev = self.db[self.name]
+            if prev["value"] != self.value:
+                print(f"[result replace] {self.name}: {prev['value']} -> {self.value}")
             else:
-                print(f"[result add]     {k}: {v}")
-            prev_res[k] = v
-        with open(RES_YML, "w") as file:
-            yaml.dump(prev_res, file)
-    else:
-        with open(RES_YML, "w") as file:
-            for k, v in kwargs.items():
-                print(f"[result add]     {k}: {v}")
-            yaml.dump(kwargs, file)
-    res_yml_to_latex()
+                print(f"[result keep]    {self.name}: {prev['value']}")
+        else:
+            print(f"[result add]     {self.name}: {self.value}")
+        self.db[self.name] = self.dict_out
 
+    def write_yml(self):
+        with open(self._RES_YML, "w") as file:
+            yaml.dump(self.db, file)
 
-def res_remove(k):
-    with open(RES_YML) as file:
-        prev_res = yaml.load(file, Loader=yaml.FullLoader)
-    rem = prev_res.pop(k)
-    print(f"[res] removing {k}: {rem}")
-    with open(RES_YML, "w") as file:
-        yaml.dump(prev_res, file)
-    res_yml_to_latex()
+    def remove_yml_file(self):
+        self._RES_YML.unlink()
 
+    def remove_db_entry(self, name):
+        rem = self.db.pop(name)
+        self.write_yml()
 
-def res_yml_to_latex():
-    with open(RES_YML) as yfile:
-        res = yaml.load(yfile, Loader=yaml.FullLoader)
-    with open(RES_TEX, "w") as lfile:
-        for k, v in res.items():
-            if type(v) is tuple:
-                line = f"\\newcommand{{\\{k}}}{{{v[0]}\\,{v[1]}}}\n"
-            else:
-                line = f"\\newcommand{{\\{k}}}{{{v}}}\n"
-            lfile.write(line)
+    def write_latex(self):
+        self.load_yml()
+        with open(self._RES_TEX, "w") as lfile:
+            for k, v in self.db.items():
+                line = f"% {v['comment']}\n"
+                lfile.write(line)
+                line = f"\\newcommand{{\\{k}}}{{{v['value']}}}\n"
+                lfile.write(line)
+                if "unit" in v:
+                    line = f"\\newcommand{{\\{k+'Unit'}}}{{{v['unit']}}}\n"
+                    lfile.write(line)
 
 
 def _res_paths():
@@ -406,7 +400,7 @@ def _res_paths():
 
 
 def _snake_case_to_camel_case(name):
-    return ''.join(word.title() for word in name.split('_'))
+    return "".join(word.title() for word in name.split("_"))
 
 
 RES_YML, RES_TEX = _res_paths()

@@ -160,16 +160,21 @@ print('calculate internal wave fluxes')
 #
 # find start depth (first row without nan's) in 2012 towyo, then use this for both as 2014 was shallower than 2012.
 # %%
-ty = a['t12']
-xx = np.where(ty.dist.values<25)
+ty = a["t12"]
+xx = np.where(ty.dist.values < 25)
 StartIndex = 0
-while np.sum(np.where(np.isnan(ty.rho_anom_windowed.values[StartIndex,xx]))):
-        StartIndex = StartIndex+1
+while np.sum(np.where(np.isnan(ty.rho_anom_windowed.values[StartIndex, xx]))):
+    StartIndex = StartIndex + 1
 # print('start index {}\nstart depth {}m'.format(StartIndex, ty.z.values[StartIndex]))
 
-nsl.io.res_save(ty_int_start_depth=ty.z.values[StartIndex])
+r = nsl.io.Res(
+    "ty_int_start_depth",
+    ty.z.values[StartIndex],
+    unit="m",
+    comment="upper integration limit for pressure anomaly",
+)
 
-[t.ty.PressureAnomaly(StartIndex) for k, t in a.items()];
+[t.ty.PressureAnomaly(StartIndex) for k, t in a.items()]
 # %%
 ty = a['t12']
 
@@ -320,7 +325,13 @@ print('integrate dissipation')
 # %%
 InterfaceSG4 = cfg.parameters.towyo.interfacesg4
 print(f'upper interface in towyo energy calcs is {InterfaceSG4} (sigma4)')
-nsl.io.res_save(ty_upper_int_limit=InterfaceSG4)
+# nsl.io.res_save(ty_upper_int_limit=InterfaceSG4)
+r = nsl.io.Res(
+    name="TyUpperIntLimit",
+    value=InterfaceSG4,
+    unit='kg/m$^3$',
+    comment="upper integration limit (sigma4) for budgets",
+)
 
 # %% [markdown]
 # ### Energy
@@ -447,7 +458,24 @@ bt.coords['year'] = [2012, 2014]
 # Calculate the residual. We don't want to include the vertical wave flux term ($w'' p''$) as this would be double-counting and should already be included in the vertical pressure work term.
 
 # %%
-bt.apesflux_div + bt.keflux_div + bt.dissipation + bt.bottom_dissipation + bt.vertical_pressure_work_sorted + bt.horizontal_pressure_work_sorted
+residual = bt.apesflux_div + bt.keflux_div + bt.dissipation + bt.bottom_dissipation + bt.vertical_pressure_work_sorted + bt.horizontal_pressure_work_sorted
+
+# %%
+residual
+
+# %%
+_ = nsl.io.Res(
+    name="TyAResidual",
+    value=f"{-residual.sel(year=2012).data/1e3:1.1f}",
+    unit="kW/m",
+    comment="towyo budget residual",
+)
+_ = nsl.io.Res(
+    name="TyBResidual",
+    value=f"{-residual.sel(year=2014).data/1e3:1.1f}",
+    unit="kW/m",
+    comment="towyo budget residual",
+)
 
 # %% [markdown]
 # ## Form Drag Energy Loss
@@ -466,7 +494,7 @@ bt.apesflux_div + bt.keflux_div + bt.dissipation + bt.bottom_dissipation + bt.ve
 [nsl.towyo.calculate_matching_form_drag_velocity(a, bt, year) for year in [2012, 2014]]
 
 # %% [markdown]
-# Upstream velocities need to be 5cm/s to 10-15cm/s depending on whether we include the vertical pressure work term or not.
+# Upstream velocities need to be 10-15cm/s.
 
 # %% [markdown]
 # ## Save
@@ -494,7 +522,10 @@ config2.parameters.towyo.energy_budget_dnstream_range = [20, 25]
 config2.parameters.towyo.energy_budget_dnstream_range
 
 # %%
-budget_terms = [nsl.towyo.calculate_energy_budget_terms(ty, config2) for k, ty in a.items()]
+budget_terms = [
+    nsl.towyo.calculate_energy_budget_terms(ty, config2, save_results=False)
+    for k, ty in a.items()
+]
 
 # %% [markdown]
 # Combine the results into one dataset.
