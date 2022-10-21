@@ -106,7 +106,7 @@ TOWYO-CALCS-OUT=data/out/ty2012.nc data/out/ty2014.nc\
 
 towyo-calcs : $(TOWYO-CALCS-OUT)
 
-$(TOWYO-CALCS-OUT) &: code/02_nb_towyo_analysis.py code/nslib/towyo.py $(DATA_TOWYO)
+$(TOWYO-CALCS-OUT) &: code/towyo_analysis.py code/nslib/towyo.py $(DATA_TOWYO)
 	$(PYTHON) $<
 
 
