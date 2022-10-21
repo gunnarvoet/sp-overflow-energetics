@@ -77,10 +77,10 @@ data-towyo: $(DATA_TOWYO)
 ##   data-model        : Generate model data files
 data-model: $(DATA_MODEL)
 
-$(DATA_TOWYO) &: code/01_load_towyo_data.py code/nslib/io.py
+$(DATA_TOWYO) &: code/towyo_load_data.py code/nslib/io.py
 	$(PYTHON) $<
 
-$(DATA_EXTRA): code/01_downstream_density.py code/nslib/io.py
+$(DATA_EXTRA): code/towyo_downstream_density.py code/nslib/io.py
 	$(PYTHON) $<
 
 $(DATA_MODEL): code/00_retrieve_data.py
