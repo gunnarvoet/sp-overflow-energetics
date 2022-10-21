@@ -9,7 +9,7 @@ Observational datasets from the [Samoan Passage Data Archive](https://github.com
 
 Model data are stored on google drive and can be retrieved via `make` calls.
 
-Code to run all analysis steps and generate plots for the paper in [code/](code/). All analysis steps are documented in the Makefile, type `make help` for an overview.
+The source code to run all analysis steps and generate plots for the manuscript is contained in [code/](code/). All analysis steps are documented in the [Makefile](Makefile), type `make help` for an overview.
 
 The source code for the manuscript is contained in [doc/](doc/).
 
