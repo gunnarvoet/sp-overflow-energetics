@@ -86,6 +86,9 @@ wppp_int_mean = wppp_int_da.mean(dim='T')
 print('plotting vertical internal wave fluxes')
 nsl.plt.PlotVerticalEnergyFluxWithPressureWork(cfg, wppp_int_mean, a)
 nsl.io.save_png('vertical_wave_flux_and_vert_pressure_work_integrated')
+
+# %%
+nsl.plt.PlotVerticalEnergyFluxWithPressureWork(cfg, wppp_int_mean, a, for_pdf=True)
 nsl.io.save_pdf('vertical_wave_flux_and_vert_pressure_work_integrated')
 
 # %% [markdown]

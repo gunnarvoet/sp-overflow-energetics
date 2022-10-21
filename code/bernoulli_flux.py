@@ -187,6 +187,15 @@ ax.set(
 )
 ax.legend()
 nsl.io.save_png('bernoulli_transport')
+ax.grid(
+    b=True,
+    which="major",
+    axis="both",
+    color="0.5",
+    linewidth=0.1,
+    linestyle="-",
+    alpha=0.3,
+)
 nsl.io.save_pdf('bernoulli_transport')
 
 # %% [markdown]

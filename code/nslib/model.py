@@ -1883,6 +1883,15 @@ def plot_steadiness_terms(B):
     """
     fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(6, 5), sharex=True)
     ax = gv.plot.axstyle(ax)
+    ax.grid(
+        b=True,
+        which="major",
+        axis="both",
+        color="0.5",
+        linewidth=0.1,
+        linestyle="-",
+        alpha=0.3,
+    )
     ax.plot(
         B.time,
         B.dEp0dt / 1e3,

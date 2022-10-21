@@ -49,6 +49,7 @@ ax.set(ylim=(5300, 4600), xlim=(-20, 40));
 print('plotting integrated energetics terms')
 nsl.plt.PlotEnergeticsTermsIntegrated(a, b, E, model_int_limit_isot=[0.9, 0.8])
 nsl.io.save_png('energetics_fields_integrated')
-nsl.io.save_pdf('energetics_fields_integrated')
 
 # %%
+nsl.plt.PlotEnergeticsTermsIntegrated(a, b, E, model_int_limit_isot=[0.9, 0.8], for_pdf=True)
+nsl.io.save_pdf('energetics_fields_integrated')

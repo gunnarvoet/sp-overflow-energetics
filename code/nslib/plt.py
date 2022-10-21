@@ -511,7 +511,7 @@ def _plot_energetics_fields_model(
     return h
 
 
-def PlotEnergeticsTermsIntegrated(a, b, E, model_int_limit_isot=0.9):
+def PlotEnergeticsTermsIntegrated(a, b, E, model_int_limit_isot=0.9, for_pdf=False):
     """Plot energetics terms (integrated along x or z).
 
     Parameters
@@ -570,6 +570,17 @@ def PlotEnergeticsTermsIntegrated(a, b, E, model_int_limit_isot=0.9):
     ax = ax.flatten()
     for axi in ax:
         gv.plot.axstyle(axi, fontsize=12, ticks="in")
+    if for_pdf:
+        for axi in ax:
+            axi.grid(
+            which="major",
+            axis="both",
+            color="0.5",
+            linewidth=0.1,
+            linestyle="-",
+            alpha=0.3,
+        )
+
 
     optsraw = dict(linewidth=0.7, alpha=0.5)
     optssmooth = dict(linewidth=1.5, alpha=1)
@@ -777,20 +788,22 @@ def PlotEnergeticsTermsIntegrated(a, b, E, model_int_limit_isot=0.9):
     axi.annotate(
         "from vel at bottom",
         xy=(b.dist[i], mbdIc[i] / 1e3),
-        xytext=(0, 20),
+        xytext=(0, 5),
         xycoords="data",
-        textcoords="offset pixels",
+        textcoords="offset points",
         color="C6",
         ha="center",
+        va="bottom",
     )
     axi.annotate(
         "from vel 40m\n above bottom",
         xy=(b.dist[i], mbdIca[i] / 1e3),
-        xytext=(0, 20),
+        xytext=(0, 5),
         xycoords="data",
-        textcoords="offset pixels",
+        textcoords="offset points",
         color="C7",
         ha="center",
+        va="bottom",
     )
 
     axi.set(
@@ -911,7 +924,7 @@ def PlotVerticalEnergyFlux(cfg, a):
     ax2.vlines(0, -10, 10, color="0.5", linewidth=1)
 
 
-def PlotVerticalEnergyFluxWithPressureWork(cfg, wppp_int, a):
+def PlotVerticalEnergyFluxWithPressureWork(cfg, wppp_int, a, for_pdf=False):
     """Plot vertical wave energy flux (integrated along x).
 
     Parameters
@@ -936,6 +949,15 @@ def PlotVerticalEnergyFluxWithPressureWork(cfg, wppp_int, a):
 
     for axi in [ax1, ax2, ax1a, ax2a]:
         gv.plot.axstyle(axi)
+        if for_pdf:
+            axi.grid(
+                which="major",
+                axis="both",
+                color="0.5",
+                linewidth=0.1,
+                linestyle="-",
+                alpha=0.3,
+        )
 
     for axi in [ax1, ax2]:
         axi.set(ylim=(0.65, 1.0))
@@ -1541,7 +1563,7 @@ def PlotEnergeticsLayerBudgetResultsHorizontalTwoIsotherms(cfg, refrho_sorted=Tr
 
 
 def PlotEnergeticsLayerBudgetResultsHorizontalTwoIsothermsSourcePositive(
-    cfg, refrho_sorted=True
+    cfg, refrho_sorted=True, for_pdf=False,
 ):
     """Plot energy budget results with horizontal bars. This version includes
     pressure work terms v'p' and w'p'. Also, this version does not show the box
@@ -1703,12 +1725,24 @@ def PlotEnergeticsLayerBudgetResultsHorizontalTwoIsothermsSourcePositive(
     )
     _add_bar_label_h(ax, "turbulent dissipation", 6, centerwidth=centerwidth, lr="r")
     _add_bar_label_h(ax, "bottom drag", 7, centerwidth=centerwidth, lr="r")
-    ax.grid(True)
+    if for_pdf:
+        ax.grid(
+        b=True,
+        which="major",
+        axis="both",
+        color="0.5",
+        linewidth=0.1,
+        linestyle="-",
+        alpha=0.3,
+    )
+    else:
+        ax.grid(True)
+
     ax.legend(loc=3)
     gv.plot.xsym(ax=ax)
 
 
-def PlotFormDrag():
+def PlotFormDrag(for_pdf=False):
     """Plot form drag."""
     cfg = nsl.io.load_config()
     a = nsl.io.load_towyos()
@@ -1718,6 +1752,17 @@ def PlotFormDrag():
     )
     gv.plot.axstyle(ax1)
     gv.plot.axstyle(ax2)
+    if for_pdf:
+        for axi in [ax1, ax2]:
+            axi.grid(
+            which="major",
+            axis="both",
+            color="0.5",
+            linewidth=0.1,
+            linestyle="-",
+            alpha=0.3,
+        )
+
     col = _linecolors(ax2, option=0)
 
     h = ax1.contourf(
@@ -1956,6 +2001,15 @@ def PlotMooredProfilerTimeSeries(mp):
     fig, ax = plt.subplots(nrows=3, figsize=(6, 8), sharey=False, sharex=True)
     for axi in ax:
         gv.plot.axstyle(axi)
+        axi.grid(
+            b=True,
+            which="major",
+            axis="both",
+            color="0.5",
+            linewidth=0.1,
+            linestyle="-",
+            alpha=0.3,
+        )
     # pyt = gv.io.mtlb2datetime(tnew)
     h0 = ax[0].contourf(pyt, V["depth"], V.transpose(), range, cmap=cmap)
     h1 = ax[1].contourf(pyt, V["depth"], lpdata.transpose(), range, cmap=cmap)
@@ -2148,11 +2202,22 @@ def PlotTowyoSketch(integration_isotherm=1.02, box_linewidth=5, show_epsilon=Tru
     ax.yaxis.set_visible(False)
 
 
-def PlotMomentumFluxes(a, momfi):
+def PlotMomentumFluxes(a, momfi, for_pdf=False):
     fontsize = 12
     fig, ax2, ax = gv.plot.newfigyy(width=5, height=6)
     for axi in [ax, ax2]:
-        ax = gv.plot.axstyle(ax, fontsize=fontsize)
+        axi = gv.plot.axstyle(axi, fontsize=fontsize)
+        if for_pdf:
+            axi.grid(
+                which="major",
+                axis="both",
+                color="0.5",
+                linewidth=0.1,
+                linestyle="-",
+                alpha=0.3,
+            )
+
+
     col = _linecolors(ax, option=0)
     h1 = []
     # towyo integrated fluxes:

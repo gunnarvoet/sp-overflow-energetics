@@ -25,4 +25,11 @@ nsl.plt.PlotEnergeticsLayerBudgetResultsHorizontalTwoIsothermsSourcePositive(
     cfg, refrho_sorted=True
 )
 nsl.io.save_png("energy_budget_results")
+
+# %%
+nsl.plt.PlotEnergeticsLayerBudgetResultsHorizontalTwoIsothermsSourcePositive(
+    cfg, refrho_sorted=True, for_pdf=True,
+)
 nsl.io.save_pdf("energy_budget_results")
+
+# %%

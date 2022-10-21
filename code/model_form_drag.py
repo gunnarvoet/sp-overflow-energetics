@@ -294,6 +294,17 @@ gv.plot.annotate_corner(
     addy=-0.05,
 )
 nsl.io.save_png('model_pressure')
+
+for axi in [ax1, ax2]:
+    axi.grid(
+        which="major",
+        axis="both",
+        color="0.5",
+        linewidth=0.1,
+        linestyle="-",
+        alpha=0.3,
+    )
+
 nsl.io.save_pdf('model_pressure')
 
 # %% [markdown]

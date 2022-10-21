@@ -19,4 +19,9 @@ import nslib as nsl
 # %%
 nsl.plt.PlotFormDrag()
 nsl.io.save_png('bottom_pressure')
+
+# %%
+nsl.plt.PlotFormDrag(for_pdf=True)
 nsl.io.save_pdf('bottom_pressure')
+
+# %%
