@@ -32,4 +32,10 @@ nsl.plt.PlotEnergeticsLayerBudgetResultsHorizontalTwoIsothermsSourcePositive(
 )
 nsl.io.save_pdf("energy_budget_results")
 
+# %% [markdown]
+# Save results to latex file.
+
+# %%
+nsl.model.save_budget_results()
+
 # %%

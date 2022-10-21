@@ -96,9 +96,7 @@ def load():
 
     # let's get rid of all stuff in x-direction
     b = b.squeeze()
-    b = b.drop(
-        ["X", "Xp1", "XG", "XC", "dxC", "dxF", "dxG", "dxV", "rAw", "HFacW"]
-    )
+    b = b.drop(["X", "Xp1", "XG", "XC", "dxC", "dxF", "dxG", "dxV", "rAw", "HFacW"])
 
     # New coords for Y and T
     b = b.assign_coords(dist=b.Y / 1000.0 - b.Y.mean() / 1000.0 + 13.0)
@@ -278,8 +276,7 @@ def calculate_velocities(b):
     b["V"] = (
         ["T", "Y"],
         (
-            (np.sum(b["VC"] * b.drF * b.HFacC, axis=1) + b.eta * b.VC.isel(Z=0))
-            / b.H
+            (np.sum(b["VC"] * b.drF * b.HFacC, axis=1) + b.eta * b.VC.isel(Z=0)) / b.H
         ).data,
     )
     # calculate a pseudo-barotropic velocity (time mean velocity field
@@ -323,23 +320,21 @@ def calculate_velocities(b):
 def calculate_energetics(b):
     cfg = nsl.io.load_config()
     # full kinetic Energy
-    Ek = 1 / 2 * rho0 * (b.VC ** 2 + b.WC ** 2) * b.BathyMask
+    Ek = 1 / 2 * rho0 * (b.VC**2 + b.WC**2) * b.BathyMask
     # barotropic horizontal kinetic energy
-    Ehk0 = 0.5 * rho0 * b.V ** 2
+    Ehk0 = 0.5 * rho0 * b.V**2
     # bring to matrix form for plotting
     Ehk0m = Ehk0 * b.BathyMask
     Ehk0m = Ehk0m.transpose("T", "Z", "Y")
     # baroclinic kinetic Energy
     # Ekp = 0.5 * rho0 * (b.v ** 2 + b.WC ** 2) * b.BathyMask
-    Ekp = 0.5 * rho0 * (b.v ** 2 + b.wp ** 2) * b.BathyMask
+    Ekp = 0.5 * rho0 * (b.v**2 + b.wp**2) * b.BathyMask
     # cross term
     Ehk0p = 0.5 * rho0 * b.v * b.V * b.BathyMask
     # perturbation potential energy
-    Ep0 = 0.5 * rho0 * gBaro * b.eta ** 2
+    Ep0 = 0.5 * rho0 * gBaro * b.eta**2
     # combine energy terms into one dataset
-    E = xr.Dataset(
-        {"Ek": Ek, "Ehk0": Ehk0, "Ekp": Ekp, "Ehk0p": Ehk0p, "Ep0": Ep0}
-    )
+    E = xr.Dataset({"Ek": Ek, "Ehk0": Ehk0, "Ekp": Ekp, "Ehk0p": Ehk0p, "Ep0": Ep0})
 
     # available potential energy
     if b.modelrun == "full":
@@ -356,14 +351,14 @@ def calculate_energetics(b):
         zeta.to_netcdf(zetafile)
     else:
         LAPE = xr.open_dataarray(apefile).data
-        ZETA =  xr.open_dataarray(zetafile).data
+        ZETA = xr.open_dataarray(zetafile).data
     E["Epp"] = (["T", "Z", "Y"], LAPE)
 
     # Available potential energy calculated against a density profile based on
     # a sorted density field
     if b.modelrun == "full":
         # don't need this for the full run
-        E["Epp_sorted_rho"] = (["T", "Z", "Y"], np.ones_like(LAPE)*np.nan)
+        E["Epp_sorted_rho"] = (["T", "Z", "Y"], np.ones_like(LAPE) * np.nan)
     else:
         if cfg.model.output.ape_sorted.exists() is False:
             LAPE_sorted_rho, ZETA_sorted_rho = LambAPEnew(b, sorted_ref_rho=True)
@@ -405,16 +400,13 @@ def calculate_energetics(b):
             rho0
             * Cd
             * abs(b.VC.values[:, d, j])
-            * (
-                b.v.values[:, d, j] * b.VC.values[:, d, j]
-                + b.WC.values[:, d, j] ** 2
-            )
+            * (b.v.values[:, d, j] * b.VC.values[:, d, j] + b.WC.values[:, d, j] ** 2)
         )
     E["BottomDrag"] = (["T", "Y"], BottomDrag)
 
     # Bottom drag with velocities 40m above the bottom
     above = -b.Depth + 40
-    tmp1 = b.v.where(b.Z>above, other=-1e6)
+    tmp1 = b.v.where(b.Z > above, other=-1e6)
     tmp = tmp1.isel(T=0)
     BottomCellsAbove = np.zeros_like(b.Y.values, dtype="int")
     for i, column in enumerate(tmp.T):
@@ -426,10 +418,7 @@ def calculate_energetics(b):
             rho0
             * Cd
             * abs(b.VC.values[:, d, j])
-            * (
-                b.v.values[:, d, j] * b.VC.values[:, d, j]
-                + b.WC.values[:, d, j] ** 2
-            )
+            * (b.v.values[:, d, j] * b.VC.values[:, d, j] + b.WC.values[:, d, j] ** 2)
         )
     E["BottomDragAbove"] = (["T", "Y"], BottomDragAbove)
 
@@ -463,7 +452,7 @@ def calculate_bernoulli_energetics(cfg, b, zlim=0):
     calculated as the difference between left and right side of the control
     volume. They should be balanced by diffusive terms.
     """
-    Ek = 1 / 2 * rho0 * (b.VC ** 2 + b.WC ** 2) * b.BathyMask
+    Ek = 1 / 2 * rho0 * (b.VC**2 + b.WC**2) * b.BathyMask
     Ep = b.rhop * gravity * b.Z * b.BathyMask
     p = b.p * b.BathyMask
     # horizontal integration limits
@@ -477,9 +466,7 @@ def calculate_bernoulli_energetics(cfg, b, zlim=0):
         zlim = -1 * zlim
     zm = b.Z < zlim
     # pre-allocate B as xarray Dataset by copying some grid info
-    B = xr.Dataset(
-        {"dist": b.dist, "Y": b.Y, "Z": b.Z, "T": b["T"], "time": b["time"]}
-    )
+    B = xr.Dataset({"dist": b.dist, "Y": b.Y, "Z": b.Z, "T": b["T"], "time": b["time"]})
 
     # Unsteadiness - first volume integral (gives J/m)
     EkpVI = (Ek.isel(Y=ym, Z=zm) * b.dyF.isel(Y=ym) * b.drF.isel(Z=zm)).sum(
@@ -735,9 +722,7 @@ def ape_fluid_particle(
         fig, ax = gv.plot.quickfig()
         ax.plot(ref_rho_profile, ref_rho_z, color="0.5", linewidth=0.8)
         ax.vlines(rho, rho_z, ref_rho_z[k_star], color="orange", linestyle="--")
-        ax.hlines(
-            rho_z, ref_rho_profile[k], rho, color="orange", linestyle="--"
-        )
+        ax.hlines(rho_z, ref_rho_profile[k], rho, color="orange", linestyle="--")
         ax.plot(rho, rho_z, marker="o", color="orange")
         ax.text(
             0.1,
@@ -779,22 +764,26 @@ def bernoulli_function(b, th_interface=0.9, quick_d=True):
     mask = c.th < th_interface
     if quick_d:
         # Determine layer thickness quickly.
-        thickness = (c.HFacC * c.drF).where(mask).sum(dim='Z')
+        thickness = (c.HFacC * c.drF).where(mask).sum(dim="Z")
     else:
         # find depth of interface and subtract from bottom depth for layer thickness
         z = c.Z
         interface_z = []
-        for dd, x in c.th.groupby('dist'):
-        #     xi = ~np.isnan(x)
-            interface_z.append(sp.interpolate.interp1d(x, z, axis=0, bounds_error=False)(model_interface))
+        for dd, x in c.th.groupby("dist"):
+            #     xi = ~np.isnan(x)
+            interface_z.append(
+                sp.interpolate.interp1d(x, z, axis=0, bounds_error=False)(
+                    model_interface
+                )
+            )
 
         thickness = np.array(interface_z) + depth
     d = thickness
     # Layer mean velocity.
-    v = ((c.HFacC * c.VC)*(c.HFacC*c.drF)).where(mask).sum(dim='Z')/d
+    v = ((c.HFacC * c.VC) * (c.HFacC * c.drF)).where(mask).sum(dim="Z") / d
     # Bernoulli function along the flow
     gprime = drho / 999 * 9.81
-    B = v ** 3 * d / 2 + v * gprime * (d ** 2 + h * d)
+    B = v**3 * d / 2 + v * gprime * (d**2 + h * d)
     # Convert to units of kW/m
     B = rho0 * B / 1000
 
@@ -848,9 +837,7 @@ def energy_budget_box(cfg, b, E, zlim=0):
     zm = b.Z < zlim
 
     # pre-allocate B as xarray Dataset by copying some grid info
-    B = xr.Dataset(
-        {"dist": b.dist, "Y": b.Y, "Z": b.Z, "T": b["T"], "time": b["time"]}
-    )
+    B = xr.Dataset({"dist": b.dist, "Y": b.Y, "Z": b.Z, "T": b["T"], "time": b["time"]})
 
     # Unsteadiness - first volume integral (gives J/m)
     EkpVI = (E.Ekp.isel(Y=ym, Z=zm) * b.dyF.isel(Y=ym) * b.drF.isel(Z=zm)).sum(
@@ -910,9 +897,9 @@ def energy_budget_box(cfg, b, E, zlim=0):
     B["EppFluxDivergence"] = EppFluxDI.isel(Y=-1) - EppFluxDI.isel(Y=0)
     B.EppFluxDivergence.attrs["name"] = "APE Flux Divergence"
     B.EppFluxDivergence.attrs["units"] = "W/m"
-    B["EppSortedFluxDivergence"] = EppSortedFluxDI.isel(
-        Y=-1
-    ) - EppSortedFluxDI.isel(Y=0)
+    B["EppSortedFluxDivergence"] = EppSortedFluxDI.isel(Y=-1) - EppSortedFluxDI.isel(
+        Y=0
+    )
     B.EppSortedFluxDivergence.attrs["name"] = "APE Flux Divergence"
     B.EppSortedFluxDivergence.attrs["units"] = "W/m"
     # Energy advection - vertical
@@ -934,9 +921,7 @@ def energy_budget_box(cfg, b, E, zlim=0):
         * b.HFacC.isel(Y=ym).isel(Z=zm)
         * b.drF.isel(Z=zm)
     ).sum(dim="Z")
-    B["IWFluxHorizDivergence"] = IWFluxHorizDI.isel(Y=-1) - IWFluxHorizDI.isel(
-        Y=0
-    )
+    B["IWFluxHorizDivergence"] = IWFluxHorizDI.isel(Y=-1) - IWFluxHorizDI.isel(Y=0)
     B.IWFluxHorizDivergence.attrs["name"] = (
         "Horizontal Internal Wave " + "Flux Divergence"
     )
@@ -960,35 +945,31 @@ def energy_budget_box(cfg, b, E, zlim=0):
         * b.HFacC.isel(Y=ym).isel(Z=zm)
         * b.drF.isel(Z=zm)
     ).sum(dim="Z")
-    B["IWFluxHorizDivergencenh"] = IWFluxHorizDInh.isel(
-        Y=-1
-    ) - IWFluxHorizDInh.isel(Y=0)
+    B["IWFluxHorizDivergencenh"] = IWFluxHorizDInh.isel(Y=-1) - IWFluxHorizDInh.isel(
+        Y=0
+    )
     B.IWFluxHorizDivergencenh.attrs["name"] = (
         "non-hydrostatic Horizontal " + "Internal Wave Flux Divergence"
     )
     B.IWFluxHorizDivergencenh.attrs["units"] = "W/m"
     # based on local mean profiles
     IWFluxHorizDI_lp = (
-        E.lp_hwf.isel(Y=ym, Z=zm)
-        * b.HFacC.isel(Y=ym).isel(Z=zm)
-        * b.drF.isel(Z=zm)
+        E.lp_hwf.isel(Y=ym, Z=zm) * b.HFacC.isel(Y=ym).isel(Z=zm) * b.drF.isel(Z=zm)
     ).sum(dim="Z")
-    B["IWFluxHorizDivergence_lp"] = IWFluxHorizDI_lp.isel(
-        Y=-1
-    ) - IWFluxHorizDI_lp.isel(Y=0)
+    B["IWFluxHorizDivergence_lp"] = IWFluxHorizDI_lp.isel(Y=-1) - IWFluxHorizDI_lp.isel(
+        Y=0
+    )
     B.IWFluxHorizDivergence_lp.attrs["name"] = (
         "Horizontal Internal Wave Local Profile " + "Flux Divergence"
     )
     B.IWFluxHorizDivergence.attrs["units"] = "W/m"
     # based on high-pass filtered time series
     IWFluxHorizDI_hp = (
-        E.hp_hwf.isel(Y=ym, Z=zm)
-        * b.HFacC.isel(Y=ym).isel(Z=zm)
-        * b.drF.isel(Z=zm)
+        E.hp_hwf.isel(Y=ym, Z=zm) * b.HFacC.isel(Y=ym).isel(Z=zm) * b.drF.isel(Z=zm)
     ).sum(dim="Z")
-    B["IWFluxHorizDivergence_hp"] = IWFluxHorizDI_hp.isel(
-        Y=-1
-    ) - IWFluxHorizDI_hp.isel(Y=0)
+    B["IWFluxHorizDivergence_hp"] = IWFluxHorizDI_hp.isel(Y=-1) - IWFluxHorizDI_hp.isel(
+        Y=0
+    )
     B.IWFluxHorizDivergence_hp.attrs["name"] = (
         "Horizontal Internal Wave High Pass Filter " + "Flux Divergence"
     )
@@ -1006,16 +987,14 @@ def energy_budget_box(cfg, b, E, zlim=0):
     ]
     if zlim != 0:
         B["IWFluxVertDivergence"] = (
-            E.IWEnergyFluxVert.isel(Z=np.argmax(zm.values), Y=ym)
-            * b.dyF.isel(Y=ym)
+            E.IWEnergyFluxVert.isel(Z=np.argmax(zm.values), Y=ym) * b.dyF.isel(Y=ym)
         ).sum(dim="Y")
         B["IWSortedFluxVertDivergence"] = (
             E.IWEnergyFluxVert_sorted_rho.isel(Z=np.argmax(zm.values), Y=ym)
             * b.dyF.isel(Y=ym)
         ).sum(dim="Y")
         B["IWFluxVertDivergencenh"] = (
-            E.nhIWEnergyFluxVert.isel(Z=np.argmax(zm.values), Y=ym)
-            * b.dyF.isel(Y=ym)
+            E.nhIWEnergyFluxVert.isel(Z=np.argmax(zm.values), Y=ym) * b.dyF.isel(Y=ym)
         ).sum(dim="Y")
         B["IWFluxVertDivergence_lp"] = (
             E.lp_vwf.isel(Z=np.argmax(zm.values), Y=ym) * b.dyF.isel(Y=ym)
@@ -1036,9 +1015,7 @@ def energy_budget_box(cfg, b, E, zlim=0):
                 ["T"],
                 np.zeros_like(B.IWFluxHorizDivergence),
             )
-    B.IWFluxVertDivergence.attrs["name"] = (
-        "Vertical Internal Wave " + "Flux Divergence"
-    )
+    B.IWFluxVertDivergence.attrs["name"] = "Vertical Internal Wave " + "Flux Divergence"
     B.IWSortedFluxVertDivergence.attrs["name"] = (
         "Vertical Internal Wave (sorted)" + "Flux Divergence"
     )
@@ -1071,7 +1048,9 @@ def energy_budget_box(cfg, b, E, zlim=0):
     B.BottomDrag.attrs["units"] = "W/m"
 
     print("Calculating bottom drag [from vels 40m above bottom] term...")
-    B["BottomDragAbove"] = (E.BottomDragAbove.isel(Y=ym) * b.dyF.isel(Y=ym)).sum(dim="Y")
+    B["BottomDragAbove"] = (E.BottomDragAbove.isel(Y=ym) * b.dyF.isel(Y=ym)).sum(
+        dim="Y"
+    )
     B.BottomDragAbove.attrs["name"] = "Integrated Bottom Drag"
     B.BottomDragAbove.attrs["units"] = "W/m"
 
@@ -1102,9 +1081,7 @@ def energy_budget_box(cfg, b, E, zlim=0):
     return B
 
 
-def energy_budget_layer(
-    cfg, b, E, isot, avg_up_dn=False, steadiness_terms_only=False
-):
+def energy_budget_layer(cfg, b, E, isot, avg_up_dn=False, steadiness_terms_only=False):
     r"""Calculate various terms for the baroclinic energy equation integrated
     over a layer.
 
@@ -1187,14 +1164,12 @@ def energy_budget_layer(
     HFacC = b.HFacC.isel(Y=ym)
 
     # pre-allocate B as xarray Dataset by copying some grid info
-    B = xr.Dataset(
-        {"dist": b.dist, "Y": b.Y, "Z": b.Z, "T": b["T"], "time": b["time"]}
-    )
+    B = xr.Dataset({"dist": b.dist, "Y": b.Y, "Z": b.Z, "T": b["T"], "time": b["time"]})
 
     # find indices of the interface. we'll use this for the vertical fluxes.
-    interface = (
-        E.th.isel(Y=ym).where(E.th.isel(Y=ym) < isot, 99) != 99
-    ).argmax(dim="Z")
+    interface = (E.th.isel(Y=ym).where(E.th.isel(Y=ym) < isot, 99) != 99).argmax(
+        dim="Z"
+    )
 
     print("Calculating unsteadiness term...")
     # Unsteadiness - first volume integral (gives J/m)
@@ -1210,11 +1185,7 @@ def energy_budget_layer(
     # Unsteadiness of perturbation potential energy
     axisT = Er.eta.get_axis_num(dim="T")
     B["dEp0dt"] = (
-        rho0
-        * gBaro
-        * Er.eta
-        * np.gradient(Er.eta, b.time * 3600, axis=axisT)
-        * dyF
+        rho0 * gBaro * Er.eta * np.gradient(Er.eta, b.time * 3600, axis=axisT) * dyF
     ).sum(dim="Y")
     # combine unsteadiness terms
     B["Unsteadiness"] = B.dEkpdt + B.dEppdt + B.dEp0dt
@@ -1233,25 +1204,25 @@ def energy_budget_layer(
     EppFluxDI = (Er.VC * Er.Epp * drF * HFacC).sum(dim="Z")
     EppSortedFluxDI = (Er.VC * Er.Epp_sorted_rho * drF * HFacC).sum(dim="Z")
     if avg_up_dn:
-        B["EkpFluxDivergence"] = EkpFluxDI.isel(Y=ydn).mean(
-            dim="Y"
-        ) - EkpFluxDI.isel(Y=yup).mean(dim="Y")
+        B["EkpFluxDivergence"] = EkpFluxDI.isel(Y=ydn).mean(dim="Y") - EkpFluxDI.isel(
+            Y=yup
+        ).mean(dim="Y")
     else:
         B["EkpFluxDivergence"] = EkpFluxDI.isel(Y=-1) - EkpFluxDI.isel(Y=0)
     B.EkpFluxDivergence.attrs["name"] = "EK Flux Divergence"
     B.EkpFluxDivergence.attrs["units"] = "W/m"
     if avg_up_dn:
-        B["EppFluxDivergence"] = EppFluxDI.isel(Y=ydn).mean(
-            dim="Y"
-        ) - EppFluxDI.isel(Y=yup).mean(dim="Y")
+        B["EppFluxDivergence"] = EppFluxDI.isel(Y=ydn).mean(dim="Y") - EppFluxDI.isel(
+            Y=yup
+        ).mean(dim="Y")
     else:
         B["EppFluxDivergence"] = EppFluxDI.isel(Y=-1) - EppFluxDI.isel(Y=0)
     B.EppFluxDivergence.attrs["name"] = "APE Flux Divergence"
     B.EppFluxDivergence.attrs["units"] = "W/m"
     # from sorted density
-    B["EppSortedFluxDivergence"] = EppSortedFluxDI.isel(
-        Y=-1
-    ) - EppSortedFluxDI.isel(Y=0)
+    B["EppSortedFluxDivergence"] = EppSortedFluxDI.isel(Y=-1) - EppSortedFluxDI.isel(
+        Y=0
+    )
     B.EppSortedFluxDivergence.attrs["name"] = "APE Flux Divergence"
     B.EppSortedFluxDivergence.attrs["units"] = "W/m"
 
@@ -1267,17 +1238,13 @@ def energy_budget_layer(
     print("Calculating horizontal internal wave energy flux term...")
     # hydrostatic
     IWFluxHorizDI = (Er.IWEnergyFluxHoriz * HFacC * drF).sum(dim="Z")
-    B["IWFluxHorizDivergence"] = IWFluxHorizDI.isel(Y=-1) - IWFluxHorizDI.isel(
-        Y=0
-    )
+    B["IWFluxHorizDivergence"] = IWFluxHorizDI.isel(Y=-1) - IWFluxHorizDI.isel(Y=0)
     B.IWFluxHorizDivergence.attrs["name"] = (
         "Horizontal Internal Wave " + "Flux Divergence"
     )
     B.IWFluxHorizDivergence.attrs["units"] = "W/m"
     # from sorted density
-    IWSortedFluxHorizDI = (Er.IWEnergyFluxHoriz_sorted_rho * HFacC * drF).sum(
-        dim="Z"
-    )
+    IWSortedFluxHorizDI = (Er.IWEnergyFluxHoriz_sorted_rho * HFacC * drF).sum(dim="Z")
     B["IWSortedFluxHorizDivergence"] = IWSortedFluxHorizDI.isel(
         Y=-1
     ) - IWSortedFluxHorizDI.isel(Y=0)
@@ -1287,27 +1254,27 @@ def energy_budget_layer(
     B.IWSortedFluxHorizDivergence.attrs["units"] = "W/m"
     # non-hydrostatic
     IWFluxHorizDInh = (Er.nhIWEnergyFluxHoriz * HFacC * drF).sum(dim="Z")
-    B["IWFluxHorizDivergencenh"] = IWFluxHorizDInh.isel(
-        Y=-1
-    ) - IWFluxHorizDInh.isel(Y=0)
+    B["IWFluxHorizDivergencenh"] = IWFluxHorizDInh.isel(Y=-1) - IWFluxHorizDInh.isel(
+        Y=0
+    )
     B.IWFluxHorizDivergencenh.attrs["name"] = (
         "non-hydrostatic Horizontal " + "Internal Wave Flux Divergence"
     )
     B.IWFluxHorizDivergencenh.attrs["units"] = "W/m"
     # based on local mean profiles
     IWFluxHorizDI_lp = (Er.lp_hwf * HFacC * drF).sum(dim="Z")
-    B["IWFluxHorizDivergence_lp"] = IWFluxHorizDI_lp.isel(
-        Y=-1
-    ) - IWFluxHorizDI_lp.isel(Y=0)
+    B["IWFluxHorizDivergence_lp"] = IWFluxHorizDI_lp.isel(Y=-1) - IWFluxHorizDI_lp.isel(
+        Y=0
+    )
     B.IWFluxHorizDivergence_lp.attrs["name"] = (
         "Horizontal Internal Wave Local Profiles " + "Flux Divergence"
     )
     B.IWFluxHorizDivergence_lp.attrs["units"] = "W/m"
     # based on high-pass filtered time series
     IWFluxHorizDI_hp = (Er.hp_hwf * HFacC * drF).sum(dim="Z")
-    B["IWFluxHorizDivergence_hp"] = IWFluxHorizDI_hp.isel(
-        Y=-1
-    ) - IWFluxHorizDI_hp.isel(Y=0)
+    B["IWFluxHorizDivergence_hp"] = IWFluxHorizDI_hp.isel(Y=-1) - IWFluxHorizDI_hp.isel(
+        Y=0
+    )
     B.IWFluxHorizDivergence_hp.attrs["name"] = (
         "Horizontal Internal Wave High Pass Filter " + "Flux Divergence"
     )
@@ -1315,12 +1282,10 @@ def energy_budget_layer(
 
     print("Calculating vertical internal wave energy flux term...")
     # hydrostatic
-    B["IWFluxVertDivergence"] = (
-        Er.IWEnergyFluxVert.isel(Z=interface) * dyF
-    ).sum(dim="Y")
-    B.IWFluxVertDivergence.attrs["name"] = (
-        "Vertical Internal Wave " + "Flux Divergence"
+    B["IWFluxVertDivergence"] = (Er.IWEnergyFluxVert.isel(Z=interface) * dyF).sum(
+        dim="Y"
     )
+    B.IWFluxVertDivergence.attrs["name"] = "Vertical Internal Wave " + "Flux Divergence"
     B.IWFluxVertDivergence.attrs["units"] = "W/m"
     # hydrostatic (from sorted reference density)
     B["IWSortedFluxVertDivergence"] = (
@@ -1331,34 +1296,28 @@ def energy_budget_layer(
     )
     B.IWSortedFluxVertDivergence.attrs["units"] = "W/m"
     # non-hydrostatic
-    B["IWFluxVertDivergencenh"] = (
-        Er.nhIWEnergyFluxVert.isel(Z=interface) * dyF
-    ).sum(dim="Y")
+    B["IWFluxVertDivergencenh"] = (Er.nhIWEnergyFluxVert.isel(Z=interface) * dyF).sum(
+        dim="Y"
+    )
     B.IWFluxVertDivergencenh.attrs["name"] = (
         "non-hydrostatic Vertical " + "Internal Wave Flux Divergence"
     )
     B.IWFluxVertDivergencenh.attrs["units"] = "W/m"
     # based on local mean profiles
-    B["IWFluxVertDivergence_lp"] = (Er.lp_vwf.isel(Z=interface) * dyF).sum(
-        dim="Y"
-    )
+    B["IWFluxVertDivergence_lp"] = (Er.lp_vwf.isel(Z=interface) * dyF).sum(dim="Y")
     B.IWFluxVertDivergence_lp.attrs["name"] = (
         "Vertical Internal Wave Local Profiles " + "Flux Divergence"
     )
     B.IWFluxVertDivergence_lp.attrs["units"] = "W/m"
     # based on high-pass filtered time series
-    B["IWFluxVertDivergence_hp"] = (Er.hp_vwf.isel(Z=interface) * dyF).sum(
-        dim="Y"
-    )
+    B["IWFluxVertDivergence_hp"] = (Er.hp_vwf.isel(Z=interface) * dyF).sum(dim="Y")
     B.IWFluxVertDivergence_hp.attrs["name"] = (
         "Vertical Internal Wave Local Profiles " + "Flux Divergence"
     )
     B.IWFluxVertDivergence_hp.attrs["units"] = "W/m"
 
     print("Calculating pressure work term due to free ocean surface...")
-    PressureWorkSurface = (rho0 * gBaro * Er.eta * Er.VC * HFacC * drF).sum(
-        dim="Z"
-    )
+    PressureWorkSurface = (rho0 * gBaro * Er.eta * Er.VC * HFacC * drF).sum(dim="Z")
     B["PressureWorkSurfaceDivergence"] = PressureWorkSurface.isel(
         Y=-1
     ) - PressureWorkSurface.isel(Y=0)
@@ -1468,9 +1427,7 @@ def plot_IWfluxH_snapshot(b, E, ti):
         ylabel="Depth [m]",
         xlabel="Distance [km]",
     )
-    plt.colorbar(
-        h, label=r"v$^\prime$ p$^\prime$ [W/m$^2$]", shrink=0.8, aspect=50
-    )
+    plt.colorbar(h, label=r"v$^\prime$ p$^\prime$ [W/m$^2$]", shrink=0.8, aspect=50)
     vmin, vmax = h.get_clim()
     vmin, vmax = -50, 50
     mc = np.max(np.abs([vmin, vmax]))
@@ -1549,9 +1506,7 @@ def plot_IWfluxV_snapshot(b, E, ti):
     fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(8, 5))
     ax = gv.plot.axstyle(ax)
 
-    h = ax.pcolormesh(
-        b.dist, -1 * b.Z, E.IWEnergyFluxVert.isel(T=ti), cmap="RdBu_r"
-    )
+    h = ax.pcolormesh(b.dist, -1 * b.Z, E.IWEnergyFluxVert.isel(T=ti), cmap="RdBu_r")
     clevels = [0.76, 0.8, 0.9, 1.0, 1.1]
     hc = ax.contour(
         b.dist,
@@ -1567,9 +1522,7 @@ def plot_IWfluxV_snapshot(b, E, ti):
         xlim=(-30, 50),
         xlabel="Distance [km",
     )
-    manual_positions = list(
-        zip([40, 40, 40, 40, 40], [3900, 4200, 4500, 4600, 4700])
-    )
+    manual_positions = list(zip([40, 40, 40, 40, 40], [3900, 4200, 4500, 4600, 4700]))
     plt.clabel(
         hc,
         manual=manual_positions,
@@ -1601,9 +1554,7 @@ def plot_IWfluxV_snapshot_large_region(b, E, ti):
         E.IWEnergyFluxVert.isel(T=ti),
         # cmap="RdBu_r",
         cmap=cmocean.cm.delta,
-        norm=mpl.colors.SymLogNorm(
-            linthresh=0.02, linscale=1.5, vmax=20, base=10
-        ),
+        norm=mpl.colors.SymLogNorm(linthresh=0.02, linscale=1.5, vmax=20, base=10),
     )
     clevels = [0.76, 0.8, 0.9, 1.0, 1.1]
     hc = ax.contour(
@@ -1618,9 +1569,7 @@ def plot_IWfluxV_snapshot_large_region(b, E, ti):
         ylabel="Depth [m]",
         xlabel="Distance [km",
     )
-    manual_positions = list(
-        zip([40, 40, 40, 40, 40], [3900, 4200, 4500, 4600, 4700])
-    )
+    manual_positions = list(zip([40, 40, 40, 40, 40], [3900, 4200, 4500, 4600, 4700]))
     plt.clabel(
         hc,
         manual=manual_positions,
@@ -1772,7 +1721,11 @@ def plot_snapshot(b: xr.Dataset, ti: int, zlim: float = 3000):
     contour_th(ax[3], tmpth)
     contour_interface(ax[3], tmpth)
     plt.colorbar(
-        h3, ax=ax[3], extend="both", label=r"$\mathrm{log}_{10}(\epsilon)$ [W/kg]", **colbaropts
+        h3,
+        ax=ax[3],
+        extend="both",
+        label=r"$\mathrm{log}_{10}(\epsilon)$ [W/kg]",
+        **colbaropts,
     )
 
     for axi in ax:
@@ -1842,9 +1795,7 @@ def plot_energy_budget(B, plotall=True):
     ax[2].plot(B.time, B.EkpFluxDivergence / 1e3, label="EK Flux Divergence H")
     ax[2].plot(B.time, B.EkpVFluxDivergence / 1e3, label="EK Flux Divergence V")
     ax[2].plot(B.time, B.EppFluxDivergence / 1e3, label="APE Flux Divergence H")
-    ax[2].plot(
-        B.time, B.EppVFluxDivergence / 1e3, label="APE Flux Divergence V"
-    )
+    ax[2].plot(B.time, B.EppVFluxDivergence / 1e3, label="APE Flux Divergence V")
 
     ax[3].plot(B.time, B.Unsteadiness / 1e3, label="Unsteadiness")
     ax[3].plot(
@@ -1954,6 +1905,73 @@ def plotsill(b, var, ti=0, **kwargs):
     fig, ax = gv.plot.quickfig()
     b[var].isel(time=ti).plot(ax=ax, **kwargs)
     ax.set(xlim=(-10, 40), ylim=(-5200, -4200))
+
+
+def save_budget_results():
+    """Save energy budget results to latex results file."""
+    cfg = nsl.io.load_config()
+    # Read model energy budget results and concatenate them for plotting.
+    B1 = xr.open_dataset(cfg.model.output.energy_budget_results_layer)
+    B2 = xr.open_dataset(cfg.model.output.energy_budget_results_layer_08)
+
+    Epp = "EppSortedFluxDivergence"
+    IWVert = "IWSortedFluxVertDivergence"
+    IWHoriz = "IWSortedFluxHorizDivergence"
+    budget_terms = [
+        "Unsteadiness",
+        Epp,
+        "EkpFluxDivergence",
+        IWHoriz,
+        IWVert,
+        "IWFluxVertDivergence_hp",
+        "Dissipation",
+        "BottomDrag",
+    ]
+
+    for B, res_id in zip([B1, B2], ["ModelUpper", "ModelLower"]):
+        means = []
+        stds = []
+        for var in budget_terms:
+            means.append(B[var].mean(dim="T").data)
+            stds.append(B[var].std(dim="T").data)
+        means = np.array(means)
+        stds = np.array(stds)
+        # print layer results
+        print("-----")
+        # save to latex result file
+        for name, data, sigma in zip(budget_terms, means, stds):
+            if name == "IWFluxVertDivergence_hp":
+                name = "IWFluxVertDivergenceHP"
+            _ = nsl.io.Res(
+                name=res_id + name,
+                value=f"{-data/1e3:1.1f}",
+                unit="kW/m",
+                comment=f"model energy budget (0.9 isotherm) {name}",
+            )
+            _ = nsl.io.Res(
+                name=res_id + name + "Sigma",
+                value=f"{sigma/1e3:1.1f}",
+                unit="kW/m",
+                comment=f"model energy budget (0.9 isotherm) {name} standard deviation",
+            )
+
+        sum_terms = means[[1, 2, 3, 4, 6, 7]]
+        residual = np.sum(means[[1, 2, 3, 4, 6, 7]])
+        _ = nsl.io.Res(
+            name=res_id + "Residual",
+            value=f"{-residual/1e3:1.1f}",
+            unit="kW/m",
+            comment=f"model energy budget (0.9 isotherm) residual",
+        )
+        sigmas_squared = np.array(stds[[1, 2, 3, 4, 6, 7]]) ** 2
+        combined_error = np.sqrt(np.sum(sigmas_squared))
+        _ = nsl.io.Res(
+            name=res_id + "ResidualSigma",
+            value=f"{combined_error/1e3:1.1f}",
+            unit="kW/m",
+            comment=f"model energy budget (0.9 isotherm) residual error",
+        )
+        print("-----")
 
 
 # constants

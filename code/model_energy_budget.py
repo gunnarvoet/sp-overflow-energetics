@@ -14,10 +14,10 @@
 #     name: python3
 # ---
 
-# %% [markdown] heading_collapsed=true
+# %% [markdown]
 # #### Imports
 
-# %% hidden=true
+# %%
 # %matplotlib inline
 import scipy as sp
 import matplotlib.pyplot as plt
@@ -35,7 +35,7 @@ import nslib as nsl
 # %autoreload 2
 # %autosave 300 
 
-# %% hidden=true
+# %%
 is_notebook = gv.misc.is_notebook()
 
 # %% [markdown]

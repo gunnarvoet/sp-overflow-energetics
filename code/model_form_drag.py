@@ -149,6 +149,41 @@ FormDrag.std()
 # %%
 FormDragStress.std()
 
+# %% [markdown]
+# Save to latex results file.
+
+# %%
+_ = nsl.io.Res(
+    name="ModelFormDrag",
+    value=f"{FormDrag.mean()/1e4:1.1f}",
+    unit="$10^4$\,N/m",
+    comment="model form drag",
+)
+
+# %%
+_ = nsl.io.Res(
+    name="ModelFormDragSigma",
+    value=f"{FormDrag.std()/1e4:1.1f}",
+    unit="$10^4$\,N/m",
+    comment="model form drag standard deviation",
+)
+
+# %%
+_ = nsl.io.Res(
+    name="ModelFormDragStress",
+    value=f"{FormDragStress.mean():1.1f}",
+    unit="N/m$^2$",
+    comment="model form drag stress",
+)
+
+# %%
+_ = nsl.io.Res(
+    name="ModelFormDragStressSigma",
+    value=f"{FormDragStress.std():1.1f}",
+    unit="N/m$^2$",
+    comment="model form drag stress standard deviation",
+)
+
 # %%
 if is_notebook:
     fig, ax = plt.subplots(nrows=2, ncols=1, figsize=(8, 5), sharex=True)
