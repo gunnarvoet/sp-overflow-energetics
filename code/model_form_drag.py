@@ -33,7 +33,7 @@ import nslib as nsl
 
 # %reload_ext autoreload
 # %autoreload 2
-# %autosave 300 
+# %autosave 300
 
 # %%
 is_notebook = gv.misc.is_notebook()
@@ -140,8 +140,8 @@ FormDrag = np.trapz(FormDragTMP.isel(Y=mask),b.Y[mask])
 FormDragStress = FormDrag/17e3
 
 # %%
-print('Form Drag is {:1.1f} N/m'.format(FormDrag.mean())) 
-print('Stress associated with form drag is {:1.4f} N/m^2'.format(FormDragStress.mean())) 
+print('Form Drag is {:1.1f} N/m'.format(FormDrag.mean()))
+print('Stress associated with form drag is {:1.4f} N/m^2'.format(FormDragStress.mean()))
 
 # %%
 FormDrag.std()
@@ -156,7 +156,7 @@ FormDragStress.std()
 _ = nsl.io.Res(
     name="ModelFormDrag",
     value=f"{FormDrag.mean()/1e4:1.1f}",
-    unit="$10^4$\,N/m",
+    unit="$10^4$\,N\,m$^{-1}$",
     comment="model form drag",
 )
 
@@ -164,7 +164,7 @@ _ = nsl.io.Res(
 _ = nsl.io.Res(
     name="ModelFormDragSigma",
     value=f"{FormDrag.std()/1e4:1.1f}",
-    unit="$10^4$\,N/m",
+    unit="$10^4$\,N\,m$^{-1}$",
     comment="model form drag standard deviation",
 )
 
@@ -172,7 +172,7 @@ _ = nsl.io.Res(
 _ = nsl.io.Res(
     name="ModelFormDragStress",
     value=f"{FormDragStress.mean():1.1f}",
-    unit="N/m$^2$",
+    unit="N\,m$^{-2}$",
     comment="model form drag stress",
 )
 
@@ -180,7 +180,7 @@ _ = nsl.io.Res(
 _ = nsl.io.Res(
     name="ModelFormDragStressSigma",
     value=f"{FormDragStress.std():1.1f}",
-    unit="N/m$^2$",
+    unit="N\,m$^{-2}$",
     comment="model form drag stress standard deviation",
 )
 
@@ -211,7 +211,7 @@ print(vel08h)
 _ = nsl.io.Res(
     name="ModelLowerFormDragMatchingVelocity",
     value=f"{vel08h:1.2f}",
-    unit="m/s",
+    unit="m\,s$^{-1}$",
     comment="model form drag matching velocity",
 )
 
@@ -223,7 +223,7 @@ print(vel09h)
 _ = nsl.io.Res(
     name="ModelUpperFormDragMatchingVelocity",
     value=f"{vel09h:1.2f}",
-    unit="m/s",
+    unit="m\,s$^{-1}$",
     comment="model form drag matching velocity",
 )
 

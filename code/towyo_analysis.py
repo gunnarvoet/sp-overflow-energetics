@@ -194,7 +194,7 @@ ty.p_anom_s.dropna(dim='z', how='all').plot(yincrease=False)
 # ### Isopycnal displacements
 # Calculate ispycnal displacement $\eta$ - find distance of each value to isopycnal depth in mean density profile.
 #
-# TODO: Can we do better in the bottom layer here? Data drop out faster than they should. Seems like the highest densities are not represented in the mean density... 
+# TODO: Can we do better in the bottom layer here? Data drop out faster than they should. Seems like the highest densities are not represented in the mean density...
 # %%
 [t.ty.IsopycnalDisplacement() for k, t in a.items()];
 # %% [markdown]
@@ -329,7 +329,7 @@ print(f'upper interface in towyo energy calcs is {InterfaceSG4} (sigma4)')
 r = nsl.io.Res(
     name="TyUpperIntLimit",
     value=InterfaceSG4,
-    unit='kg/m$^3$',
+    unit='kg\,m$^{-3}$',
     comment="upper integration limit (sigma4) for budgets",
 )
 
@@ -467,13 +467,13 @@ residual
 _ = nsl.io.Res(
     name="TyAResidual",
     value=f"{-residual.sel(year=2012).data/1e3:1.1f}",
-    unit="kW/m",
+    unit="kW\,m$^{-1}$",
     comment="towyo budget residual",
 )
 _ = nsl.io.Res(
     name="TyBResidual",
     value=f"{-residual.sel(year=2014).data/1e3:1.1f}",
-    unit="kW/m",
+    unit="kW\,m$^{-1}$",
     comment="towyo budget residual",
 )
 

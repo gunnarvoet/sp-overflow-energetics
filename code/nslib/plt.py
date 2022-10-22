@@ -2031,7 +2031,7 @@ def PlotMooredProfilerTimeSeries(mp):
         h1,
         cax=cax,
         orientation="horizontal",
-        label="v [m/s]",
+        label="v [m$\,$s$^{-1}$]",
         ticks=[-0.2, -0.1, 0, 0.1, 0.2],
     )
 

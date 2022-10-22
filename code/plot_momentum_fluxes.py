@@ -145,7 +145,7 @@ print(momfi.mean(dim='time').min().data / 17e3)
 _ = nsl.io.Res(
     name="ModelMomentumFlux",
     value=f"{momfi.mean(dim='time').min().data/1e4:1.1f}",
-    unit="$10^4$\,N/m",
+    unit="$10^4$\,N\,m$^{-1}$",
     comment="model absolute maximum momentum flux",
 )
 
@@ -153,7 +153,7 @@ _ = nsl.io.Res(
 _ = nsl.io.Res(
     name="ModelMomentumFluxSigma",
     value=f"{momfi.min(dim='isot').std(dim='time').data/1e4:1.1f}",
-    unit="$10^4$\,N/m",
+    unit="$10^4$\,N\,m$^{-1}$",
     comment="model absolute maximum momentum flux standard deviation",
 )
 
@@ -161,7 +161,7 @@ _ = nsl.io.Res(
 _ = nsl.io.Res(
     name="ModelMomentumFluxStress",
     value=f"{momfi.mean(dim='time').min().data/17e3:1.1f}",
-    unit="N/m$^2$",
+    unit="N\,m$^{-2}$",
     comment="model absolute maximum momentum flux stress",
 )
 
@@ -169,7 +169,7 @@ _ = nsl.io.Res(
 _ = nsl.io.Res(
     name="ModelMomentumFluxStressSigma",
     value=f"{momfi.min(dim='isot').std(dim='time').data/17e3:1.1f}",
-    unit="N/m$^2$",
+    unit="N\,m$^{-2}$",
     comment="model absolute maximum momentum flux stress standard deviation",
 )
 
@@ -181,7 +181,7 @@ for k, t in a.items():
     _ = nsl.io.Res(
         name=res_id + "MomentumFlux",
         value=f"{momflux/1e4:1.1f}",
-        unit="$10^4$\,N/m",
+        unit="$10^4$\,N\,m$^{-1}$",
         comment="absolute maximum momentum flux",
     )
     average_momflux = t.mf2_along_isopycnal.where(t.sg4bins>45.94).min().data / 17e3
@@ -189,7 +189,7 @@ for k, t in a.items():
     _ = nsl.io.Res(
         name=res_id + "MomentumFluxAverage",
         value=f"{average_momflux:1.1f}",
-        unit="N/m$^2$",
+        unit="N\,m$^{-2}$",
         comment="absolute maximum momentum flux",
     )
 

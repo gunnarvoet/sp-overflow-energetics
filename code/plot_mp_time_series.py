@@ -13,10 +13,10 @@
 #     name: python3
 # ---
 
-# %% [markdown] heading_collapsed=true
+# %% [markdown]
 # #### Imports
 
-# %% hidden=true
+# %%
 # %matplotlib inline
 import matplotlib.pyplot as plt
 import numpy as np
@@ -82,3 +82,21 @@ print(f'tidal band KE: {bp_ke_m/1e3:1.1f} kJ/m^2')
 print(f'ratio of low-frequency KE to tidal KE is {lp_ke_m / bp_ke_m:1.1f}')
 
 print('\n-------------------\n')
+
+# %%
+_ = nsl.io.Res(
+    name="MPLowFreqKE",
+    value=f"{lp_ke_m/1e3:1.1f}",
+    unit="kJ\,m$^{-2}$",
+    comment="Low-frequency kinetic energy in MP data",
+    )
+
+# %%
+_ = nsl.io.Res(
+    name="MPTidalFreqKE",
+    value=f"{bp_ke_m/1e3:1.1f}",
+    unit="kJ\,m$^{-2}$",
+    comment="Tidal frequency kinetic energy in MP data",
+    )
+
+# %%

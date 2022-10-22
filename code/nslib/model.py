@@ -1945,13 +1945,13 @@ def save_budget_results():
             _ = nsl.io.Res(
                 name=res_id + name,
                 value=f"{-data/1e3:1.1f}",
-                unit="kW/m",
+                unit="kW\,m$^{-1}$",
                 comment=f"model energy budget {name}",
             )
             _ = nsl.io.Res(
                 name=res_id + name + "Sigma",
                 value=f"{sigma/1e3:1.1f}",
-                unit="kW/m",
+                unit="kW\,m$^{-1}$",
                 comment=f"model energy budget {name} standard deviation",
             )
 
@@ -1960,7 +1960,7 @@ def save_budget_results():
         _ = nsl.io.Res(
             name=res_id + "Residual",
             value=f"{-residual/1e3:1.1f}",
-            unit="kW/m",
+            unit="kW\,m$^{-1}$",
             comment=f"model energy budget residual",
         )
         sigmas_squared = np.array(stds[[1, 2, 3, 4, 6, 7]]) ** 2
@@ -1968,7 +1968,7 @@ def save_budget_results():
         _ = nsl.io.Res(
             name=res_id + "ResidualSigma",
             value=f"{combined_error/1e3:1.1f}",
-            unit="kW/m",
+            unit="kW\,m$^{-1}$",
             comment=f"model energy budget residual error",
         )
 
@@ -1977,7 +1977,7 @@ def save_budget_results():
         _ = nsl.io.Res(
             name=res_id + "LossTerms",
             value=f"{losses/1e3:1.1f}",
-            unit="kW/m",
+            unit="kW\,m$^{-1}$",
             comment=f"model energy budget loss terms",
         )
         # bty.dissipation + bty.bottom_dissipation + bty.vertical_pressure_work_sorted
