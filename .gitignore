@@ -3,3 +3,4 @@ data/out/*.nc
 data/out/results.yml
 data/in/model/setup/*
 -data/in/model/setup/track_towyo_long.mat
+fig/
