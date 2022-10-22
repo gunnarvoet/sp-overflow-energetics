@@ -182,13 +182,12 @@ ax.set(
     xlim=(-4, 44),
     ylim=(0, 75),
 #     title="Bernoulli function transport",
-    ylabel=r"$\rho_0\,Q\,B$ [kW/m]",
+    ylabel=r"$\rho_0\,Q\,B$ [kW$\,$m$^{-1}$]",
     xlabel='distance [km]',
 )
 ax.legend()
 nsl.io.save_png('bernoulli_transport')
 ax.grid(
-    b=True,
     which="major",
     axis="both",
     color="0.5",
@@ -202,7 +201,16 @@ nsl.io.save_pdf('bernoulli_transport')
 # Calculate the model drop between kilometer 0 and 17 based on the smoothed model mean.
 
 # %%
-model_smoothed_mean.sel(dist=0, method='nearest').item() - model_smoothed_mean.sel(dist=17, method='nearest').item()
+drop = model_smoothed_mean.sel(dist=0, method='nearest').item() - model_smoothed_mean.sel(dist=17, method='nearest').item()
+print(drop)
+
+# %%
+nsl.io.Res(
+    name="ModelBernoulliDrop",
+    value=f"{drop:1.1f}",
+    unit="kW\,m$^{-1}$",
+    comment="Bernoulli function drop in the model between km 0 and 17 (time average)",
+)
 
 # %% [markdown]
 # How does the drop look like if we go further into the far field?
@@ -213,7 +221,16 @@ model_smoothed_mean.plot()
 ax.set(xlim=(-10, 150))
 
 # %%
-model_smoothed_mean.sel(dist=0, method='nearest').item() - model_smoothed_mean.sel(dist=80, method='nearest').item()
+drop40 = model_smoothed_mean.sel(dist=0, method='nearest').item() - model_smoothed_mean.sel(dist=40, method='nearest').item()
+print(drop40)
+
+# %%
+nsl.io.Res(
+    name="ModelBernoulliDropFarther",
+    value=f"{drop40:1.1f}",
+    unit="kW\,m$^{-1}$",
+    comment="Bernoulli function drop in the model between km 0 and 40 (time average)",
+)
 
 # %% [markdown]
 # Calculate form drag based on Larry's parameterization:

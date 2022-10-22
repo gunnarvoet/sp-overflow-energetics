@@ -266,7 +266,7 @@ def PlotEnergeticsTerms(a, b, E, fluxes, cfg):
         cmap="Blues",
         vmax=120,
         name=r"available potential energy $E^\prime_P$",
-        cbar_kwargs=dict(label=r"$E^\prime_P$ [J/m$^3$]"),
+        cbar_kwargs=dict(label=r"$E^\prime_P$ [J$\,$m$^{-3}$]"),
     )
     _plot_energetics_fields_model(
         a,
@@ -279,7 +279,7 @@ def PlotEnergeticsTerms(a, b, E, fluxes, cfg):
         vmin=0,
         vmax=120,
         cmap="Blues",
-        cbar_kwargs=dict(label=r"$E^\prime_P$ [J/m$^3$]"),
+        cbar_kwargs=dict(label=r"$E^\prime_P$ [J$\,$m$^{-3}$]"),
     )
     # KE
     _plot_energetics_fields(
@@ -290,7 +290,7 @@ def PlotEnergeticsTerms(a, b, E, fluxes, cfg):
         cmap="Blues",
         vmax=120,
         name=r"kinetic energy $E^\prime_K$",
-        cbar_kwargs=dict(label=r"$E^\prime_K$ [J/m$^3$]"),
+        cbar_kwargs=dict(label=r"$E^\prime_K$ [J$\,$m$^{-3}$]"),
     )
     _plot_energetics_fields_model(
         a,
@@ -303,7 +303,7 @@ def PlotEnergeticsTerms(a, b, E, fluxes, cfg):
         vmin=0,
         vmax=120,
         cmap="Blues",
-        cbar_kwargs=dict(label=r"$E^\prime_K$ [J/m$^3$]"),
+        cbar_kwargs=dict(label=r"$E^\prime_K$ [J$\,$m$^{-3}$]"),
     )
     # APE flux
     _plot_energetics_fields(
@@ -314,7 +314,7 @@ def PlotEnergeticsTerms(a, b, E, fluxes, cfg):
         cmap="Purples",
         vmax=15,
         name=r"APE flux $v^\prime E^\prime_P$",
-        cbar_kwargs=dict(label=r"$\mathbf{u}\,E^\prime_P$ [W/m$^2$]"),
+        cbar_kwargs=dict(label=r"$\mathbf{u}\,E^\prime_P$ [W$\,$m$^{-2}$]"),
     )
     _plot_energetics_fields_model(
         a,
@@ -327,7 +327,7 @@ def PlotEnergeticsTerms(a, b, E, fluxes, cfg):
         vmin=0,
         vmax=15,
         cmap="Purples",
-        cbar_kwargs=dict(label=r"$v^\prime\,E^\prime_P$ [W/m$^2$]"),
+        cbar_kwargs=dict(label=r"$v^\prime\,E^\prime_P$ [W$\,$m$^{-2}$]"),
     )
     # KE flux
     _plot_energetics_fields(
@@ -338,7 +338,7 @@ def PlotEnergeticsTerms(a, b, E, fluxes, cfg):
         cmap="Purples",
         vmax=30,
         name=r"KE flux $v^\prime E^\prime_K$",
-        cbar_kwargs=dict(label=r"$\mathbf{u}\,E^\prime_K$ [W/m$^2$]"),
+        cbar_kwargs=dict(label=r"$\mathbf{u}\,E^\prime_K$ [W$\,$m$^{-2}$]"),
     )
     _plot_energetics_fields_model(
         a,
@@ -351,7 +351,7 @@ def PlotEnergeticsTerms(a, b, E, fluxes, cfg):
         vmin=0,
         vmax=30,
         cmap="Purples",
-        cbar_kwargs=dict(label=r"$v^\prime\,E^\prime_K$ [W/m$^2$]"),
+        cbar_kwargs=dict(label=r"$v^\prime\,E^\prime_K$ [W$\,$m$^{-2}$]"),
     )
     # horizontal pressure work
     _plot_energetics_fields(
@@ -363,7 +363,7 @@ def PlotEnergeticsTerms(a, b, E, fluxes, cfg):
         vmax=30,
         name=r"horizontal pressure work $v' p'$",
         vmin=-30,
-        cbar_kwargs=dict(label=r"$v'\,p'$ [W/m$^2$]"),
+        cbar_kwargs=dict(label=r"$v'\,p'$ [W$\,$m$^{-2}$]"),
     )
     _plot_energetics_fields_model(
         a,
@@ -376,7 +376,7 @@ def PlotEnergeticsTerms(a, b, E, fluxes, cfg):
         vmin=-30,
         vmax=30,
         cmap="PuOr_r",
-        cbar_kwargs=dict(label=r"$v'\,p'$ [W/m$^2$]"),
+        cbar_kwargs=dict(label=r"$v'\,p'$ [W$\,$m$^{-2}$]"),
     )
     # vertical pressure work
     _plot_energetics_fields(
@@ -388,7 +388,7 @@ def PlotEnergeticsTerms(a, b, E, fluxes, cfg):
         vmax=2,
         name=r"vertical pressure work $w' p'$",
         vmin=-2,
-        cbar_kwargs=dict(label=r"$w'\,p'$ [W/m$^2$]"),
+        cbar_kwargs=dict(label=r"$w'\,p'$ [W$\,$m$^{-2}$]"),
     )
     _plot_energetics_fields_model(
         a,
@@ -401,7 +401,7 @@ def PlotEnergeticsTerms(a, b, E, fluxes, cfg):
         vmin=-2,
         vmax=2,
         cmap="PuOr_r",
-        cbar_kwargs=dict(label=r"$w'\,p'$ [W/m$^2$]"),
+        cbar_kwargs=dict(label=r"$w'\,p'$ [W$\,$m$^{-2}$]"),
     )
     # vertical IW flux
     _plot_energetics_fields(
@@ -413,7 +413,7 @@ def PlotEnergeticsTerms(a, b, E, fluxes, cfg):
         vmax=1,
         name=r"vertical IW flux $w'' p''$",
         vmin=-1,
-        cbar_kwargs=dict(label=r"$w''\,p''$ [W/m$^2$]"),
+        cbar_kwargs=dict(label=r"$w''\,p''$ [W$\,$m$^{-2}$]"),
     )
     _plot_energetics_fields_model(
         a,
@@ -426,7 +426,7 @@ def PlotEnergeticsTerms(a, b, E, fluxes, cfg):
         vmin=-1,
         vmax=1,
         cmap="PuOr_r",
-        cbar_kwargs=dict(label=r"$w''\,p''$ [W/m$^2$]"),
+        cbar_kwargs=dict(label=r"$w''\,p''$ [W$\,$m$^{-2}$]"),
     )
 
     for axi in ax.flatten():
@@ -610,7 +610,7 @@ def PlotEnergeticsTermsIntegrated(a, b, E, model_int_limit_isot=0.9, for_pdf=Fal
         )
     axi.set(
         xlabel="dist [km]",
-        ylabel=r"$\int v^\prime\,\mathrm{dz}\ $ [m$^2$/s]",
+        ylabel=r"$\int v^\prime\,\mathrm{dz}\ $ [m$^2$$\,$s$^{-1}$]",
         ylim=(-30, 180),
         xlim=xlims,
     )
@@ -664,7 +664,7 @@ def PlotEnergeticsTermsIntegrated(a, b, E, model_int_limit_isot=0.9, for_pdf=Fal
         )
         h.append(htmp[0])
     axi.legend(handles=h, loc="upper right")
-    axi.set(ylabel=r"$\int v^\prime E^\prime_P\, \mathrm{dz}\ $ [kW/m]", xlim=xlims)
+    axi.set(ylabel=r"$\int v^\prime E^\prime_P\, \mathrm{dz}\ $ [kW$\,$m$^{-1}$]", xlim=xlims)
     ax[1].set_ylim(bottom=-2, top=7)
     gv.plot.annotate_corner("b) APE flux", ax=axi, quadrant=1, addx=-0.02)
 
@@ -690,7 +690,7 @@ def PlotEnergeticsTermsIntegrated(a, b, E, model_int_limit_isot=0.9, for_pdf=Fal
         mKEfluxI.where(~np.isnan(mKEfluxI), drop=True).rolling(
             dist=model_smoothing_factor, center=True
         ).mean().plot(ax=axi, color=color, linestyle=linestyle, **optssmooth)
-    axi.set(ylabel=r"$\int v^\prime E^\prime_K\, \mathrm{dz}\ $ [kW/m]", xlim=xlims)
+    axi.set(ylabel=r"$\int v^\prime E^\prime_K\, \mathrm{dz}\ $ [kW$\,$m$^{-1}$]", xlim=xlims)
     ax[2].set_ylim(bottom=-2)
     gv.plot.annotate_corner("c) KE flux", ax=axi, addx=-0.02)
 
@@ -718,7 +718,7 @@ def PlotEnergeticsTermsIntegrated(a, b, E, model_int_limit_isot=0.9, for_pdf=Fal
         mPressureWorkHorizI.where(~np.isnan(mPressureWorkHorizI), drop=True).rolling(
             dist=model_smoothing_factor, center=True
         ).mean().plot(ax=axi, color=color, linestyle=linestyle, **optssmooth)
-    axi.set(ylabel=r"$\int v^\prime p^\prime\, \mathrm{dz}\ $ [kW/m]", xlim=xlims)
+    axi.set(ylabel=r"$\int v^\prime p^\prime\, \mathrm{dz}\ $ [kW$\,$m$^{-1}$]", xlim=xlims)
     axi.set_ylim(bottom=-14, top=14)
     gv.plot.annotate_corner("d) horizontal pressure work", ax=axi, addx=-0.02)
 
@@ -751,7 +751,7 @@ def PlotEnergeticsTermsIntegrated(a, b, E, model_int_limit_isot=0.9, for_pdf=Fal
             **optssmooth,
         )
     axi.set(
-        ylabel=r"$\rho \int \epsilon\, \mathrm{dz}\, \mathrm{dy}\ $ [kW/m]",
+        ylabel=r"$\rho \int \epsilon\, \mathrm{dz}\, \mathrm{dy}\ $ [kW$\,$m$^{-1}$]",
         xlim=xlims,
     )
     axi.set(xlabel="Distance [km]")
@@ -807,7 +807,7 @@ def PlotEnergeticsTermsIntegrated(a, b, E, model_int_limit_isot=0.9, for_pdf=Fal
     )
 
     axi.set(
-        ylabel=r"$\int D^\prime \, \mathrm{dy}\ $ [kW/m]",
+        ylabel=r"$\int D^\prime \, \mathrm{dy}\ $ [kW$\,$m$^{-1}$]",
         xlim=xlims,
     )
     axi.set(xlabel="Distance [km]")
@@ -909,7 +909,7 @@ def PlotVerticalEnergyFlux(cfg, a):
     ax2.set(
         ylim=(0.65, 1.0),
         ylabel=r"$\theta$ [$^{\circ}$C]",
-        xlabel=r"$\int w'' p''\ dy$ [kW/m]",
+        xlabel=r"$\int w'' p''\ dy$ [kW$\,$m$^{-1}$]",
     )
     ax2.spines["right"].set_visible(True)
     almost_black = "#262626"
@@ -964,20 +964,20 @@ def PlotVerticalEnergyFluxWithPressureWork(cfg, wppp_int, a, for_pdf=False):
 
     ax1.set(
         ylabel=r"$\theta$ [$^{\circ}$C]",
-        xlabel=r"$\int w' p'\ dy$ [kW/m]",
+        xlabel=r"$\int w' p'\ dy$ [kW$\,$m$^{-1}$]",
         xlim=(-4.5, 4.5),
     )
 
     ax2.set(
         ylabel="",
-        xlabel=r"$\int w'' p''\ dy$ [kW/m]",
+        xlabel=r"$\int w'' p''\ dy$ [kW$\,$m$^{-1}$]",
         xlim=(-0.2, 2.2),
     )
 
     ax1a.yaxis.set_ticklabels([])
 
     ax2a.set(
-        ylabel=r"$\sigma_4$ [kg/m$^3$ - 1000]",
+        ylabel=r"$\sigma_4$ [kg$\,$m$^{-3}$ - 1000]",
     )
 
     for axi in [ax1a, ax2a]:
@@ -1697,7 +1697,7 @@ def PlotEnergeticsLayerBudgetResultsHorizontalTwoIsothermsSourcePositive(
     ax.set_yticks(yticks)
     ax.set_yticklabels([])
     ax.set(ylim=[yticks[-1] + 1, yticks[0] - 1])
-    ax.set(xlabel="Energy Flux [kW/m]")
+    ax.set(xlabel="Energy Flux [kW$\,$m$^{-1}$]")
     _add_bar_label_h(ax, "steadiness", 0, centerwidth=centerwidth, lr="r")
     _add_bar_label_h(ax, "APE flux divergence", 1, centerwidth=centerwidth, lr="l")
     _add_bar_label_h(ax, "KE flux divergence", 2, centerwidth=centerwidth, lr="r")
@@ -1803,7 +1803,7 @@ def PlotFormDrag(for_pdf=False):
     ax1.set_ylim([5200, 4050])
     ax1.set_yticks(np.arange(4200, 5200, 400))
     ax1.set_ylabel("Depth [m]")
-    cb = plt.colorbar(h, ax=ax1, label=r"p$^\prime$ [N/m$^2$]", aspect=50)
+    cb = plt.colorbar(h, ax=ax1, label=r"p$^\prime$ [N$\,$m$^{-2}$]", aspect=50)
     gv.plot.annotate_corner(
         "a) 2012 baroclinic pressure anomaly",
         ax=ax1,
@@ -1826,7 +1826,7 @@ def PlotFormDrag(for_pdf=False):
     )
     ax2.set(
         xlabel="Distance [km]",
-        ylabel=r"$p_B$ [N/m$^2$]",
+        ylabel=r"$p_B$ [N$\,$m$^{-2}$]",
         xlim=(-2, 32),
         title="",
     )
@@ -2253,13 +2253,13 @@ def PlotMomentumFluxes(a, momfi, for_pdf=False):
     ax.set(
         ylim=(45.99, 45.92),
         xlim=(-4e4, 0.3e4),
-        xlabel=r"$\int w^\prime p^\prime\ dy$ [W/m]",
-        ylabel=r"$\sigma_4$ [kg/m$^3$ - 1000]",
+        # xlabel=r"$\int w^\prime p^\prime\ dy$ [W$\,$m$^{-1}$]",
+        ylabel=r"$\sigma_4$ [kg$\,$m$^{-3}$ - 1000]",
     )
     ax2.set(
         ylim=(0.65, 1.0),
         ylabel=r"$\theta$ [$^{\circ}$C]",
-        xlabel=r"$\int \rho v^\prime w^\prime\ dy$ [N/m]",
+        xlabel=r"$\int \rho v^\prime w^\prime\ dy$ [N$\,$m$^{-1}$]",
     )
     ax2.spines["right"].set_visible(True)
     almost_black = "#262626"

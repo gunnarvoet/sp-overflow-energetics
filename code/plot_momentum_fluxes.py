@@ -203,3 +203,5 @@ nsl.io.save_png('momentum_flux')
 # %%
 nsl.plt.PlotMomentumFluxes(a, momfi, for_pdf=True)
 nsl.io.save_pdf('momentum_flux')
+
+# %%

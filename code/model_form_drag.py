@@ -307,7 +307,7 @@ bp.swap_dims({'Y': 'dist'}).isel(T=ti).plot(ax=ax1, label='bc full depth')
 surface_p.swap_dims({'Y': 'dist'}).isel(T=ti).plot(ax=ax1, label='surface')
 q0bottom.plot(ax=ax1, label='nh')
 # b.swap_dims({'Y': 'dist'}).phibot.isel(T=ti).plot(ax=ax1, color='k', alpha=0.5, linestyle='--', label='full')
-ax1.set(title='', xlabel='', ylabel=r'p$^\prime$ [N/m$^2$]')
+ax1.set(title='', xlabel='', ylabel=r'p$^\prime$ [N$\,$m$^{-2}$]')
 gv.plot.annotate_corner(
     "model time 100 h",
     ax=ax1,
@@ -324,7 +324,7 @@ surface_p.swap_dims({'Y': 'dist'}).isel(T=ti).plot(ax=ax2, label='surface')
 q1bottom.plot(ax=ax2, label='nh')
 # b.swap_dims({'Y': 'dist'}).phibot.isel(T=ti).plot(ax=ax2, color='k', alpha=0.5, linestyle='--', label='full')
 
-ax2.set(xlim=(-40, 100), title='', ylabel=r'p$^\prime$ [N/m$^2$]', xlabel='Distance [km]')
+ax2.set(xlim=(-40, 100), title='', ylabel=r'p$^\prime$ [N$\,$m$^{-2}$]', xlabel='Distance [km]')
 ax2.legend(loc='lower left', bbox_to_anchor=(0.65, 0.62));
 gv.plot.annotate_corner(
     "model time 150 h",

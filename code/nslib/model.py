@@ -1883,7 +1883,7 @@ def plot_steadiness_terms(B):
         ),
     )
     ax.annotate("analysis\nperiod", xy=(125, 2), xycoords="data", ha="center")
-    ax.set(xlabel="model time [h]", ylabel="dE/dt [kW/m]")
+    ax.set(xlabel="model time [h]", ylabel="dE/dt [kW$\,$m$^{-1}$]")
 
 
 # helper plot functions
