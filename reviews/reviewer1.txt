@@ -1,0 +1,51 @@
+This paper sets out the energetics of a dense water overflow at a key bottleneck in the northwards spreading of bottom water leading to identifying the key dynamical balances driving the flow and turbulent mixing. This is achieved using a blended approach of observations and numerical modelling allowing robust conclusions to be draw accounting for the limitations of each approach. The paper is very well written with a comprehensive description of the methodology and its limitations. Overall, I recommend this paper is returned for minor revisions to allow the authors to consider some minor comments (see below).
+
+• *Does the paper fit within the stated scope of the journal?*
+◦ Yes
+
+• *Does the paper identify a gap in scientific knowledge and add new knowledge to the overall body of scientific understanding, or repeat another study to verify its findings?*
+◦ Yes
+
+• *Is the paper free of errors in logic?*
+◦ Yes
+
+• *Do the conclusions follow from the evidence?*
+◦ Yes, within the limitations that are clearly identified within the text
+
+• *Are alternative explanations explored as appropriate?*
+◦ Yes
+
+• *Are biases, limitations, and assumptions clearly stated, and uncertainty quantified?*
+◦ Yes
+
+• *Is methodology explained in sufficient detail so that the paper\'s scientific conclusions could be tested by others?*
+◦ Yes
+
+• *Is previous work and current understanding cited and represented correctly?*
+◦ Yes
+
+• *Is information conveyed clearly enough to be understood by the typical reader?*
+◦ Yes
+
+• *Are all figures and tables necessary, appropriate, legible, and annotated (as appropriate)?*
+◦ Yes, some could be a little clearer (see comments below)
+
+## Minor Comments
+
+• Line 102 -- change "high resolution" to "high horizontal resolution" to provide more clarity
+
+• Line 108 -- in the description of the sections there is no mention of 4a might be an oversight or intentional
+
+• Figure 2 -- The vertical velocities in panel a are hard to interpret to this size. Perhaps a separate panel would make this clearer.
+
+• Figure 4 -- Panel b is described as northwards velocity. I found this a little confusing as, if I understood correctly, the topography used for the model does not run directly North-South. Perhaps change the wording to across sill or horizontal velocity (as the model is 2D).
+
+• Equation 4 -- I believe "du" should be "δu"
+
+• Line 563 -- "Fluxes within the dense layer" I found it a little unclear here what fluxes you are referring to. I think it is the vertical pressure work however it could be the internal wave fluxes (both listed on line 559).
+
+• Figure 13b -- You should say what offset has been used for the plot here so the reader can judge if the model and observations are showing similar magnitude anomalies If they are significantly different in magnitude a few words to explain why that is the case would be helpful.
+
+• Line 948 -- The text here refers to the other choices of window size being shown in figure 11b however they are not. These should: be added to figure 11, given a new appendix figure, or the link to a figure removed.
+
+• Line 966 to 969 -- The text here states that the effect of diffusive fluxes is small. It would be helpful to have a quick scaling provided to support this statement as it is not (at least to me) obvious a priori given that in these deep ocean settings buoyancy flux can be an important sink of turbulent kinetic energy (e.g., Ijichi et al GRL 2020, Spingys et al JPO 2021).
