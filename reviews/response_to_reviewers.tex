@@ -1,0 +1,167 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx}
+% \usepackage[dvipsnames]{xcolor}
+% \usepackage{palatino}
+% \usepackage{mathpazo}
+\usepackage{kpfonts}
+\usepackage[top=1in, left=1in, bottom=1.1in, right=1in]{geometry}
+
+
+
+% \pagestyle{plain}
+% \topmargin 0mm
+% \headsep 0mm
+% \textwidth 6.5in
+% \headheight 10mm
+% \footskip 10mm
+% \textheight 9in
+% \oddsidemargin 0in
+% \evensidemargin 0in
+
+\newcommand{\dgr}{$^{\circ}$}
+
+\begin{document}
+
+\pagestyle{empty}
+
+\begin{center}
+{\large  SCRIPPS INSTITUTION OF OCEANOGRAPHY\\
+UNIVERSITY OF CALIFORNIA, SAN DIEGO}\\
+\vspace{0.1in}
+{\small 9500 Gilman Drive \#0213\\
+La Jolla, CA 92093}
+\end{center}
+
+\begin{flushright}
+phone: 858.822.6809\\
+email:~gvoet@ucsd.edu\\
+\vspace{0.2in}
+\today
+\end{flushright}
+
+\begin{flushleft}
+% Addressee
+Sylvia Cole, Editor\\
+Journal of Physical Oceanography\\
+American Meteorological Society\\
+Boston, MA\\
+
+\end{flushleft}
+
+\vspace{.2in}
+
+\noindent Dear Dr.\ Cole,
+
+Please consider the enclosed manuscript, which was originally submitted as JPO-D-22-0220, ``Energy and Momentum of a Density-Driven Overflow in the Samoan Passage'' for consideration in \it Journal of Physical Oceanography\rm.  We have addressed all of the reviewer's comments, as seen in the following.
+
+\begin{flushleft}
+Sincerely,
+
+\includegraphics[height=0.5in]{"/Users/gunnar/Documents/private/sig"}
+
+
+%\vspace{.5in}
+Gunnar Voet
+
+\clearpage
+In the following, we quote the reviewer's comments in italics, followed by our responses in bold.\\
+\vspace{0.2in}
+
+\centerline{\bf Responses to Reviewer 1}
+\vspace{0.05in}
+
+
+
+\it
+This paper sets out the energetics of a dense water overflow at a key bottleneck in the northwards spreading of bottom water leading to identifying the key dynamical balances driving the flow and turbulent mixing. This is achieved using a blended approach of observations and numerical modelling allowing robust conclusions to be draw accounting for the limitations of each approach. The paper is very well written with a comprehensive description of the methodology and its limitations. Overall, I recommend this paper is returned for minor revisions to allow the authors to consider some minor comments (see below).
+
+\vspace{0.05in}
+\bf
+We appreciate you taking the time to review this manuscript and would like to thank you for your kind words and helpful comments.
+
+\begin{itemize}
+\item \it
+Line 102: change ``high resolution'' to ``high horizontal resolution'' to provide more clarity
+
+\bf
+Changed as suggested.
+
+\item \it
+Line 108 -- in the description of the sections there is no mention of 4a might be an oversight or intentional
+
+\bf
+We added the following sentence to highlight section 4a: ``Flow steadiness is discussed as a precursor to the following analysis in section~4a.''
+
+\item \it
+Figure 2 -- The vertical velocities in panel a are hard to interpret to this size. Perhaps a separate panel would make this clearer.
+
+\bf
+response
+
+\item \it
+Figure 4 -- Panel b is described as northwards velocity. I found this a little confusing as, if I understood correctly, the topography used for the model does not run directly North-South. Perhaps change the wording to across sill or horizontal velocity (as the model is 2D).
+
+\bf
+We changed the description for panel b to ``horizontal velocity'' as suggested.
+
+\item \it
+Equation 4 -- I believe ``$du$'' should be ``$\delta u$''.
+
+\bf
+Corrected. Thank you for pointing this out.
+
+\item \it
+Line 563 -- ``Fluxes within the dense layer'' I found it a little unclear here what fluxes you are referring to. I think it is the vertical pressure work however it could be the internal wave fluxes (both listed on line 559).
+
+\bf
+You are right, this should read ``Pressure work within the dense layer'' and is now corrected.
+
+\item \it
+Figure 13b -- You should say what offset has been used for the plot here so the reader can judge if the model and observations are showing similar magnitude anomalies If they are significantly different in magnitude a few words to explain why that is the case would be helpful.
+
+\bf
+Thank you for pointing this out. There is indeed a considerable offset of about 200\,N\,m$^{-2}$ between model and observations. This is caused by the way we initialize the model: It starts out with the observed density field but then drains some of the initial stratification associated with potential energy to accelerate the flow. We restore density at the domain boundaries, but over the sill the density structure has deviated somewhat from the initial values model hour~100 when we start the model analysis. This difference between model and observations is visible, for example, in Fig.~9a-c where the observations show higher potential energy than the model. This difference is now reflected in the caption. 
+
+\item \it
+Line 948 -- The text here refers to the other choices of window size being shown in figure 11b however they are not. These should: be added to figure 11, given a new appendix figure, or the link to a figure removed.
+
+\bf
+Thank you for spotting this, the figure reference is a remnant of an earlier version of this manuscript. We removed the reference to the figure.
+
+\item \it
+Line 966 to 969 -- The text here states that the effect of diffusive fluxes is small. It would be helpful to have a quick scaling provided to support this statement as it is not (at least to me) obvious a priori given that in these deep ocean settings buoyancy flux can be an important sink of turbulent kinetic energy (e.g., Ijichi et al GRL 2020, Spingys et al JPO 2021).
+
+\bf
+response
+
+\end{itemize}
+
+%------------------------------------------
+
+\clearpage
+
+\centerline{\bf Responses to Reviewer 2}
+\vspace{0.05in}
+
+\it 
+This paper examines detailed observations and a semi-idealized 2D (non-hydrostatic) model of a density-driven overflow. The observations are impressive (i.e., they include non-trivial estimates of TKE dissipation and vertical velocities) and the authors have carefully though about how to construct energy and momentum budgets given the strengths and limitations of the observations. The modeling results do not match the observations precisely, but provide a welcomed sanity check. The paper quantifies many useful terms in the energy and momentum budgets, which will allow quantitative comparisons with future observations, numerical simulations, and parameterizations. The analyses here have significant caveats and uncertainties, but all of these issues are well documented. The manuscript is well written and references the relevant literature. Many/most references are discussed in detail and linked to the central methods and results of the study (as opposed to a less-helpful pro-forma list of references in the introduction). This work will of be of interest the readers of JPO and I recommend the paper be published with minimal edits.
+\vspace{0.05in}
+
+\bf
+Thank you very much for taking the time to review the manuscript and for your thorough comments. We are glad you found it interesting to read.
+
+
+\begin{itemize}
+
+\item \it
+Fig. 9 Change the color bar on the 3rd and 4th row to match other fluxes? The purple color makes it look like the fluxes are going to the left, when compared with the rows below them.
+
+\bf
+Response
+\end{itemize}
+
+\clearpage
+
+\end{flushleft}
+
+\end{document}
