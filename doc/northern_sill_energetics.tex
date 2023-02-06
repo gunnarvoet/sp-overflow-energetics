@@ -142,11 +142,12 @@ a) The Samoan Passage in the south-equatorial Pacific. b) Bathymetry of the Samo
 \label{fig:OverviewMap}
 \end{figure*}
 
-In this study we estimate the energy and momentum budget of flow across a major sill in the Samoan Passage using high resolution, towed, observations.
+In this study we estimate the energy and momentum budget of flow across a major sill in the Samoan Passage using high horizontal resolution, towed, observations.
 Results from a two-dimensional model are used to corroborate the analysis.
 In the following, we give a short overview of the abyssal flow through the Samoan Passage and one of its major overflows (section~\ref{sec:ExperimentalDetails}\ref{sec:StudyRegion}), present towed observations of this overflow (section~\ref{sec:ExperimentalDetails}\ref{sec:Observations}),  and outline the setup of a two-dimensional numerical model simulating the dense overflow (section~\ref{sec:ExperimentalDetails}\ref{sec:Model}) to help interpret the observations.
 After discussing the energy of the flow in terms of the Bernoulli equation (section~\ref{sec:Energetics}\ref{sec:Bernoulli}), a baroclinic energy equation is introduced (section~\ref{sec:Energetics}\ref{sec:EnergyEquation}).
-Both frameworks are applied to the observed and modeled overflow for energy budgets in section~\ref{sec:Results}\ref{ssec:EnergyBudgetResults}.
+Flow steadiness is discussed as a precursor to the following analysis in section~\ref{sec:Results}\ref{ssec:FlowSteadiness}.
+Both energy frameworks are applied to the observed and modeled overflow to obtain energy budgets in section~\ref{sec:Results}\ref{ssec:EnergyBudgetResults}.
 Form drag is calculated and evaluated against the energy budgets (\ref{sec:Results}\ref{ssec:FormDrag}).
 Upward momentum flux estimates are presented in section~\ref{sec:Results}\ref{ssec:MomentumFluxes}.
 The results are discussed and compared to observations of other high drag flows in section~\ref{sec:Discussion}.
@@ -247,7 +248,7 @@ This mixing parameterization has previously been employed successfully, e.g.~in 
 \centerline{\includegraphics[width=39pc]{model_snapshot.pdf}}
 \caption{Model snapshot after 100 hours spinup time. Potential temperature is contoured in all four panels in 0.05$^{\circ}$C intervals starting at 0.7$^{\circ}$C. Thicker contours show the 0.8 and 0.9$^{\circ}$C isotherms.
 (a) Potential temperature.
-(b) Northward velocity.
+(b) Horizontal velocity.
 (c) Vertical velocity.
 (d) Turbulent dissipation $\varepsilon$ based on a parameterization acting on vertical density instabilities \citep[KL10,][]{klymaklegg10}.
 }
@@ -291,7 +292,7 @@ The change in the energy flux associated with the transport of the Bernoulli fun
 \begin{align}
 \begin{split}
 \Delta F &= Q_u B_u -Q_d B_d = Q(B_u - B_d) \\
-    &= v_u d_u (\frac{v_u^2}{2} + g^\prime \delta_u - \frac{v_d^2}{2} -g^\prime \delta_d)\ ,
+    &= v_u \delta_u (\frac{v_u^2}{2} + g^\prime \delta_u - \frac{v_d^2}{2} -g^\prime \delta_d)\ ,
 \end{split}
 \label{eq:BernoulliNoEntrainment}
 \end{align}
@@ -676,7 +677,7 @@ For comparison, small-scale internal wave fluxes calculated based on high-pass f
 
 Vertical pressure work and internal wave fluxes, the small-scale subset of the pressure work term, are mostly upward and concentrated within the dense bottom layer.
 The total pressure work term integrated along isopycnals between kilometer~0 and 17 differs quite substantially between observations and model (Fig.~\ref{fig:VerticalIWIntegrated}a), especially for the densest layers where it shows a downward flux of energy for the 2012 towyo. 
-Fluxes within the dense layer vary between -4 and 4\,kW\,m$^{-1}$. 
+Pressure work within the dense layer varies between -4 and 4\,kW\,m$^{-1}$. 
 Both towyo sections and the model show upward energy flux due to the pressure work term near the interface and diminishing magnitudes towards and beyond the interface.
 The disagreement between the two towyos and the model makes the vertical pressure work term the least consistent term in the energy budget.
 Integrated along isopycnals, the vertical energy flux due to smaller-scale internal waves is directed upwards and reaches between 1~and 2\,kW\,m$^{-1}$ within the bottom layer in the observations and somewhat smaller magnitudes in the model (Fig.~\ref{fig:VerticalIWIntegrated}b).
@@ -807,7 +808,8 @@ In the following, we calculate form drag and associated energy loss of the flow 
 a) Baroclinic pressure anomaly (colors) and isopycnals (contours) in the 2012 towyo transect.
 The thick contour shows the $\sigma_4=45.94$\,kg\,m$^{-3}$ isopycnal previously defined as the upper layer interface.
 The shaded area above the bottom shows depths not reached by the CTD observations and where constant density was assumed in the bottom pressure calculation.
-b) Baroclinic bottom pressure in observations and model offset by constant factors for visualization purposes.
+b) Baroclinic bottom pressure in observations and model offset by constant factors (model:~60\,N\,m$^{-2}$, towyo~2012:~-130\,N\,m$^{-2}$, towyo~2014:~-150\,N\,m$^{-2}$) for visualization purposes.
+This relatively large offset in absolute baroclinic bottom pressure between model and observations is due to model initialization with the observed density structure and partial draining of the initial stratification during model spinup as discussed in section~\ref{sec:ExperimentalDetails}\ref{sec:Model}.
 Faint black lines show bottom pressure for each model time step of the analysis period.
 The pink line shows the time mean model bottom pressure for the same period.
 Blue and purple lines show bottom pressure in the observations. 
@@ -1052,7 +1054,7 @@ The non-hydrostatic pressure component in the model (purple) does not influence 
 \appendix[B]
 \appendixtitle{Small-scale internal wave fluxes}
 We work with locally defined velocity and pressure perturbations $\mathbf{u''}$ and $p''$ as detailed in section~\ref{sec:Energetics}\ref{sec:EnergyEquation} in \eqref{eq:BaroclinicPressureDecomposition} and \eqref{eq:BaroclinicoVelocityDecomposition} to investigate the role of smaller-scale internal waves for the energetics of the dense layer.
-Varying the window size in the calculation of local mean profiles between 3 and 8\,km in the model changes the magnitude of the horizontally integrated vertical wave flux as shown in Fig.~\ref{fig:VerticalIWIntegrated}b by about a factor of two with diminishing energy flux for smaller window sizes corresponding to smaller lateral scales.
+Varying the window size in the calculation of local mean profiles between 3 and 8\,km in the model changes the magnitude of the horizontally integrated vertical wave flux by about a factor of two with diminishing energy flux for smaller window sizes corresponding to smaller lateral scales.
 
 We further validate the method by calculating model $w''$ and $p''$ based on high-pass filtered time series with a 12~hour cutoff period.
 The resulting pattern of the integrated vertical wave flux matches the local profile method, albeit at a somewhat smaller magnitude (Fig.~\ref{fig:VerticalIWIntegrated}b).
