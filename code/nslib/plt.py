@@ -359,7 +359,7 @@ def PlotEnergeticsTerms(a, b, E, fluxes, cfg):
         ax[4, :2],
         cax[4, :2],
         "PressureWorkHorizSorted",
-        cmap="PuOr_r",
+        cmap="PuOr",
         vmax=30,
         name=r"horizontal pressure work $v' p'$",
         vmin=-30,
@@ -375,7 +375,7 @@ def PlotEnergeticsTerms(a, b, E, fluxes, cfg):
         name="model IW flux",
         vmin=-30,
         vmax=30,
-        cmap="PuOr_r",
+        cmap="PuOr",
         cbar_kwargs=dict(label=r"$v'\,p'$ [W$\,$m$^{-2}$]"),
     )
     # vertical pressure work
@@ -384,7 +384,7 @@ def PlotEnergeticsTerms(a, b, E, fluxes, cfg):
         ax[5, :2],
         cax[5, :2],
         "PressureWorkVertSorted",
-        cmap="PuOr_r",
+        cmap="PuOr",
         vmax=2,
         name=r"vertical pressure work $w' p'$",
         vmin=-2,
@@ -400,7 +400,7 @@ def PlotEnergeticsTerms(a, b, E, fluxes, cfg):
         name="model IW flux",
         vmin=-2,
         vmax=2,
-        cmap="PuOr_r",
+        cmap="PuOr",
         cbar_kwargs=dict(label=r"$w'\,p'$ [W$\,$m$^{-2}$]"),
     )
     # vertical IW flux
@@ -409,7 +409,7 @@ def PlotEnergeticsTerms(a, b, E, fluxes, cfg):
         ax[6, :2],
         cax[6, :2],
         "wp_pp",
-        cmap="PuOr_r",
+        cmap="PuOr",
         vmax=1,
         name=r"vertical IW flux $w'' p''$",
         vmin=-1,
@@ -425,7 +425,7 @@ def PlotEnergeticsTerms(a, b, E, fluxes, cfg):
         name="model IW flux",
         vmin=-1,
         vmax=1,
-        cmap="PuOr_r",
+        cmap="PuOr",
         cbar_kwargs=dict(label=r"$w''\,p''$ [W$\,$m$^{-2}$]"),
     )
 
