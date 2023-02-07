@@ -6,11 +6,11 @@
 #       extension: .py
 #       format_name: percent
 #       format_version: '1.3'
-#       jupytext_version: 1.14.1
+#       jupytext_version: 1.14.0
 #   kernelspec:
-#     display_name: Python 3 (ipykernel)
+#     display_name: Python [conda env:sp]
 #     language: python
-#     name: python3
+#     name: conda-env-sp-py
 # ---
 
 # %%
@@ -247,7 +247,7 @@ def Fig1Eps(ty,ax):
 
 
 # %%
-def Fig1Vel(ty,ax,vel_component='v'):
+def Fig1Vel(ty,ax,vel_component='v', maxv=0.5, step=0.05):
     """Plot Velocity
     
     Args:
@@ -264,7 +264,7 @@ def Fig1Vel(ty,ax,vel_component='v'):
 #     Zm = np.ma.array(Z1,mask=np.isnan(Z1))
     field = np.ma.masked_invalid(ty[vel_component])
     h = ax.contourf(ty.dist,ty.z,field,
-                    levels=np.arange(-0.5,0.55,0.05),
+                    levels=np.arange(-maxv,maxv+step,step),
                     cmap='RdBu_r',
                    extend='both')
     for c in h.collections:
@@ -276,6 +276,9 @@ def Fig1Vel(ty,ax,vel_component='v'):
         ax.contour(ty.dist, ty.z, ty.gsw_sigma4, levels=ty.sg4bins, colors='0.5', linewidths=0.5)
         ax.contour(ty.dist, ty.z, ty.gsw_sigma4, levels=[45.94], colors='k', linewidths=0.75)
     if vel_component == 'v':
+        ax.contour(ty.dist, ty.z, ty.gsw_sigma4, levels=[45.94], colors='k', linewidths=0.75)
+    if vel_component == 'w':
+        ax.contour(ty.dist, ty.z, ty.gsw_sigma4, levels=ty.sg4bins, colors='0.5', linewidths=0.5)
         ax.contour(ty.dist, ty.z, ty.gsw_sigma4, levels=[45.94], colors='k', linewidths=0.75)
     
     ht = ax.plot(ty.dist,ty.topo,'k')
@@ -290,7 +293,13 @@ def Fig1Vel(ty,ax,vel_component='v'):
 if is_notebook:
     ty = a['t12']
     fig, ax = gv.plot.newfig()
-    Fig1Vel(ty,ax,'u')
+    Fig1Vel(ty,ax,'v')
+
+# %%
+if is_notebook:
+    ty = a['t12']
+    fig, ax = gv.plot.newfig()
+    Fig1Vel(ty,ax,'w', maxv=0.07, step=0.01)
 
 
 # %%
@@ -486,3 +495,137 @@ for  letter, axi in zip(SubplotLetters, [ax1, ax3, ax5, ax7, ax9]):
 print('saving figure...')
 nsl.io.save_png("towyo_overview")
 nsl.io.save_pdf("towyo_overview")
+
+# %% [markdown]
+# The towyo overview figure for the revised version should have the following panels with two columns for 2012 and 2014 (with rowspan for each row):
+# - time stamps and profile markers (2)
+# - $\theta$ (4)
+# - v (4)
+# - w (4)
+# - shear and $\sigma_4$ contours (4)
+# - $\epsilon$(4)
+# - TPXO u and v (1)
+#
+# 23 rows total
+
+# %%
+fig = plt.figure(figsize=(12,14))
+# subplot2grid((shape),(loc),colspan=,rowspan=)
+nr = 23
+nc = 11
+# plot axes
+ax1 = plt.subplot2grid((nr, nc), (2, 0), rowspan=4, colspan=5)
+ax2 = plt.subplot2grid((nr, nc), (2, 5), rowspan=4, colspan=5, sharey=ax1, sharex=ax1)
+ax3 = plt.subplot2grid((nr, nc), (6, 0), rowspan=4, colspan=5, sharey=ax1, sharex=ax1)
+ax3a = plt.subplot2grid((nr, nc), (6+4, 0), rowspan=4, colspan=5, sharey=ax1, sharex=ax1)
+ax4 = plt.subplot2grid((nr, nc), (6, 5), rowspan=4, colspan=5, sharey=ax1, sharex=ax1)
+ax4a = plt.subplot2grid((nr, nc), (6+4, 5), rowspan=4, colspan=5, sharey=ax1, sharex=ax1)
+ax5 = plt.subplot2grid((nr, nc), (10+4, 0), rowspan=4, colspan=5, sharey=ax1, sharex=ax1)
+ax6 = plt.subplot2grid((nr, nc), (10+4, 5), rowspan=4, colspan=5, sharey=ax1, sharex=ax1)
+ax7 = plt.subplot2grid((nr, nc), (14+4, 0), rowspan=4, colspan=5, sharey=ax1, sharex=ax1)
+ax8 = plt.subplot2grid((nr, nc), (14+4, 5), rowspan=4, colspan=5, sharey=ax1, sharex=ax1)
+ax9 = plt.subplot2grid((nr, nc), (18+4, 0), colspan=5, sharex=ax1)
+ax10 = plt.subplot2grid((nr, nc), (18+4, 5), colspan=5, sharex=ax1, sharey=ax9)
+# colorbar axes
+cbax1 = plt.subplot2grid((nr, nc), (2, 10), rowspan=4)
+cbax2 = plt.subplot2grid((nr, nc), (6, 10), rowspan=4)
+cbax2a = plt.subplot2grid((nr, nc), (6+4, 10), rowspan=4)
+cbax3 = plt.subplot2grid((nr, nc), (10+4, 10), rowspan=4)
+cbax4 = plt.subplot2grid((nr, nc), (14+4, 10), rowspan=4)
+# time tick axes
+tax1 = plt.subplot2grid((nr, nc), (0, 0), rowspan=2, colspan=5, sharex=ax1)
+tax2 = plt.subplot2grid((nr, nc), (0, 5), rowspan=2, colspan=5, sharex=ax1, sharey=tax1)
+
+
+ax = np.array([ax1, ax2, ax3, ax4, ax3a, ax4a, ax5, ax6, ax7, ax8, ax9, ax10, tax1, tax2])
+
+for axi in ax:
+    axi = gv.plot.axstyle(axi)
+    
+def AdjustColorbar(cb,cbax,lbl):
+    cb.ax.set_ylabel(lbl);
+    cb.solids.set_rasterized(True) 
+    pos1 = cbax.get_position() # get the original position 
+    pos2 = [pos1.x0-0.055, pos1.y0+pos1.height/10,  pos1.width / 10.0, pos1.height-pos1.height/5] 
+    cbax.set_position(pos2) # set a new position
+
+# theta
+for kty, axi in zip(a.items(),[ax1, ax2]):
+    # ty still is a tuple with (key, value), need to unpack
+    k, ty = kty
+    h, h2, qk, ht = Fig1THw(ty,'w',axi)
+cb = plt.colorbar(h, drawedges=False,
+                      ticks=np.arange(0.7,1.2,0.1),cax=cbax1);
+AdjustColorbar(cb, cbax1, r'$\theta$ [$^{\circ}$C]')
+
+# v
+for kty, axi in zip(a.items(),[ax3, ax4]):
+    k, ty = kty
+    h = Fig1Vel(ty,axi,'v')
+cb = plt.colorbar(h, drawedges=False, cax=cbax2, ticks=np.arange(-0.2,0.6,0.2));
+AdjustColorbar(cb, cbax2, r'v [m$\,$s$^{-1}$]');
+
+# w
+for kty, axi in zip(a.items(),[ax3a, ax4a]):
+    k, ty = kty
+    h = Fig1Vel(ty,axi,'w', maxv=0.07, step=0.01)
+cb = plt.colorbar(h, drawedges=False, cax=cbax2a, ticks=np.arange(-0.06, 0.09, 0.03));
+AdjustColorbar(cb, cbax2a, r'w [m$\,$s$^{-1}$]');
+
+# shear
+for kty, axi in zip(a.items(),[ax5, ax6]):
+    k, ty = kty
+    h = Fig1Shear(ty,axi)
+cb = plt.colorbar(h, drawedges=False, cax=cbax3, ticks=np.arange(0,1.2e-5,2e-6), extend='max');
+AdjustColorbar(cb, cbax3, r'v$_z^2$ [s$^{-2}$]');
+
+# eps
+for kty, axi in zip(a.items(),[ax7, ax8]):
+    k, ty = kty
+    h, ht = Fig1Eps(ty, axi)
+cb = plt.colorbar(h, drawedges=False, cax=cbax4);
+AdjustColorbar(cb, cbax4, r'$\mathrm{log}_{10}(\epsilon)$ [W$\,$kg$^{-1}$]')
+
+# tpxo
+for kty, axi in zip(a.items(),[ax9, ax10]):
+    k, ty = kty
+    Fig1TPXO(ty, axi);
+
+# markers
+for kty, axi in zip(a.items(),[tax1, tax2]):
+    k, ty = kty
+    Fig1ProfileMarker(ty, axi);
+
+# time stamps
+ni1 = np.arange(0,len(a['t12']['lon']),10)
+ni2 = np.arange(0,len(a['t14']['lon']),15)
+for kty, axi, ni in zip(a.items(),[tax1, tax2], [ni1, ni2]):
+    k, ty = kty
+    Fig1PrintTimeStamps(axi, ty, ni);
+    
+# no grid lines / spines / ticklabels for some axes
+for axi in ax:
+    axi.grid(False)
+for axi in [tax1, tax2, ax1, ax2, ax3, ax4, ax3a, ax4a, ax5, ax6, ax7, ax8]:
+    axi.xaxis.set_visible(False)
+    axi.spines['bottom'].set_visible(False)
+for axi in [tax1, tax2, ax2, ax4, ax4a, ax6, ax8, ax9, ax10]:
+    axi.yaxis.set_visible(False)
+    axi.spines['left'].set_visible(False)
+ax10.yaxis.set_visible(True)
+ax10.yaxis.tick_right()
+ax10.yaxis.label_position='right'
+ax10.yaxis.labelpad = 20
+ax10.spines['right'].set_visible(True)
+
+
+SubplotLetters = ['a', 'b', 'c', 'd', 'e', 'f']
+for  letter, axi in zip(SubplotLetters, [ax1, ax3, ax3a, ax5, ax7, ax9]):
+    axi.text(0, 0.97, letter, transform=axi.transAxes,
+              horizontalalignment='left', fontweight='bold')
+
+print('saving figure...')
+nsl.io.save_png("towyo_overview")
+nsl.io.save_pdf("towyo_overview")
+
+# %%
