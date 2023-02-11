@@ -7,11 +7,11 @@
 #       extension: .py
 #       format_name: percent
 #       format_version: '1.3'
-#       jupytext_version: 1.14.1
+#       jupytext_version: 1.14.0
 #   kernelspec:
-#     display_name: Python 3 (ipykernel)
+#     display_name: Python [conda env:sp]
 #     language: python
-#     name: python3
+#     name: conda-env-sp-py
 # ---
 
 # %% [markdown]
@@ -55,6 +55,18 @@ print("start: ", b.time[0].data, "\nend  : ", b.time[-1].data)
 
 # %%
 E = xr.open_dataset(cfg.model.output.energy)
+
+# %%
+E.diffEkVert.isel(T=0).plot(robust=True)
+
+# %%
+E.diffEpVert.isel(T=0).plot(robust=True)
+
+# %%
+(b.v.isel(T=0) * E.diffEkVert.isel(T=0)).plot(robust=True)
+
+# %%
+np.log10(b.kappa.isel(T=0)).plot(robust=True)
 
 # %% [markdown]
 # ## Energy budget of a layer
@@ -173,6 +185,14 @@ cfg = nsl.io.load_config()
 
 # %%
 B = nsl.model.energy_budget_layer(cfg, b, E, isot=0.9)
+
+# %% [markdown]
+# Take a quick look at the diffusive transport of kinetic and potential energy. Note that these are in W/m so tiny...
+
+# %%
+B.EkpDiffFluxDivergence.plot()
+B.EppDiffFluxDivergence.plot()
+# B.IWFluxVertDivergence.plot()
 
 # %% [markdown]
 # Save energy budget results.
