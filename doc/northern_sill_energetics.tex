@@ -1075,8 +1075,11 @@ In section~\ref{sec:Energetics}\ref{sec:EnergyEquation} we consider the baroclin
 with contributions from the advection of kinetic and available potential energy, pressure work including contributions from non-hydrostatic pressure $q$ and the free surface $\eta$, and diffusive fluxes of kinetic and potential energy in the horizontal and the vertical.
 
 Diffusive background fluxes are explicitly set in the model through eddy viscosities $\nu_H$, $\nu_V$ and eddy diffusivities $\kappa_H$, $\kappa_V$ acting horizontally and vertically on momentum and mass, respectively.
-These terms are small and therefore neglected in the budget.
-Estimates of diffusive fluxes in the observations are also small and neglected.
+These terms are inherently small as the bulk of the mixing is accomplished through the KL10 mixing parameterization (see section~\ref{sec:ExperimentalDetails}\ref{sec:Model}).
+Even when calculated with the much larger turbulent diffusivities from the KL10 parameterization, which are calculated as $K_z = \Gamma \varepsilon N^{-2}$ based on a flux coefficient $\Gamma=0.2$ \citep{klymaklegg10}, the diffusive fluxes of baroclinic potential and kinetic energy are only $\mathcal{O}(1)$\,W\,m$^{-1}$ when integrated over the budget boundaries.
+They are thus orders of magnitude smaller than other budget terms and therefore neglected.
+Diffusive fluxes of baroclinic potential and kinetic energy in the observations can be estimated in a similar way and are of the same order of magnitude as in the model as the input parameters for the calculation are of similar size.
+We note that using a larger flux coefficient, as may be necessary for near-bottom turbulence \citep[e.g.][]{ijichietal20,spingysetal21}, does not change the orders-of-magnitude difference to other terms in the energy budget.
 
 The contribution of the free ocean surface $\eta$ to the energy budget is not considered in the energy budget.
 The term vanishes when averaging over the full ocean depth as $\int_{-d}^\eta \mathbf{u^\prime}\ dz = 0$ by definition \cite[e.g.][]{kang10}, however, it is non-zero for a partial depth integral.

@@ -1235,6 +1235,15 @@ def energy_budget_layer(cfg, b, E, isot, avg_up_dn=False, steadiness_terms_only=
         Er.wp.isel(Z=interface) * Er.Epp.isel(Z=interface) * dyF
     ).sum(dim="Y")
 
+    print("Calculating vertical energy diffusion term...")
+    # Integrating horizontally along the interface.
+    B["EkpDiffFluxDivergence"] = (
+        Er.diffEkVert.isel(Z=interface) * dyF
+    ).sum(dim="Y")
+    B["EppDiffFluxDivergence"] = (
+        Er.diffEpVert.isel(Z=interface) * dyF
+    ).sum(dim="Y")
+
     print("Calculating horizontal internal wave energy flux term...")
     # hydrostatic
     IWFluxHorizDI = (Er.IWEnergyFluxHoriz * HFacC * drF).sum(dim="Z")
