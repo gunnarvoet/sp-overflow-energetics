@@ -1,0 +1,1183 @@
+%% Version 6.1, 1 September 2021
+%DIF LATEXDIFF DIFFERENCE FILE
+%DIF DEL northern_sill_energetics_r0.tex   Wed Feb 15 12:41:19 2023
+%DIF ADD northern_sill_energetics.tex      Wed Feb 15 12:41:32 2023
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TemplateV6.1.tex --  LaTeX-based blank template for submissions to the 
+% American Meteorological Society
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PREAMBLE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Start with one of the following:
+% 1.5-SPACED VERSION FOR SUBMISSION TO THE AMS
+\documentclass{ametsocV6.1}
+
+% TWO-COLUMN JOURNAL PAGE LAYOUT---FOR AUTHOR USE ONLY
+% \documentclass[twocol]{ametsocV6.1}
+
+\graphicspath{{../fig/}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% To be entered by author:
+
+%% May use \\ to break lines in title:
+
+\title{Energy and Momentum of a Density-Driven Overflow in the Samoan Passage}
+
+%% Enter authors' names and affiliations as you see in the examples below.
+%
+%% Use \correspondingauthor{} and \thanks{} (\thanks command to be used for affiliations footnotes, 
+%% such as current affiliation, additional affiliation, deceased, co-first authors, etc.)
+%% immediately following the appropriate author.
+%
+%% Note that the \correspondingauthor{} command is NECESSARY.
+%% The \thanks{} commands are OPTIONAL.
+%
+%% Enter affiliations within the \affiliation{} field. Use \aff{#} to indicate the affiliation letter at both the
+%% affiliation and at each author's name. Use \\ to insert line breaks to place each affiliation on its own line.
+
+%\authors{Author One,\aff{a}\correspondingauthor{Author One, email@email.com} 
+%Author Two,\aff{a} 
+%Author Three,\aff{b} 
+%Author Four,\aff{a} 
+%Author Five\thanks{Author Five's current affiliation: NCAR, Boulder, Colorado},\aff{c} 
+%Author Six,\aff{c} 
+%Author Seven,\aff{d}
+% and Author Eight\aff{a,d}
+%}
+%
+%\affiliation{\aff{a}{First Affiliation}\\
+%\aff{b}{Second Affiliation}\\
+%\aff{c}{Third Affiliation}\\
+%\aff{d}{Fourth Affiliation}
+%}
+
+\authors{Gunnar Voet,\aff{a}\correspondingauthor{Gunnar Voet, gvoet@ucsd.edu}
+Matthew H. Alford,\aff{a}
+%DIF 58-64c58-64
+%DIF < Jesse M. Cusack,\aff{a,b}
+%DIF < Larry J. Pratt,\aff{c}
+%DIF < James B. Girton,\aff{d}
+%DIF < Glenn S. Carter,\aff{e}
+%DIF < Jody M. Klymak,\aff{f}
+%DIF < Shuwen Tan,\aff{g}
+%DIF <  and Andreas M. Thurnherr\aff{g}
+%DIF -------
+Jesse M. Cusack,\aff{a,b,c} %DIF > 
+Larry J. Pratt,\aff{d} %DIF > 
+James B. Girton,\aff{e} %DIF > 
+Glenn S. Carter,\aff{f} %DIF > 
+Jody M. Klymak,\aff{g} %DIF > 
+Shuwen Tan,\aff{h,i} %DIF > 
+ and Andreas M. Thurnherr\aff{h} %DIF > 
+%DIF -------
+}
+
+\affiliation{\aff{a}{Scripps Institution of Oceanography, University of California San Diego, La Jolla, California}\\
+\aff{b}{Rutgers, The State University of New Jersey, New Brunswick, New Jersey}\\
+%DIF 69-73c69-75
+%DIF < \aff{c}{Woods Hole Oceanographic Institution, Woods Hole, Massachusetts}\\
+%DIF < \aff{d}{Applied Physics Laboratory, University of Washington, Seattle, Washington}\\
+%DIF < \aff{e}{Department of Oceanography, University of Hawaii at M\={a}noa, Honolulu, Hawaii}\\
+%DIF < \aff{f}{University of Victoria, Victoria, British Columbia, Canada}\\
+%DIF < \aff{g}{Lamont-Doherty Earth Observatory, Columbia University, Palisades, New York}\\
+%DIF -------
+\aff{c}{College of Oceanic and Atmospheric Sciences, Oregon State University, Corvallis, Oregon} %DIF > 
+\aff{d}{Woods Hole Oceanographic Institution, Woods Hole, Massachusetts}\\ %DIF > 
+\aff{e}{Applied Physics Laboratory, University of Washington, Seattle, Washington}\\ %DIF > 
+\aff{f}{Department of Oceanography, University of Hawaii at M\={a}noa, Honolulu, Hawaii}\\ %DIF > 
+\aff{g}{University of Victoria, Victoria, British Columbia, Canada}\\ %DIF > 
+\aff{h}{Lamont-Doherty Earth Observatory, Columbia University, Palisades, New York}\\ %DIF > 
+\aff{i}{University of California Irvine, Irvine, California}\\ %DIF > 
+%DIF -------
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ABSTRACT
+% Abstracts should not exceed 250 words in length!
+ 
+\abstract{
+The energy and momentum balance of an abyssal overflow across a major sill in the Samoan Passage is estimated from two highly resolved towed sections, set 16 months apart, and results from a two-dimensional numerical simulation.
+Driven by the density anomaly across the sill, the flow is relatively steady.
+The system gains energy from divergence of horizontal pressure work $\mathcal{O}(5)$\,kW\,m$^{-1}$ and flux of available potential energy $\mathcal{O}(2)$\,kW\,m$^{-1}$.
+Approximately half of these gains are transferred into kinetic energy while the other half is lost to turbulent dissipation, bottom drag, and divergence in vertical pressure work.
+Small-scale internal waves emanating downstream of the sill within the overflow layer radiate $\mathcal{O}(1)$\,kW\,m$^{-1}$ upwards but dissipate most of their energy within the dense overflow layer and at its upper interface.
+The strongly sheared and highly stratified upper interface acts as a critical layer inhibiting any appreciable upward radiation of energy via topographically generated lee waves.
+Form drag of $\mathcal{O}(2)$\,N\,m$^{-2}$, estimated from the pressure drop across the sill, is consistent with energy lost to dissipation and internal wave fluxes.
+The topographic drag removes momentum from the mean flow, slowing it down and feeding a counter current aloft.
+The processes discussed in this study combine to convert about one third of the energy released from the cross-sill density difference into turbulent mixing within the overflow and at its upper interface.
+The observed and modeled vertical momentum flux divergence sustains gradients in shear and stratification, thereby maintaining an efficient route for abyssal water mass transformation downstream of this Samoan Passage sill.
+}
+%DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
+%DIF UNDERLINE PREAMBLE %DIF PREAMBLE
+\RequirePackage[normalem]{ulem} %DIF PREAMBLE
+\RequirePackage{color}\definecolor{RED}{rgb}{1,0,0}\definecolor{BLUE}{rgb}{0,0,1} %DIF PREAMBLE
+\providecommand{\DIFadd}[1]{{\protect\color{blue}\uwave{#1}}} %DIF PREAMBLE
+\providecommand{\DIFdel}[1]{{\protect\color{red}\sout{#1}}}                      %DIF PREAMBLE
+%DIF SAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddbegin}{} %DIF PREAMBLE
+\providecommand{\DIFaddend}{} %DIF PREAMBLE
+\providecommand{\DIFdelbegin}{} %DIF PREAMBLE
+\providecommand{\DIFdelend}{} %DIF PREAMBLE
+\providecommand{\DIFmodbegin}{} %DIF PREAMBLE
+\providecommand{\DIFmodend}{} %DIF PREAMBLE
+%DIF FLOATSAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddFL}[1]{\DIFadd{#1}} %DIF PREAMBLE
+\providecommand{\DIFdelFL}[1]{\DIFdel{#1}} %DIF PREAMBLE
+\providecommand{\DIFaddbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFaddendFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelendFL}{} %DIF PREAMBLE
+%DIF COLORLISTINGS PREAMBLE %DIF PREAMBLE
+\RequirePackage{listings} %DIF PREAMBLE
+\RequirePackage{color} %DIF PREAMBLE
+\lstdefinelanguage{DIFcode}{ %DIF PREAMBLE
+%DIF DIFCODE_UNDERLINE %DIF PREAMBLE
+  moredelim=[il][\color{red}\sout]{\%DIF\ <\ }, %DIF PREAMBLE
+  moredelim=[il][\color{blue}\uwave]{\%DIF\ >\ } %DIF PREAMBLE
+} %DIF PREAMBLE
+\lstdefinestyle{DIFverbatimstyle}{ %DIF PREAMBLE
+	language=DIFcode, %DIF PREAMBLE
+	basicstyle=\ttfamily, %DIF PREAMBLE
+	columns=fullflexible, %DIF PREAMBLE
+	keepspaces=true %DIF PREAMBLE
+} %DIF PREAMBLE
+\lstnewenvironment{DIFverbatim}{\lstset{style=DIFverbatimstyle}}{} %DIF PREAMBLE
+\lstnewenvironment{DIFverbatim*}{\lstset{style=DIFverbatimstyle,showspaces=true}}{} %DIF PREAMBLE
+%DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
+
+\begin{document}
+
+% This file contains variable definitions with results
+\input{results.tex}
+
+%% Necessary!
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MAIN BODY OF PAPER
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+Water mass transformation through turbulent mixing in the deep ocean is necessary for the maintenance of a steady state Global Overturning Circulation and has been recognized as one of its driving forces.
+While details of the physical processes driving the upward turbulent buoyancy flux needed to close the overturning circulation are yet to be determined \citep[e.g.][]{ferrarietal16}, it is clear that for the layer of dense bottom water that does not upwell diabatically in the Southern Ocean \citep[e.g.][]{talley13}, turbulent mixing near topography must play a leading order role \citep[e.g.][]{delavergneetal16a}.
+Breaking internal waves and geothermal heating provide the external energy for the turbulent mixing necessary to close the abyssal overturning circulation.
+A large part of the water mass transformation of the abyssal overturning cell, however, also occurs in flows across sills at inter-basin passages and various canyons of the abyssal ocean~\citep[e.g.][]{brydennurser03, thurnherrspeer03} where mixing is driven by the overturning circulation itself, thereby consuming rather than adding energy to the system.
+Turbulent mixing at topographic constrictions, despite not being the initial driver of the overturning circulation, profoundly affects its strength by modifying the abyssal stratification~\citep[e.g.][]{delavergneetal22}.
+
+The Samoan Passage at 9$^\circ$S, 169$^\circ$W in the tropical South Pacific (Fig.~\ref{fig:OverviewMap}a,\,b) is one of the major constrictions for the northward flow of the lower limb of the Pacific overturning circulation \citep[e.g.][]{reidlonsdale74, rudnick97}.
+On average, around 6\,Sv~($1\,\textrm{Sv}\equiv 10^6$\,m$^3$\,s$^{-1}$) or more than half the total Pacific overturning volume transport at this latitude flow through the various channels and gaps that constitute the Samoan Passage \citep{roemmichetal96, rudnick97, voetetal16}.
+
+Based on hydrographic observations, the Samoan Passage had long been suspected to be of major importance for abyssal water mass transformation in the Pacific \citep{roemmichetal96} due to turbulent mixing processes associated with hydraulically controlled flows \citep{whitehead98, freeland01}.
+Turbulent mixing within the Samoan Passage may be as important for the abyssal water mass transformation as turbulent mixing processes along the flow path of the deep western boundary current south of 50$^\circ$N in the North Pacific when considering basin-scale hydrographic observations \citep{prattetal19}.
+A recent observational campaign, comprised of extensive hydrographic, moored, and direct turbulence (microstructure) measurements, confirmed high levels of turbulent mixing within the Samoan Passage \citep{alfordetal13c, carteretal19} and tied these to processes associated with flow-topography interaction at the major sills of the Samoan Passage \citep{voetetal15,girtonetal19}.
+Processes leading to increased levels of turbulent mixing include hydraulic jumps and various forms of instabilities \citep{cusacketal21}.
+Climate models are currently, and will remain to be so for the foreseeable future, too coarse to properly resolve these physical processes and must therefore rely on parameterizing them.
+One example for parameterization in this context is the application of a theoretical model \citep{thorpeli14} to Samoan Passage observations, predicting the turbulence occurring in a hydraulic jump \citep{thorpeetal18}.
+
+A better understanding of energy and momentum of Samoan Passage flow situations may inform further parameterizations.
+For example, the topographic drag on geophysical flows, and associated mixing processes, may be expressed through form drag, with the potential of relating energy and momentum losses of near-bottom flow due to flow-topography interaction to the larger scale flow velocity \citep[e.g.][]{warnermaccready09}.
+Additionally, the appropriateness of shear-based overflow mixing parameterizations~\citep[e.g.][]{legg21}, which are thought to include only internal wave effects but in practice act on the shear of all resolved processes, remains unclear~\citep{alfordetal13c}.
+
+There have been a number of studies of hydraulically controlled flows that have dissected energy (and occasionally momentum) balances, but most have dealt with relatively shallow, tidal flows, as opposed to the quasi-steady, density-driven abyssal overflow considered here.
+The studies generally found that potential energy was converted into kinetic energy, turbulent dissipation, and internal wave fluxes.
+The energy budget of tidal flow through Knight Inlet \citep{farmersmith80a, farmerarmi99, farmerarmi99a} was analyzed by \citet{klymakgregg04}, finding two thirds of the energy extracted from tidal flow going into (horizontal) internal wave fluxes while one third of the energy dissipated locally.
+Strong form drag, comparable in magnitude to the local Coriolis force, was observed during intermittent hydraulic flows on the Oregon Shelf \citep{moumnash00, nashmoum01}.
+\citet{johnsonetal94b} and \citet{johnsonetal94a} highlight the importance of bottom and interfacial stresses for the momentum budget of the Mediterranean outflow plume.
+In a model study of dense plumes over a sloping plane, \citet{kidaetal09} find that interaction with waters aloft plays an important role in their momentum budget and contributes to the descent rate during the initial descent of the overflow.
+Most closely resembling the overflow survey presented in this paper is the observational study by \citet{clementetal17} of an overflow across a sill in a fracture zone canyon corrugating the western flank of the Mid-Atlantic Ridge \citep[see also][]{thurnherretal05}.
+The estimated energy losses of the fracture zone overflow appear to be mostly balanced by internal wave fluxes radiating energy horizontally and vertically.
+Energy loss to turbulent dissipation plays only a minor role in the energy budget, although the authors could not rule out undersampling of (usually patchy) turbulence.
+
+\begin{figure*}
+% \centerline{\includegraphics[width=39pc]{/Users/gunnar/Projects/hyprsp/py/northern_sill/fig/map_overview.png}}
+\centerline{\includegraphics[width=39pc]{map_overview.pdf}}
+\caption{
+a) The Samoan Passage in the south-equatorial Pacific. b) Bathymetry of the Samoan Passage with its major channel to the east. c) Bathymetry of the sill at the northern end of the eastern channel and towyo transects from 2012 and 2014. The 2014 towyo track (light orange) traced the 2012 observations (dark orange) but was shortened by a few kilometers. T1 marks the location of a moored profiler deployed about 1\,km upstream of the towyo start point.
+}
+\label{fig:OverviewMap}
+\end{figure*}
+
+In this study we estimate the energy and momentum budget of flow across a major sill in the Samoan Passage using high \DIFaddbegin \DIFadd{horizontal }\DIFaddend resolution, towed, observations.
+Results from a two-dimensional model are used to corroborate the analysis.
+In the following, we give a short overview of the abyssal flow through the Samoan Passage and one of its major overflows (section~\ref{sec:ExperimentalDetails}\ref{sec:StudyRegion}), present towed observations of this overflow (section~\ref{sec:ExperimentalDetails}\ref{sec:Observations}),  and outline the setup of a two-dimensional numerical model simulating the dense overflow (section~\ref{sec:ExperimentalDetails}\ref{sec:Model}) to help interpret the observations.
+After discussing the energy of the flow in terms of the Bernoulli equation (section~\ref{sec:Energetics}\ref{sec:Bernoulli}), a baroclinic energy equation is introduced (section~\ref{sec:Energetics}\ref{sec:EnergyEquation}).
+\DIFdelbegin \DIFdel{Both }\DIFdelend \DIFaddbegin \DIFadd{Flow steadiness is discussed as a precursor to the following analysis in section~\ref{sec:Results}\ref{ssec:FlowSteadiness}.
+Both energy }\DIFaddend frameworks are applied to the observed and modeled overflow \DIFdelbegin \DIFdel{for }\DIFdelend \DIFaddbegin \DIFadd{to obtain }\DIFaddend energy budgets in section~\ref{sec:Results}\ref{ssec:EnergyBudgetResults}.
+Form drag is calculated and evaluated against the energy budgets (\ref{sec:Results}\ref{ssec:FormDrag}).
+Upward momentum flux estimates are presented in section~\ref{sec:Results}\ref{ssec:MomentumFluxes}.
+The results are discussed and compared to observations of other high drag flows in section~\ref{sec:Discussion}.
+
+\section{Experimental details}\label{sec:ExperimentalDetails}
+
+\subsection{Study region}\label{sec:StudyRegion}
+This study focuses on the abyssal flow across a major sill in the Samoan Passage.
+The Samoan Passage consists of various channels with sills and narrows constricting the flow of the dense near-bottom layers (Fig.~\ref{fig:OverviewMap}).
+Shipboard observations show that the flow of bottom water through the Samoan Passage is split in approximately equal parts between shallower pathways to the west and a deeper channel to the east with the densest water flowing through the eastern channel \citep{voetetal15}.
+Some of the strongest velocities and highest levels of turbulent mixing throughout the Samoan Passage were found downstream of a sill at the northern end of the eastern channel \citep{alfordetal13c}.
+The sill height is about 200\,m relative to upstream channel bathymetry.
+The channel narrows to about 15\,km at the sill.
+The sill bathymetry has three-dimensional aspects that we will ignore in the following analysis by treating it as a ridge-like two-dimensional feature; however, we will discuss aspects of three-dimensionality later as they matter for the energy budget of the flow at a distance of about 15\,km downstream of the sill and beyond.
+Three-dimensional aspects of the flow across the sill are also discussed further in \citet{girtonetal19} and \citet{cusacketal21}.
+
+
+\subsection{Observations}\label{sec:Observations}
+The flow of dense and cold bottom water across the sill was observed at high spatial resolution using towed measurements during two cruises in August 2012 and in January 2014.
+During both cruises, temperature and conductivity were measured with a Seabird 911-plus CTD.
+Velocity was measured using a pair of lowered Teledyne RD Instruments Acoustic Doppler Current Profilers (LADCPs) mounted on the CTD rosette.
+In 2012, a combination of a 150\,kHz ADCP looking downward and a 300\,kHz ADCP looking upward was used while in 2014 both up- and downlooker operated at 300\,kHz.
+The instrument package was cycled at vertical speeds of 1\,m\,s$^{-1}$ between 4000\,m depth and 40\,m above the sea floor while steaming slowly at horizontal speeds of about 0.5\,knots or 0.25\,m\,s$^{-1}$.
+This translated into a sawtooth-like sampling pattern with profiles of the bottom layer at a horizontal resolution of a few hundred meters.
+Fig.~\ref{fig:OverviewMap}c shows the bathymetry of the sill region and the location of the 2012 and 2014 towyo sections.
+The 2014 repeat measurements exactly tracked the 2012 section, shortened at the downstream end by about 5\,km.
+Due to instrument problems, the instrument package had to be recovered for a short period during the 2014 section, resulting in a time offset of a few hours at km\,12.5.
+Both occupations took about 36~hours from start to finish, thereby spanning several cycles of the M2 tide (Fig.~\ref{fig:TowyoObservations}e).
+
+% Towyo Observations
+\begin{figure*}
+\DIFdelbeginFL %DIFDELCMD < \centerline{\includegraphics[width=39pc]{towyo_overview.pdf}}
+%DIFDELCMD < %%%
+\DIFdelendFL \DIFaddbeginFL \centerline{\includegraphics[width=33pc]{towyo_overview.pdf}}
+\DIFaddendFL \caption{
+Towyo-sections across the northern sill from 2012 (left) and 2014 (right).
+({\bf a}) Potential temperature $\theta$ (color) and vertical velocity $w$ (black and white arrows showing upward/downward velocities, respectively, with scale given to lower right) with profile markers and a number of time stamps at top.
+({\bf b}) Northward velocity $v$ (color) and $\sigma_4=45.94$\,kg\,m$^{-3}$ isopycnal tracing the upper interface (black contour).
+({\bf c}) \DIFaddbeginFL \DIFaddFL{Vertical velocity $w$ (color) and $\sigma_4$ isopycnals at $10^{-2}$\,kg\,m$^{-3}$ intervals.
+(}{\bf \DIFaddFL{d}}\DIFaddFL{) }\DIFaddendFL Square of vertical shear $(\partial v/\partial z)^2$ (color) and \DIFdelbeginFL \DIFdelFL{isopycnal }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{isopycnals }\DIFaddendFL from panel \DIFdelbeginFL \DIFdelFL{b}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{c}\DIFaddendFL .
+({\bf \DIFdelbeginFL \DIFdelFL{d}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{e}\DIFaddendFL }) Turbulent dissipation $\varepsilon$ from Thorpe-scale estimates.
+({\bf \DIFdelbeginFL \DIFdelFL{e}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{f}\DIFaddendFL }) Barotropic tide prediction \citep[TPXO,][]{egberterofeeva02} for times and locations along the section.
+Note the sharp transition in measured properties and tidal phase for the 2014 section at km\,12 where the instrument had to be recovered for a few hours.
+}
+\label{fig:TowyoObservations}
+\end{figure*}
+
+Vertical velocities were calculated following \citet{thurnherretal15}.
+Essentially, vertical package velocities derived from CTD pressure measurements were subtracted from ADCP-derived vertical velocities to yield the vertical oceanic motion.
+Horizontal velocities were calculated using the shear-based method \citep{fischervisbeck93} and then nudged to bottom tracking velocities using an inverse method.
+The lack of shipboard ADCP (SADCP) measurements in the solution, due to upper turnaround depths being way beyond the SADCP reach, leads to relatively higher uncertainty in horizontal velocity higher up in the water column away from the bottom tracking velocity constraint.   
+
+Turbulent dissipation was estimated using the Thorpe scale method \citep{thorpe77, dillon82, ferronetal98} associating vertical instabilities in density profiles with the largest overturns, thereby linking observable scales to centimeter-scale turbulence.
+The method has been ground-truthed with direct turbulence measurements in this flow~\citep{voetetal15}.
+
+The two occupations of the towyo line from 2012 and 2014 exhibit remarkable similarities, suggesting a temporally quasi-steady flow~\citep{cusacketal19}.
+As described for the 2012 towyo in \citet{alfordetal13c}, the flow approaches the sill from the south at speeds below 0.2\,m\,s$^{-1}$ with a relatively sharp interface marked by high stratification at around 4300\,m.
+The $\sigma_4=45.94$\,kg\,m$^{-3}$ isopycnal (Fig.~\ref{fig:TowyoObservations}b) traces the interface between lower and upper layer very well in both observations and will be used to define the bottom layer in the following.
+Once the bottom-intensified flow passes the sill, it plunges downward and accelerates.
+The measurements indicate high levels of turbulent dissipation both in strongly sheared regions and hydraulic jumps downstream of the main sill around kilometer~7 and at a topographic feature around kilometer~22.
+The hydraulic jumps have been described and modeled based on upstream and downstream interface height in \citet{thorpeetal18}.
+
+\subsection{Numerical model}\label{sec:Model}
+
+\begin{figure*}
+\centerline{\includegraphics[width=33pc]{model_setup.pdf}}
+\caption{
+Model (a) bathymetry and initial stratification expressed in temperature (note the different color scales for temperatures above and below 1.2$^{\circ}$C to highlight the relatively lowly stratified bottom layer), (b) horizontal resolution $\Delta y$ (minimum 20\,m around the sill), and (c) vertical resolution $\Delta z$.
+}
+\label{fig:ModelBasics}
+\end{figure*}
+
+To help interpret the observations we ran a two-dimensional numerical simulation of the flow with realistic bathymetry of the sill region.
+The simulation was based on the Massachusetts Institute of Technology general circulation model \citep[MITgcm;][]{marshalletal97}.
+The model domain size was 600\,km in the horizontal and 5300\,m in the vertical with realistic bathymetry from multibeam measurements along the towyo line in the center and flat bottom at 5280\,m depth upstream and downstream of the sill region~(Fig.~\ref{fig:ModelBasics}a).
+Grid cell spacing around the sill was 20\,m both in the horizontal and the vertical.
+The model resolution was gradually reduced starting at 4000m depth upward and $\pm$20\,km upstream and downstream of the sill crest to reduce computation cost~(Fig.~\ref{fig:ModelBasics}b,~c).
+The simulation was run in non-hydrostatic mode as the condition for hydrostatic approximation that horizontal length scales be much larger than vertical scales was clearly violated both in model setup and observed flow response.
+Indeed, a hydrostatic test run resulted in strong vertical velocity fluctuations on grid-scale level.
+One inertial period at the experiment site is about 3.5\,days.
+With an advective time scale of about 1.5\,days at 0.25\,m\,s$^{-1}$ flow speed, or an advective length scale of about 20\,km for a quarter inertial period, the sill region was small enough to neglect any rotational effects and the model was run in a non-rotational reference frame.
+We will discuss the potential effects of the Coriolis force on the observations beyond approximately 15\,km from the sill and how they may explain downstream differences between model and observations in section~\ref{sec:Discussion}.
+Model density $\rho$ was defined using a linear equation of state where $\rho = \rho_0 (1 - \alpha\, \theta$) with reference density $\rho_0$, potential temperature $\theta$, and the thermal expansion constant $\alpha = 2 \times 10^{-4}$\,K$^{-1}$.
+
+The model was initialized with realistic CTD profiles for the regions up- and downstream of the sill.
+Stratification over the sill was linearly interpolated between the two reservoirs (Fig.~\ref{fig:ModelBasics}a).
+The pressure gradient across the sill provided the forcing for the model.
+The model was run for a total of 12 days or 288 hours.
+After about 100 hours, the model reached a quasi-steady state where the upstream reservoir of dense water was draining slowly, thereby converting potential into kinetic energy downstream of the sill and creating relatively stable flow conditions.
+Stratification at the lateral boundaries was restored to initial values at every time step to replenish the upstream reservoir.
+The model had sponge layers at the lateral boundaries to prevent waves from being reflected back into the interior.
+However, after running the model for a sufficiently long period of time, partial reflections started to occur.
+We therefore focus on the initial stable period after model spinup between model hours 100 and 150 in the analysis.  
+
+Background values of vertical diffusivity and viscosity were $\kappa_v = \nu_v=10^{-5}$\,m$^2$\,s$^{-1}$, while the background values of horizontal diffusivity and viscosity were $\kappa_h = \nu_h=10^{-4}$\,m$^2$\,s$^{-1}$.
+The bulk of turbulent mixing was accomplished through a mixing parameterization based on vertical instabilities similar to the Thorpe scale method \citep[KL10,][]{klymaklegg10}.
+Regions of vertical instability are sorted into a stable state and vertical sorting distances then related to turbulent diffusivities and dissipation via Ozmidov and Osborn relations.
+This mixing parameterization has previously been employed successfully, e.g.~in the simulation of tidal mixing near supercritical topography~\citep{klymaketal10}.
+
+\begin{figure*}
+\centerline{\includegraphics[width=39pc]{model_snapshot.pdf}}
+\caption{Model snapshot after 100 hours spinup time. Potential temperature is contoured in all four panels in 0.05$^{\circ}$C intervals starting at 0.7$^{\circ}$C. Thicker contours show the 0.8 and 0.9$^{\circ}$C isotherms.
+(a) Potential temperature.
+(b) \DIFdelbeginFL \DIFdelFL{Northward }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{Horizontal }\DIFaddendFL velocity.
+(c) Vertical velocity.
+(d) Turbulent dissipation $\varepsilon$ based on a parameterization acting on vertical density instabilities \citep[KL10,][]{klymaklegg10}.
+}
+\label{fig:ModelSnapshot}
+\end{figure*}
+
+The model, during its relatively stable period between hours~100 and 150, reproduces the basic features of the flow as seen in the observations (compare Figs.~\ref{fig:TowyoObservations} and~\ref{fig:ModelSnapshot}): Acceleration over the main sill with a deepening of isopycnals; bottom intensified flow; strong turbulent dissipation in the lee of the sill; high frequency waves downstream of the sill.
+We will investigate the relative importance of turbulent dissipation and internal waves on the energy budget of the overflow in the following sections.
+
+Having initiated the model with the observed density fields one may expect the upper interface definition for the dense layer from the observations to also hold for the model.
+Through the linear equation of state, a model temperature of 0.9$^{\circ}$C corresponds to the 45.94~$\sigma_4$ isopycnal tracing the upper interface in the observations.
+However, Fig.~\ref{fig:ModelSnapshot} shows that this isotherm stays above the dense and swift overflow.
+The 0.8$^{\circ}$C isotherm also highlighted in Fig.~\ref{fig:ModelSnapshot} appears to be more closely tracing the overflow layer.
+The discrepancy may have arisen from model spinup, draining some of the upstream energy reservoir before reaching a quasi-steady state and thus leading to a lower interface compared to the observations.
+We will use both the 0.8 and the 0.9$^{\circ}$C isotherms for integrating over the dense layer in the model in the following.
+
+\section{Energetics}\label{sec:Energetics}
+In the following we outline two theoretical approaches for an energetic description of the bottom current as it crosses the sill.
+Some form of the Bernoulli function or Bernoulli flux is often used to describe the energetics of density driven overflows, following the evolution of its energy along streamlines.
+We explore this concept in a single layer approach in section~\ref{sec:Energetics}\ref{sec:Bernoulli} before we turn to an approach traditionally closer aligned with the energetic description of internal gravity waves, the baroclinic energy equation (section~\ref{sec:Energetics}\ref{sec:EnergyEquation}).
+The baroclinic energy equation provides a more detailed description of the overflow energetics than the Bernoulli function as formulated here and allows us to study the impact of the high-frequency waves observed downstream of the sill in both model and observations on the energy budget and the flow aloft.
+We will also show in section~\ref{sec:Results}\ref{ssec:EnergyBudgetResults} that the Bernoulli flux only converges to a meaningful result when averaged sufficiently in time, thereby making it unsuitable to apply to the observations.
+In contrast, the baroclinic energy equation will return results even for the observations, which are relatively sparsely sampled compared to the model output.
+
+\subsection{Bernoulli flux}\label{sec:Bernoulli}
+Treating the overflow as a single layer flow with the waters above at rest, we start out with the steady shallow water equations in one dimension:
+\begin{equation}
+    v \frac{\partial v}{\partial y} + g^\prime \frac{\partial}{\partial y} (\delta + h) = 0\ ,
+    \label{eq:ShallowWater}
+\end{equation}
+where $\delta$ is the thickness of the layer, $v$ is the horizontal layer velocity along coordinate $y$, $h$ is the elevation of the topography, and $g^\prime=g \Delta \rho / \rho$ expresses the density difference $\Delta \rho$ between the bottom layer and waters aloft.
+Neglecting entrainment leads to constant volume transport $Q$ of the dense bottom layer:
+\begin{equation}
+\frac{\partial (v \delta)}{\partial y} = \frac{\partial Q}{\partial y} = 0\ .
+\end{equation}
+Integrating \eqref{eq:ShallowWater} along the flow ($y$-coordinate) results in the Bernoulli function describing the sum of kinetic and potential energy of the system which is conserved for an isolated single layer except for dissipative regions like hydraulic jumps:
+\begin{equation}
+    B = \frac{v^2}{2} + g^\prime \delta + g^\prime h\ .
+\end{equation}
+The change in the energy flux associated with the transport of the Bernoulli function $F=Q B$, or Bernoulli flux, between upstream and downstream of a dissipative region over a flat bottom is
+\begin{align}
+\DIFdelbegin %DIFDELCMD < \begin{split}
+%DIFDELCMD < \Delta F &= Q_u B_u -Q_d B_d = Q(B_u - B_d) \\
+%DIFDELCMD <     &= v_u d_u (\frac{v_u^2}{2} + g^\prime \delta_u - \frac{v_d^2}{2} -g^\prime \delta_d)\ ,
+%DIFDELCMD < \end{split}%%%
+\DIFdelend \DIFaddbegin \begin{split}
+\Delta F &= Q_u B_u -Q_d B_d = Q(B_u - B_d) \\
+    &= v_u \delta_u (\frac{v_u^2}{2} + g^\prime \delta_u - \frac{v_d^2}{2} -g^\prime \delta_d)\ ,
+\end{split}\DIFaddend 
+\label{eq:BernoulliNoEntrainment}
+\end{align}
+with subscripts $u$ and $d$ denoting upstream and downstream of a jump.
+If entrainment is allowed then the volume flux changes and the drop is
+\begin{equation}
+\Delta F = v_u \delta_u (\frac{v_u^2}{2} + g^\prime_u \delta_u) - v_d \delta_d(\frac{v_d^2}{2} -g^\prime_d \delta_d)\ .
+\label{eq:BernoulliEntrainment}
+\end{equation}
+Note that in \eqref{eq:BernoulliEntrainment} the bottom depth is the same between upstream and downstream.
+We can express the energy drop including changes in bottom depth by adding the $h$ term:
+\begin{equation}
+\Delta F = \frac{v_u^3 \delta_u}{2} + v_u g^\prime_u (\delta_u^2 + h_u \delta_u) - \frac{v_d^3 \delta_d}{2} -v_d g^\prime_d (\delta_d^2 + h_d \delta_d)\ .
+\label{eq:BernoulliEntrainmentVariableBottom}
+\end{equation}
+We can calculate $\Delta F$ following \eqref{eq:BernoulliEntrainmentVariableBottom} for various points upstream and downstream in model and observations, however, as we define a single layer $g^\prime$ and single layer velocity $v$, the results will be somewhat coarse.
+As we will show in section~\ref{sec:Results}\ref{ssec:EnergyBudgetResults}, the drop in Bernoulli flux only converges to a meaningful result when sufficiently averaged in time.
+% Furthermore, in this Bernoulli formulation of the overflow energetics we lack any information on how the energy loss occurs; whether it all dissipates within the overflow layer or whether some energy may radiate upwards in the form of an internal gravity wave energy flux.
+We thus turn to a more detailed description of the overflow energetics in the next section.
+Nevertheless, we expect results from these two approaches to be broadly comparable with each other.
+
+\subsection{Baroclinic energy equation}\label{sec:EnergyEquation}
+Our framework loosely follows the energy analysis of internal wave fields outlined in \citet{kang10} and \citet{kangfringer11} where a detailed derivation and discussion of barotropic and baroclinic energy equations can be found.
+In summary, the equations of motion are decomposed into a depth-average (barotropic) part and deviations from this average (baroclinic) by integrating in depth.
+An important distinction between the energy analysis presented here and many previous studies focusing on the energetics of internal wave fields is the vertical integration range: we do not integrate over the whole water column but focus only on the dense overflow layer and the waters immediately above its interface.
+For the observations this is simply due to the depth-limited nature of the dataset.
+We will show with the model that limiting the integration to the deeper part of the water column does introduce uncertainty but no major discrepancies.
+A further distinction will be made to investigate the smaller-scale waves downstream of the sill.
+We stress that with the approach presented here, we aim to quantify the relative importance of processes like local turbulent dissipation and internal wave energy radiation for the energy budget of the flow.
+Our formulation of the energy budget is not complete and therefore does not close exactly either for the observations, where time-space aliasing and measurement uncertainties render a closure of the energy budget out of reach in any case, or for the model, where a depth-integrated approach as in e.g.~\citet{kangfringer11} would be better suited.
+
+We outline the energy equation in all three spatial dimensions in the following, however, in the analysis we will omit any integration in east-west direction which causes units to be expressed per meter, for example, energy expressed in J\,m$^{-1}$ or volume transport in m$^2$\,s$^{-1}$.
+Most expressions are similarly valid for model and observations with a few exceptions due to the limited nature of the observational dataset; most importantly regarding the calculation of hydrostatic pressure and our inability to observe non-hydrostatic pressure and the vertical movement of the ocean surface.
+We will discuss these differences as we describe specifics of the energy equation.
+\subsubsection{Density \& pressure}
+Density is decomposed into
+\begin{equation}
+\rho(x,y,z,t) = \rho_0 + \rho_b(z)+ \rho^\prime(x,y,z,t)\ ,
+\label{eq:DensityDecomposition}
+\end{equation}
+with a constant reference density $\rho_0$, background density $\rho_b$, and the dynamically active perturbation density $\rho^\prime$.
+The background density profile is determined via the adiabatic leveling method \citep{brayfofonoff81, moumetal07} by redistributing the initial model density field adiabatically to obtain uniform density on geopotential surfaces, thereby reaching the state of least attainable potential energy.
+Since the initial model density was constructed based on observations, we use the same $\rho_b$ for model and observations.
+Computing the baroclinic energy budget with background density defined by a downstream density profile instead of the adiabatically leveled profile does not change the results for either model or observations qualitatively.
+
+Total pressure $p(x,y,z,t)$ is the sum of hydrostatic pressure $p_h(x,y,z,t)$ and non-hydrostatic pressure $q(x,y,z,t)$, the latter resulting from vertical inertia of fluid in waves.
+The non-hydrostatic pressure term is not observed independently in the measurements.
+Hydrostatic pressure is defined by
+\begin{equation}
+    \frac{\partial p_h}{\partial z} = -g (\rho_0 + \rho_b + \rho^\prime)\ .
+\label{eq:HydrostaticPressureDefinition}
+\end{equation}
+Integration from depth $z$ to the free ocean surface $\eta$ yields the hydrostatic pressure decomposed into the reference pressure including the free ocean surface $p_0$, background pressure $p_b$, and perturbation pressure $p^\prime$:
+\begin{align}
+\begin{split}
+p_h(x,y,z,t) &= \rho g (\eta - z) + g \int_z^\eta \rho_b dz + g \int_z^\eta \rho^\prime dz \\
+            &= p_0(x,y,z,t) + p_b(z) + p^\prime(x,y,z,t)\ .
+\end{split}
+\label{eq:PressureDecomposition}
+\end{align}
+Here we have neglected the influence of atmospheric pressure which is zero in the model and not independently observed in our measurements.
+The integrals in \eqref{eq:PressureDecomposition} are readily carried out for the model results.
+The observations do not cover the whole water column and we have to restrict the calculation of $p^\prime$ to a depth level where we assume zero pressure perturbation.
+We have chosen $z=-\TyIntStartDepth$\,m for both towyos throughout the paper as vertical excursion of isopycnals at this depth is much reduced compared to deeper layers. 
+The pressure contribution $p_0$ due to variations in the free surface elevation $\eta$ is also unknown in the observations.
+Integration in \eqref{eq:PressureDecomposition} is thus carried out to an upper limit of $z=-\TyIntStartDepth$\,m instead of $\eta$.
+We justify our approach to calculating pressure from the observations by showing in appendix~A that integrating density anomalies only over the lower part of the water column ($z<-4100$\,m) is a good approximation for bottom pressure perturbation in the model.
+
+To treat small scale internal waves and their energy fluxes, we further define local density and pressure perturbations $\rho''$ and $p''$.
+Local vertical profiles of $\rho''$ are calculated by referencing against a local mean density anomaly profile calculated within a 5\,km window:
+\begin{equation}
+\rho^\prime = \overline{\rho^\prime} + \rho''\ ,
+\end{equation}
+where $\overline{\rho^\prime}$ is the windowed mean density perturbation.
+Local pressure perturbations $p''$ are similarly defined as
+\begin{equation}
+p^\prime = \overline{p^\prime} + p''
+\label{eq:BaroclinicPressureDecomposition} 
+\end{equation}
+and calculated via depth integral of $\rho''$ as outlined for $p^\prime$ in \eqref{eq:PressureDecomposition}.
+We will use $p''$ to calculate small scale internal wave fluxes while $p^\prime$ will be used to determine the full pressure work terms.
+See Appendix~B for further discussion of this method.
+
+\subsubsection{Velocity}
+The velocity vector $\mathbf{u}=(u,v,w)$ is split into barotropic and baroclinic parts
+\begin{equation}
+\mathbf{u} = \mathbf{U} + \mathbf{u^\prime}\ ,
+\label{eq:BarotropicBaroclinicVelocity}
+\end{equation}
+with horizontal barotropic velocities defined as
+\begin{equation}
+\mathbf{U}_H = \frac{1}{d+\eta} \int_{-d}^{\eta} \mathbf{u}_H dz
+\label{eq:BarotropicHorizontalVelocity}
+\end{equation}
+and vertical velocity balancing the convergence of horizontal barotropic flow as
+\begin{equation}
+W = -\nabla_H \cdot  \left[ (d+\eta)\ \mathbf{U}_H \right]\ ,
+\label{eq:BarotropicVerticalVelocity}
+\end{equation}
+with the total water depth defined as the sum of bottom depth $z = -d(x,y)$ and surface elevation $z = \eta(x,y)$.
+Horizontal baroclinic velocities are thus simply deviations from the depth-mean flow while the vertical baroclinic velocity represents deviations from the flow balancing the horizontal barotropic motion.
+We decompose velocity in the model following \eqref{eq:BarotropicBaroclinicVelocity} to \eqref{eq:BarotropicVerticalVelocity}.
+Lacking full depth velocity in the towyos, we revert to treating observed velocities as purely baroclinic.
+Integrating velocities over only the lower part of the water column clearly does not result in meaningful barotropic velocities.
+This differs from our approach of obtaining $p^\prime$ and $p''$ from the observations through partial depth integrals.
+However, physically this differing approach makes sense as integration from a neutrally stable depth level may provide realistic pressure conditions at depth, whereas barotropic velocities are defined as the movement of the whole water column and may not care about a baroclinic level of no motion.
+Barotropic velocities from stationary LADCP casts measured in the region in 2012~\citep{voetetal15} are on average $1.9\pm0.9$\,cm\,s$^{-1}$ and thus an order of magnitude smaller than overflow velocities observed here.
+In the model, barotropic velocities are small by construction and reach only maximum amplitudes of $2\times10^{-4}$\,m\,s$^{-1}$ associated with barotropic waves generated at model initialization transiting the domain.
+Therefore, we will not consider barotropic motion further in this study.
+
+\begin{figure*}
+\centerline{\includegraphics[width=33pc]{towyo_sketch_energetics.pdf}}
+\caption{Terms considered in the baroclinic energy budget \eqref{eq:BaroclinicEnergyEquationIntegralForm2}: 
+Horizontal potential ($v^\prime E_p^\prime$) and kinetic ($v^\prime E_k^\prime$) energy fluxes; horizontal ($v^\prime p^\prime$) and vertical ($w^\prime p^\prime$) pressure work terms; interior turbulent dissipation ($\rho \varepsilon$) and dissipation due to bottom friction ($D^\prime$).
+Small scale vertical internal wave fluxes $w''p''$ are shown with a gray arrow as they are only a subset of the vertical pressure work term.
+Vertical potential and kinetic energy fluxes are small and not indicated here.
+Colored areas indicate regions of increased turbulent dissipation, contour lines show a smoothed version of the density field for visualization purposes.}
+\label{fig:EnergyBudgetSketch}
+\end{figure*}
+
+As for density and pressure, we calculate local baroclinic velocity perturbations $\mathbf{u''}$ based on deviations from average velocity profiles within a 5~kilometer window:
+\begin{equation}
+\mathbf{u}^\prime = \overline{\mathbf{u}^\prime} + \mathbf{u}''\ ,
+\label{eq:BaroclinicoVelocityDecomposition} 
+\end{equation}
+where the overline again denotes the 5\,km sliding windowed mean, applied to the overall baroclinic velocity $\mathbf{u}^\prime$.
+The local velocity perturbations $\mathbf{u''}$ are used for internal wave flux calculations with the aim of filtering out the effect of the larger scale baroclinic background flow.
+
+\subsubsection{Energy}
+With the division into barotropic and baroclinic velocity components, kinetic energy can be similarly divided into $E_k = E_{k0} + E^\prime_k + E^\prime_{k0}$ 
+with the barotropic horizontal kinetic energy density
+\begin{equation}
+E_{k0}(x,y,t) = \frac{1}{2} \rho_0 \left(U^2+V^2\right),
+\label{eq:BarotropicKineticEnergy}
+\end{equation}
+the baroclinic kinetic energy density
+\begin{equation}
+E'_k(x,y,z,t) = \frac{1}{2} \rho_0 \left({u'}^2 + {v'}^2 + {w'}^2\right),
+\label{eq:BaroclinicKineticEnergy}
+\end{equation}
+and kinetic energy from the cross terms
+\begin{equation}
+E'_{k0}(x,y,z,t) = \rho_0 (Uu' + Vv')
+\label{eq:KineticEnergyCrossTerms}
+\end{equation}
+in units of Joules per cubic meter.
+Note that both $E_{k0}$ and $E'_{k0}$ vanish for purely baroclinic flow.
+
+Available potential energy (APE), the fraction of potential energy that can be converted into kinetic energy \citep[e.g.][]{hollidaymcintyre81,wintersetal95,kangfringer10,lamb08}, is calculated as
+\begin{equation}
+    E_p'(x,y,z,t) = g \int_{z-\zeta(t)}^z [\rho(x,y,z)-\rho_b(z')]dz'\ ,
+\label{eq:AvailablePotentialEnergy}
+\end{equation}
+% $$E_p' = g \int_z^{z^{\ast}} (\rho_r(s) - \rho) ds$$
+where $\zeta$ is the vertical deviation of an isopycnal from the equilibrium state defined by the reference density profile $\rho_b$.
+
+For exclusively baroclinic flow, the baroclinic energy equation may now be formulated following \citet{kang10} as
+\begin{equation}
+\frac{\partial}{\partial t} \left( E'_k + E'_p \right) = - \nabla \mathbf{F'} - \rho \varepsilon\ ,
+\label{eq:BaroclinicEnergyEquation}
+\end{equation}
+expressing the temporal change of the overall baroclinic energy, i.e.\ the sum of baroclinic kinetic and potential energy, as balanced by the sum of baroclinic energy flux divergence $\nabla \mathbf{F'}$ and dissipation rate of turbulent kinetic energy $\varepsilon$ multiplied with density to express it as an energy flux.
+For flow in steady state, the left-hand side of \eqref{eq:BaroclinicEnergyEquation} vanishes and the baroclinic energy equation simplifies to
+\begin{equation}
+\nabla \mathbf{F'} = - \rho \varepsilon\ ,
+\label{eq:SteadyStateBaroclinicEnergyEquation}
+\end{equation}
+where the divergence in baroclinic energy fluxes is balanced by the overall dissipation of energy.
+Integrating over a control volume and applying the divergence theorem gives
+\begin{equation}
+\oint_A \mathbf{F'} dA = -\int_V \rho \varepsilon dV\ ,
+\label{eq:BaroclinicEnergyEquationIntegralForm}
+\end{equation}
+stating that energy consumption through turbulent dissipation within the volume must be balanced by an energy flux through its boundaries.
+The baroclinic energy flux vector $\mathbf{F'}$ is given by
+% \begin{table*}[h!t]
+% \begin{equation}
+% \mathbf{F'} = \underbrace{\mathbf{u^\prime}E'_k + \mathbf{u^\prime}E'_p}_\text{Advection} \\
+%    + \underbrace{\mathbf{u^\prime}p^\prime + \mathbf{u^\prime}q}_\text{Pressure work} \\
+%    + \underbrace{\mathbf{u''}p'' + \mathbf{u''}q}_\text{Small-scale internal waves} \\
+%    + \underbrace{-\nu_H \nabla_H E'_k -\nu_V \frac{\partial E'_k}{\partial z} - \kappa_H \nabla_H E'_p -\kappa_V \frac{\partial E'_p}{\partial z} }_\text{Diffusion} 
+% \label{eq:BaroclinicEnergyFluxTerms}
+% \end{equation}
+% \end{table*}
+\begin{equation}
+\mathbf{F'} = \underbrace{\mathbf{u^\prime}E'_k + \mathbf{u^\prime}E'_p}_\text{Advection} \\
+   + \underbrace{\mathbf{u^\prime}p^\prime}_{\text{\makebox[0pt]{Pressure work} }}\ ,
+\label{eq:BaroclinicEnergyFluxTerms}
+\end{equation}
+with contributions from the advection of kinetic and available potential energy, and pressure work.
+Contributions of diffusive energy fluxes, non-hydrostatic pressure terms, and from the free ocean surface are neglected here; see Appendix~C for further discussion.
+In addition to the pressure work term $\mathbf{u^\prime}p^\prime$ we calculate contributions of small-scale waves to pressure work $\mathbf{u''} p''$, in the following termed \emph{internal wave fluxes}.
+Note that $\mathbf{u''} p''$ are a subset of $\mathbf{u^\prime}p^\prime$ and therefore already included in the pressure work term in \eqref{eq:BaroclinicEnergyFluxTerms}.
+
+The rate of turbulent dissipation of kinetic energy is estimated from the observations via the Thorpe scale method (see section~\ref{sec:ExperimentalDetails}\ref{sec:Observations}).
+Similarly, the bulk of turbulent dissipation in the model is achieved via the KL10 parameterization with increased viscosities and diffusivities where vertical instabilities occur.
+The amount of energy dissipated through the parameterization is calculated online in the model as
+\begin{equation}
+\varepsilon = \nu_\mathrm{KL10} \left( \left( \frac{\partial u}{\partial z}\right)^2 \\
+  + \left(\frac{\partial v}{\partial z}\right)^2\right)\ ,
+\end{equation}
+with the vertical turbulent viscosity $\nu_\mathrm{KL10}$ based on the vertical size of unstable overturns.
+
+Observations over the bottom-near 20 to 40\,m are lacking, so we must parameterize the dissipation caused by bottom friction based on near-bottom velocities $u_B$.
+We apply a quadratic drag parameterization $\tau_B = \rho C_D u_B^2$ with drag coefficient $C_D = 2\times10^{-3}$.
+Bottom drag dissipation $D^\prime$ is then calculated based on near-bottom velocities as $\tau_B u_B$.
+Model bottom drag dissipation is also parameterized via quadratic drag parameterization, however, the model drag coefficient is $1\times10^{-3}$.
+Velocities right at the bottom going into the parameterization further differentiate the model bottom drag estimates from the observation based estimates where velocities at about 40\,m above the bottom are used.
+We rewrite the energy budget in its integral form \eqref{eq:BaroclinicEnergyEquationIntegralForm} to separate between interior turbulent dissipation $\rho \varepsilon$ and dissipation caused by bottom drag $D^\prime$:
+\begin{equation}
+    \oint_A \mathbf{F'} dA = -\int_V \rho \varepsilon\,dV - \int_y \int_x D^\prime\,dx dy\ .
+\label{eq:BaroclinicEnergyEquationIntegralForm2}
+\end{equation}
+
+The important terms of \eqref{eq:BaroclinicEnergyEquationIntegralForm2} are depicted in Fig.~\ref{fig:EnergyBudgetSketch}.  
+In section~\ref{sec:Results}b, we calculate the baroclinic energy equation terms in \eqref{eq:BaroclinicEnergyEquationIntegralForm2} for both observations and model results.
+
+% Moored profiler / observations steadiness
+\begin{figure}
+\centerline{\includegraphics[width=19pc]{T1_time_series.pdf}}
+\caption{Three-day time series of northward velocity from a moored profiler deployed upstream of the towyo lines in 2014 (see Fig.~\ref{fig:OverviewMap} for location).
+a) Full northward velocity record.
+b) Low-frequency component obtained by low pass-filtering the time series at a cutoff period of 36~hours.
+c) Tidal components after band pass-filtering with cutoff periods of 36 and 10~hours.
+The low frequency component dominates the time series.
+}
+\label{fig:TimeDependence}
+\end{figure}
+
+\section{Results}\label{sec:Results}
+
+\subsection{Flow Steadiness}\label{ssec:FlowSteadiness}
+Justified by our measurements, we approximate the abyssal flow across the sill as in steady state.
+Observations show that tidal kinetic energy is only a fraction of the mean flow kinetic energy in this part of the Samoan Passage.
+A moored time series of velocity in the abyssal layer just upstream of the towyo line (Fig.~\ref{fig:TimeDependence}) shows domination of the bottom current by the steady northward flow of bottom water with tidal velocity amplitudes making up only a fraction of the low-frequency flow speed.
+The time-averaged horizontal kinetic energy of the low-frequency flow in Fig.~\ref{fig:TimeDependence} is \MPLowFreqKE\,\MPLowFreqKEUnit whereas the tidal band carries only \MPTidalFreqKE\,\MPTidalFreqKEUnit on average.
+Throughout most of the paper we will treat the flow as in steady state, but will discuss aspects of temporal variability in section~\ref{sec:Discussion}.
+Temporal aspects of the flow across the sill are also discussed in \citet{cusacketal19}, including the persistence of turbulent mixing as estimated from a number of moored profiler time series along the flow. 
+
+% Model steadiness
+\begin{figure}
+\centerline{\includegraphics[width=19pc]{model_steadiness.pdf}}
+\caption{
+Rate of change of model perturbation potential energy $E_{p0}=1/2 \rho_0 g \eta^2$ (gray), baroclinic potential energy $E_p^\prime$ (purple), and baroclinic kinetic energy $E_k^\prime$ (blue) and their sum (red) within a domain centered on the region of interest from kilometers~-10 to 30 and bounded in the vertical by the 0.9$^{\circ}$C isotherm.
+Baroclinic potential and kinetic energy change rapidly during model spinup and stabilize after about 100\,hours.
+Model data are analyzed for the period 100 to 150~hours after model start as indicated on the plot.
+At later times, waves reflected off the model boundaries lead to a less stable flow situation.
+}
+\label{fig:ModelSteadiness}
+\end{figure}
+
+The model stabilizes after about 100~hours of spinup time (Fig.~\ref{fig:ModelSteadiness}).
+Initially, kinetic energy increases strongly while potential energy drops.
+During the period around 100 to 150~hours after model start, total baroclinic energy ($E_k^\prime + E_p^\prime$) changes within a control volume centered on the sill area are only $\mathcal{O}(100)$\,W\,m$^{-1}$.
+As we will show, this constitutes only a small fraction of the magnitude of some of the terms in the baroclinic energy equation.
+At a later stage of the model run, baroclinic signals reflected from the outer edges of the domain start to appear in the control volume near the sill and lead to increased fluctuations in the rate of change of baroclinic energy content.
+We therefore focus the model analysis on the period 100 to 150~hours after model initialization.
+
+\subsection{Energetics}\label{ssec:EnergyBudgetResults}
+
+\subsubsection{Bernoulli flux}
+A significant drop in Bernoulli flux, as expected for a dissipative flow, becomes apparent upon averaging over a sufficient number of time steps in the model.
+It is not readily apparent for the two towyo sections or any individual model snapshot.
+Fig.~\ref{fig:BernoulliTransport} shows the Bernoulli flux along the flow with parameters $g^\prime$, $v$, and $\delta$ in \eqref{eq:BernoulliEntrainmentVariableBottom} calculated with the interface defined by $\theta=0.8^\circ$C in the model and $\sigma_4=45.94$\,kg\,m$^{-3}$ in the observations.
+$v$ is thus the average horizontal velocity over the layer below the interface, $\delta$ the layer thickness, and $g^\prime=g (\rho_2 - \rho_1) / \rho_0$ the density difference across the interface with $\rho_1$ the average density between \TyIntStartDepth\,m depth and the interface and $\rho_2$ the average density of the lower layer.
+
+The non-synopticity of the observations may partially explain the high variance in the Bernoulli flux downstream of the sill, however, even a model snapshot, synoptic by definition, shows high variance, if to a lesser degree.
+We speculate that internal repartitioning of energy and transient features of the flow lead to high variance in the Bernoulli flux.
+The hydraulic jumps around kilometers~7 and~22 show up as upward bumps in the Bernoulli flux.
+It thus appears as if drops in Bernoulli flux are associated with sharp downward motion of the flow interface height rather than the presumably dissipative regions of the hydraulic jumps.
+
+% Bernoulli function transport
+\begin{figure}
+\centerline{\includegraphics[width=19pc]{bernoulli_transport.pdf}}
+\caption{Transport of the Bernoulli function $B$, calculated as volume transport per unit width $Q$ times $B$, in model and observations.
+Results were multiplied by background density $\rho_0$ to obtain energy flux units.
+Thin lines show values calculated per towyo profile or model grid point, thick lines show a 2\,km-sized windowed mean.
+Results for a model snapshot are shown in pink.
+Gray colors show a time-average over the model analysis period with the shading indicating the range within $\pm 2 \sigma$ where $\sigma$ is the standard deviation of the model time-mean.}
+\label{fig:BernoulliTransport}
+\end{figure}
+
+When averaged over the analysis period between model hours~100 and~150, the model Bernoulli flux drops by \ModelBernoulliDrop\,\ModelBernoulliDropUnit{} between kilometer~0 and 17 with most of the drop concentrated around the region of the initial descent of the flow from the sill.
+However, extending the same calculation to kilometer~40 results in only \ModelBernoulliDropFarther\,\ModelBernoulliDropFartherUnit{} Bernoulli flux divergence.
+We dissect the individual terms contributing to the energetics of the dense layer overflow more closely in the following section where we apply the baroclinic energy equation developed in section~\ref{sec:Energetics}\ref{sec:EnergyEquation}.
+
+\subsubsection{Baroclinic energy budget}
+The baroclinic energy budget lets us separate the energetics of the overflow layer into various terms.
+We calculate the terms of the baroclinic energy equation as expressed in \eqref{eq:BaroclinicEnergyFluxTerms} and \eqref{eq:BaroclinicEnergyEquationIntegralForm2} for both observations and model where possible.
+All model terms can be computed.
+For the observations, the steadiness term $\partial E / \partial t$ cannot be computed and we have to assume the flow to be steady.
+Based on moored observations, we have made the argument above that this assumption is valid to first order.
+Further limitations for calculating energy terms from the observations are discussed in sections \ref{sec:Energetics}\ref{sec:EnergyEquation} and \ref{sec:Results}\ref{ssec:FlowSteadiness}.
+
+% Energy Fields
+\begin{figure*}
+\centerline{\includegraphics[width=33pc]{energetics_fields.pdf}}
+\caption{Energy and energy fluxes in observations and model.
+The left two columns show observations from 2012 and 2014, the right column shows the corresponding fields in the model for one snapshot.
+Black contours show the $\sigma_4=45.94$\,kg\,m$^{-3}$ isopycnal for the observations and the 0.8 and 0.9$^{\circ}$C isotherms in the model for tracing the upper interface of the dense layer.
+Rows a) and d) show available potential and kinetic energy, rows g) and j) show their respective horizontal fluxes.
+Rows m) and p) show horizontal and vertical pressure work terms $v'p'$ and $w'p'$.
+Row s) shows the small-scale vertical internal wave fluxes $w''p''$.
+Note the different color scales between the energy fluxes.
+}
+\label{fig:EnergeticsField}
+\end{figure*}
+
+Potential energy, kinetic energy, their horizontal flux forms, horizontal and vertical pressure work terms $v^\prime p^\prime$ and $w^\prime p^\prime$, and the vertical component of small-scale internal wave fluxes $w''p''$, are shown in Fig.~\ref{fig:EnergeticsField} for both towyos and a model snapshot.
+Vertical fluxes of potential and kinetic energy (not shown) are negligibly small and not further discussed here.
+The energy fields show the general conversion of available potential energy into kinetic energy as the flow plunges over the sill both in model and observations.
+The divergence in the horizontal pressure work term between upstream and downstream of the sill is a further energy source.
+As already apparent in Fig.~\ref{fig:EnergeticsField} and more clearly visible in the following when we integrate energy fluxes within the overflow layer, the horizontal pressure work terms ($v'p'$) do net work on the water volume encompassing the sill and are a dominant source of energy for the flow\footnote{Note that $v'p'$ is often removing energy from obstacles in barotropic-baroclinic conversion problems, where the barotropic pressure work term ($VP$) provides the energy,  and $v'p'$ is carrying energy away from the obstacle via radiating internal waves.}.
+
+Vertical pressure work and small-scale vertical internal wave fluxes are mostly contained within the dense layer.
+Vertical pressure work and internal wave fluxes exhibit a similar pattern in observations and model.
+In both cases, $w' p'$ and $w'' p''$ are elevated in the overflow layer but do not radiate much energy beyond the upper interface. 
+Regions of increased vertical wave fluxes appear to be tied to topography immediately downstream of the main sill and near the topographic depression around kilometer~22.
+
+\begin{figure}
+\centerline{\includegraphics[width=19pc]{energetics_fields_integrated.pdf}}
+\caption{
+Layer-integrated terms of the energy equation in observations and model.
+Model data are shown for one snapshot in time.
+Layer interfaces are defined by the 0.9 and 0.8$^{\circ}$C isotherm for the model and the $\sigma_4=45.94$\,kg/m$^3$ isopycnal for the towyo observations.
+(a) Volume flux per unit width calculated as vertical integral of horizontal velocities within the dense bottom layer.
+Thick lines here and in the following three panels show a 2\,km windowed moving average, thin lines results at each towyo profile or model grid point, respectively.
+(b) Horizontal flux of available potential energy.
+(c) Horizontal flux of kinetic energy.
+(d) Horizontal pressure work.
+(e) Turbulent dissipation cumulatively integrated horizontally and within the dense bottom layer. 
+(f) Cumulative integral of dissipation caused by bottom drag.
+}
+\label{fig:EnergeticsFieldsIntegrated}
+\end{figure}
+
+After passing the sill, kinetic energy and its flux are concentrated further towards the bottom in the model when compared to the observations.
+This may either be an observational shortcoming as the measurements are missing on average the bottom 40\,m, or dynamics like vertical transports of horizontal momentum not being fully captured in the model.
+Beyond kilometer~15, kinetic energy and its flux strongly increase in the observations but not in the model.
+We suggest that this is probably due to bathymetric and rotational effects becoming important and leading to flow joining from the side, thereby violating the assumption of two-dimensional flow and bringing in flow from the side with different upstream conditions.
+We will discuss this further in section~\ref{sec:Discussion}.
+
+Depth-integrated energy fluxes, dissipative terms, and volume flux,  are shown in Fig.~\ref{fig:EnergeticsFieldsIntegrated}.
+Vertical integration is carried out from the bottom to the upper layer interface.
+For the observations we integrate up to $\sigma_4=\TyUpperIntLimit$\,\TyUpperIntLimitUnit.
+In the model, we integrate both to the 0.8$^{\circ}$C isotherm, which traces the maximum shear at the upper interface, and the 0.9$^{\circ}$C isotherm, which formally coincides with the density interface used for the observations (compare section~\ref{sec:ExperimentalDetails}\ref{sec:Model}).
+Upstream of the sill, the volume transport per unit width is around 50 to 100\,m$^2$\,s$^{-1}$ in both observations and model.
+The volume flux increases only slightly in the model whereas it approximately doubles between kilometer~15 and~25 in both towyo sections.
+The change in volume flux in the observations may either be due to vertical entrainment caused by turbulence in the lee of the sill, or, as discussed above, due to flow with high kinetic energy joining the flow from the side, or a combination of both.
+Given the relatively large disagreement between model and observations further downstream of the sill, likely due to the three-dimensionality of the flow and not all flow being captured by the observations, we will focus the baroclinic energy budget on the region between kilometer~0 and 17.
+% However, we will also briefly discuss results for budgets extending further downstream.
+For the region of focus, depth-integrated energy fluxes in model and observations shown in Fig.~\ref{fig:EnergeticsFieldsIntegrated} compare within a factor of 2 to 3.
+
+Turbulent dissipation (Fig.~\ref{fig:EnergeticsFieldsIntegrated}e) is strongest in the region of the initial descent and hydraulic jump just downstream of the sill around kilometer~7 in both observations and model.
+Integration over the depth of the overflow layer and this region results in energy dissipation ranging between 0.5 and 1\,kW\,m$^{-1}$.
+A second hydraulic jump around kilometer~22 leads to noticeable, but less intense, dissipation of turbulent kinetic energy at only around 0.1\,kW\,m$^{-1}$ when integrated spatially.
+Model turbulent dissipation stays sufficiently strong beyond the hydraulic jump to increase the integrated downstream dissipation by a factor of two when compared to the observations.
+This discrepancy may be due to shortcomings in the model's turbulence parameterization, or the need for energy to be dissipated in the two-dimensional model instead of flow fluctuations being able to extend into the third dimension.
+Increased shear between the dense overflow layer and waters aloft may also contribute to increased turbulent dissipation in the model.
+The model develops a relatively strong return flow just above the interface that is not observed to be as strong in the towyo sections.
+We will discuss the return flow when touching on vertical momentum transports later in the paper.
+
+Bottom drag dissipation is a significant energy term in the observations, but not in the model (Fig.~\ref{fig:EnergeticsFieldsIntegrated}f).
+It is of similar size as the turbulent dissipation term for the observations, but about a factor of five smaller in the model.
+Turbulent dissipation due to bottom friction as parameterized here is proportional to $u_B^3$ and therefore sensitive to the velocity input.
+Velocities from 40\,m above the bottom in the observational estimate may be overestimating the true dissipation in the bottom boundary layer.
+Model bottom drag dissipation calculated from velocities 40\,m above the bottom (Fig.~\ref{fig:EnergeticsFieldsIntegrated}f, gray) illustrates this sensitivity as it show magnitudes comparable to the observations.
+The actual dissipation in the layer close to the bottom and its relationship to bottom drag parameterizations remains an open question.
+
+\begin{figure*}
+\centerline{\includegraphics[width=33pc]{vertical_wave_flux_and_vert_pressure_work_integrated.pdf}}
+\caption{
+Vertical pressure work integrated horizontally along isopycnals (for towyo observations) and isotherms (for model output) between kilometer~0 and~17.
+The dashed lines indicate the upper interface of the dense bottom layer at $\sigma_4=45.94$\,kg\,m$^{-3}$ in the observations and, correspondingly in the temperature-only stratified model, $\theta=0.9^{\circ}$C or $\theta=0.8^{\circ}$ (see text).
+Vertical pressure work is shown for all scales in (a) and for lateral scales of less than 5\,km termed \emph{internal waves} in the text in (b).
+Note the different x-axis limits between the two panels.
+Model small-scale internal wave fluxes are calculated based on locally defined perturbation pressure and velocity (pink). 
+For comparison, small-scale internal wave fluxes calculated based on high-pass filtered model velocity and pressure time series (see Appendix~B) are shown in orange. 
+}
+\label{fig:VerticalIWIntegrated}
+\end{figure*}
+
+Vertical pressure work and internal wave fluxes, the small-scale subset of the pressure work term, are mostly upward and concentrated within the dense bottom layer.
+The total pressure work term integrated along isopycnals between kilometer~0 and 17 differs quite substantially between observations and model (Fig.~\ref{fig:VerticalIWIntegrated}a), especially for the densest layers where it shows a downward flux of energy for the 2012 towyo. 
+\DIFdelbegin \DIFdel{Fluxes }\DIFdelend \DIFaddbegin \DIFadd{Pressure work }\DIFaddend within the dense layer \DIFdelbegin \DIFdel{vary }\DIFdelend \DIFaddbegin \DIFadd{varies }\DIFaddend between -4 and 4\,kW\,m$^{-1}$. 
+Both towyo sections and the model show upward energy flux due to the pressure work term near the interface and diminishing magnitudes towards and beyond the interface.
+The disagreement between the two towyos and the model makes the vertical pressure work term the least consistent term in the energy budget.
+Integrated along isopycnals, the vertical energy flux due to smaller-scale internal waves is directed upwards and reaches between 1~and 2\,kW\,m$^{-1}$ within the bottom layer in the observations and somewhat smaller magnitudes in the model (Fig.~\ref{fig:VerticalIWIntegrated}b).
+In both cases, vertical internal wave fluxes diminish close to zero past the upper interface of the overflow layer, indicating that the high frequency waves do not radiate much energy aloft outside the overflow layer.
+
+
+\begin{figure}
+\centerline{\includegraphics[width=19pc]{energy_budget_results.pdf}}
+\caption{Energy budget results.
+Colored bars show the magnitude of terms in the baroclinic energy equation \eqref{eq:BaroclinicEnergyEquationIntegralForm} \& \eqref{eq:BaroclinicEnergyFluxTerms} for towyo observations in 2012 (blue) and 2014 (purple), and for the model both within a control volume bounded by the 0.9$^{\circ}$C (pink) and the 0.8$^{\circ}$C isotherms (reddish pink) at the top.
+The control volume for the observations is defined by the $\sigma_4=\TyUpperIntLimit$\,\TyUpperIntLimitUnit{} isopycnal.
+Lateral limits are km\,0 and km\,17 in both observations and model.
+Variability in time over the model analysis period of 50\,hours is shown with gray horizontal bars as $\pm$ one standard deviation about the mean.
+Steadiness is only shown for the model output. 
+}
+\label{fig:EnergyBudgetResult}
+\end{figure}
+
+\begin{table*}[t]
+\begin{center}
+\begin{tabular}{lcccc}
+\hline\hline
+& Towyo 2012 & Towyo 2014 & Model 0.9$^{\circ}$C & Model 0.8$^{\circ}$C\\
+\hline
+\bf{Baroclinic energy budget} & & & & \\
+
+APE flux divergence [kW\,m$^{-1}$] & \TyAAPESFluxDiv & 
+\TyBAPESFluxDiv & $\ModelUpperEppSortedFluxDivergence\pm\ModelUpperEppSortedFluxDivergenceSigma$ &
+$\ModelLowerEppSortedFluxDivergence\pm\ModelLowerEppSortedFluxDivergenceSigma$\\
+
+KE flux divergence [kW\,m$^{-1}$] & \TyAKEFluxDiv & \TyBKEFluxDiv &
+$\ModelUpperEkpFluxDivergence\pm\ModelUpperEkpFluxDivergenceSigma$ &
+$\ModelLowerEkpFluxDivergence\pm\ModelLowerEkpFluxDivergenceSigma$\\
+
+Horizontal pressure work ($v^\prime p^\prime$) divergence [kW\,m$^{-1}$] & \TyAHorizPressWorkDiv  & \TyBHorizPressWorkDiv &
+$\ModelUpperIWSortedFluxHorizDivergence\pm\ModelUpperIWSortedFluxHorizDivergenceSigma$ &
+$\ModelLowerIWSortedFluxHorizDivergence\pm\ModelLowerIWSortedFluxHorizDivergenceSigma$ \\
+
+Vertical pressure work ($w^\prime p^\prime$) divergence [kW\,m$^{-1}$] & \TyAVertPressWorkDiv & \TyBVertPressWorkDiv &
+$\ModelUpperIWSortedFluxVertDivergence\pm\ModelUpperIWSortedFluxVertDivergenceSigma$ &
+$\ModelLowerIWSortedFluxVertDivergence\pm\ModelLowerIWSortedFluxVertDivergenceSigma$ \\
+
+Internal wave flux $(w'' p'')$ divergence [kW\,m$^{-1}$] & \TyAIWFluxDiv & \TyBIWFluxDiv &
+$\ModelUpperIWFluxVertDivergenceHP\pm\ModelUpperIWFluxVertDivergenceHPSigma$ &
+$\ModelLowerIWFluxVertDivergenceHP\pm\ModelLowerIWFluxVertDivergenceHPSigma$ \\
+
+Turbulent dissipation $(\varepsilon)$ [kW\,m$^{-1}$] & \TyADiss & \TyBDiss &
+$\ModelUpperDissipation\pm\ModelUpperDissipationSigma$ &
+$\ModelLowerDissipation\pm\ModelLowerDissipationSigma$ \\
+
+Bottom drag $(D^\prime)$ [kW\,m$^{-1}$] & \TyABottomDiss & \TyBBottomDiss &
+$\ModelUpperBottomDrag\pm\ModelUpperBottomDragSigma$ &
+$\ModelLowerBottomDrag\pm\ModelLowerBottomDragSigma$ \\
+
+Residual [kW\,m$^{-1}$] & \TyAResidual & \TyBResidual &
+$\ModelUpperResidual\pm\ModelUpperResidualSigma$ &
+$\ModelLowerResidual\pm\ModelLowerResidualSigma$ \\
+
+\hline
+\bf{Form drag} & & & & \\
+Integrated form drag [$10^4$\,N\,m$^{-1}$] & \TyAFormDrag & \TyBFormDrag & \multicolumn{2}{c}{$\ModelFormDrag\pm\ModelFormDragSigma$} \\
+Average form drag [N\,m$^{-2}$] & \TyAFormDragStress & \TyBFormDragStress & \multicolumn{2}{c}{$\ModelFormDragStress\pm\ModelFormDragStressSigma$} \\
+\hline
+\bf{Momentum flux} & & & & \\
+Integrated momentum flux [$10^4$\,N\,m$^{-1}$] & \TyAMomentumFlux & \TyBMomentumFlux & \multicolumn{2}{c}{$\ModelMomentumFlux\pm\ModelMomentumFluxSigma$} \\
+Average momentum flux [N\,m$^{-2}$] & \TyAMomentumFluxAverage & \TyBMomentumFluxAverage & \multicolumn{2}{c}{$\ModelMomentumFluxStress\pm\ModelMomentumFluxStressSigma$} \\
+\hline
+\end{tabular}
+\end{center}
+\caption{Energy budget, form drag, and momentum flux results.
+Model energy budget results are shown for both the 0.8$^{\circ}$C and the 0.9$^{\circ}$C isotherm defining the upper interface.
+Lateral integration limits for the energy budget, form drag, and momentum fluxes are kilometer~0 and~17.
+Vertical internal wave fluxes $w'' p''$ are a subset of the vertical pressure work term $w' p'$(compare \eqref{eq:BaroclinicPressureDecomposition} and \eqref{eq:BaroclinicoVelocityDecomposition}) and therefore not included in the energy budget residual.
+The energy budget residual is calculated from precise results and can therefore differ slightly from summing up rounded terms shown in this table.
+Results for momentum fluxes give maximum values from their vertical profiles within the overflow layer (compare Fig.~\ref{fig:MomentumFlux}).
+Uncertainties for the model results are calculated as standard deviations of the respective terms over the analysis period.
+See text for further details.
+}
+\label{tab:results}
+\end{table*}
+
+Bringing together the terms of the baroclinic energy equation shows an overall balance between source and sink terms.
+Energy sources, split between two thirds horizontal pressure work and one third available potential energy flux, are converted into roughly one half kinetic energy and one half domain energy loss.
+The latter is made up of a combination of turbulent dissipation, bottom drag energy loss, and upward flux of energy due vertical pressure work in both model and observations (Fig.~\ref{fig:EnergyBudgetResult} and Table~\ref{tab:results}).
+The integration volume is confined laterally between kilometer~0 and 17.
+In the vertical, we integrate from the bottom to $\sigma_4=\TyUpperIntLimit$\,\TyUpperIntLimitUnit{} in the observations and to either the $\theta=0.8^{\circ}$ or the $\theta=0.9^{\circ}$C isotherm in the model.
+Model results are shown for a time-mean over the 50~hour analysis period.
+Uncertainty in the model terms is estimated by showing $\pm$~one standard deviation around the mean values.
+The observations are too sparse for uncertainty estimates for the individual towyos, however, we interpret the spread between the two towyo sections as a measure for their uncertainty.
+
+Vertical small-scale internal wave fluxes $w''p''$ are not strong enough beyond the upper interface of the dense bottom layer to substantially flux energy upwards into the interior.
+We note that the $\mathcal{O}(1)$\,kW\,m$^{-1}$ vertical divergence of the upward wave energy flux within the overflow layer up to the interface (Fig.~\ref{fig:VerticalIWIntegrated}b) approximately matches the order of magnitude of integrated turbulent dissipation within the overflow layer (Fig.~\ref{fig:EnergyBudgetResult}).
+This is consistent with a notion of vertical wave energy flux divergence being balanced by turbulent dissipation associated with wave breaking.
+
+The total vertical pressure work term $w'p'$ shows the largest spread in the results.
+If we identify the 0.8$^{\circ}$C isotherm in the model as the flow interface, we find good agreement with the vertical pressure work energy flux from the 2012 towyo. 
+Better agreement of the vertical pressure work term between model and observations can be found when looking at vertical gradients instead of absolute values.
+The diminishing upward energy flux associated with pressure work in the model beyond the interface (only 0.2\,kW\,m$^{-1}$ at the 0.9$^{\circ}$C isotherm) and upwards decreasing trends in the observations (compare Fig.~\ref{fig:VerticalIWIntegrated}a) indicate a similar fate as for the small-scale internal wave flux discussed above.
+
+The energy budget closes with an imbalance of only about 20\%.
+The observational budget shows excess available energy for both towyo transects.
+Residuals are \TyAResidual{} and \TyBResidual\,\TyBResidualUnit{} or about one fifth of the energy source terms for the 2012 and 2014 towyos, respectively.
+The model energy budget also shows a moderate lack of energy sink terms at \ModelUpperResidual{} and \ModelLowerResidual\,\ModelLowerResidualUnit, depending on the interface choice.
+Model energy budget residuals are approximately within the residual uncertainty, calculated as the root-mean-square of uncertainties of the individual energy budget terms.
+We discuss these residuals further in section~\ref{sec:Discussion}.
+
+% Extending the budget to kilometer~25 leads to residuals of 2.6 and 3.6\,kW/m for the 2012 and 2014 towyos and $2.5\pm1.5$\,kW/m for the model.
+% The energy partitioning stays approximately the same for the towyos, although kinetic energy now dominates over the energy loss terms, consistent with flow with higher kinetic energy joining from the side.
+% The extended model budget shows less kinetic energy than energy loss terms, indicative of a more dissipative flow in the model than observed.
+% We do not discuss this extended energy budget any further in the following but point out that the general notion of horizontal pressure work dominating over available potential energy flux in flow forcing still holds.
+% The results are thus qualitatively similar.
+
+\subsection{Form Drag}
+\label{ssec:FormDrag}
+The impact of the topography on the flow, leading to the loss of about half of the released energy to internal waves, and eventually turbulent dissipation, can be expressed as a drag force.
+Usually termed \emph{form drag} in geophysical fluid dynamics, for certain flow types this drag force can be used to quantify the extraction of momentum (and energy) from the flow due to topographic obstacles.
+Form drag can provide a convenient route for parameterizing the effects of small-scale processes associated with flow-topography interaction, as for example hydraulic jumps and internal waves, on energy and momentum of the flow \citep[e.g.][]{klymaketal10a, maccreadyetal03, warneretal13}.
+In regions with significant topographic features, form drag can far exceed frictional drag at the bottom \citep[e.g.][]{moumnash00, edwardsetal04, mccabeetal06, warneretal13}.
+We note that not all form drag causes dissipation, as for example in the case of inviscid wave generation behind a topographic obstacle.
+However, even in such a case a conversion from mean flow to pressure work takes place.
+\citet[][p.~72]{prattwhitehead07} show that energy loss is a function of form drag for two-dimensional flow over an obstacle with a hydraulic jump in the lee.
+Having determined that about half of the energy driving the overflow either dissipates or leaves the flow via the upward pressure work term, we expect a relationship between form drag and energy loss. 
+In the following, we calculate form drag and associated energy loss of the flow across the sill and compare results with the energy budget presented above.
+
+\begin{figure*}
+\centerline{\includegraphics[width=27pc]{bottom_pressure.pdf}}
+\caption{Pressure anomaly in observations and model.
+a) Baroclinic pressure anomaly (colors) and isopycnals (contours) in the 2012 towyo transect.
+The thick contour shows the $\sigma_4=45.94$\,kg\,m$^{-3}$ isopycnal previously defined as the upper layer interface.
+The shaded area above the bottom shows depths not reached by the CTD observations and where constant density was assumed in the bottom pressure calculation.
+b) Baroclinic bottom pressure in observations and model offset by constant factors \DIFaddbeginFL \DIFaddFL{(model:~60\,N\,m$^{-2}$, towyo~2012:~-130\,N\,m$^{-2}$, towyo~2014:~-150\,N\,m$^{-2}$) }\DIFaddendFL for visualization purposes.
+\DIFaddbeginFL \DIFaddFL{This relatively large offset in absolute baroclinic bottom pressure between model and observations is due to model initialization with the observed density structure and partial draining of the initial stratification during model spinup as discussed in section~\ref{sec:ExperimentalDetails}\ref{sec:Model}.
+}\DIFaddendFL Faint black lines show bottom pressure for each model time step of the analysis period.
+The pink line shows the time mean model bottom pressure for the same period.
+Blue and purple lines show bottom pressure in the observations. 
+}
+\label{fig:BottomPressure}
+\end{figure*}
+
+Form drag emerges from the momentum equations \citep[e.g.][]{maccreadyetal03} as the horizontal integral over the product of bottom pressure $p_B$ and bottom slope $dh/dy$:
+\begin{equation}
+    D_f = \int_{y_0}^{y_1} p_B \frac{dh}{dy} dy\ .
+\label{eq:FormDrag}
+\end{equation}
+Calculated this way, $D_f$ is expressed in units of~N\,m$^{-1}$.
+Integrating also in cross-stream direction would return $D_f$ in units of~N as expected for a drag force.
+
+Form drag is readily calculated from \eqref{eq:FormDrag} in the model.
+In the observations, bottom pressure $p_B$ is not directly measured.
+Following \citet{warneretal13}, we obtain the baroclinic component of $p_B$ by making use of the hydrostatic equation and integrating density anomaly $\rho^\prime$ vertically:
+\begin{equation}
+    p^\prime = \int_{-d}^{-\TyIntStartDepth\,\mathrm{m}} \rho^\prime(z)\, g\, dz\ .
+\label{eq:HydrostaticEquation}
+\end{equation}
+As pointed out in section~\ref{sec:Energetics}\ref{sec:EnergyEquation}, we have to restrict the integration to the lower part of the water column as we are lacking observations further aloft.
+Integration is thus carried out from a depth of \TyIntStartDepth\,m to the bottom depth~$d$ for both towyos.
+Appendix~A shows that, in the model, a similar vertical integration range results in bottom pressure estimates that are good approximations of true model bottom pressure.
+The bottom layer not measured with the CTD, which was in general the bottom-most 40\,m, is accounted for in the vertical integration in \eqref{eq:HydrostaticEquation} by extending the deepest density estimate in each vertical profile all the way to the bottom.
+Bottom pressure along the flow for model and observations is shown in Fig.~\ref{fig:BottomPressure} and exhibits a distinct pressure drop across the sill.
+We stress that restricting the integration range to the bottom layer is justified in this specific case as there is no appreciable barotropic flow in observations and model and bottom pressure fluctuations are determined through density variations at depth.
+Different flow situations may call for full water column integration of density to obtain bottom pressure or even the need to include the pressure contribution from the surface elevation in the bottom pressure calculation.
+
+Horizontal integration in \eqref{eq:FormDrag} must be carried out between similar bottom depths upstream and downstream of the sill to be meaningful \citep[e.g.][]{nashmoum01}.
+We integrate from kilometer~0 to kilometer~17.
+These integration limits guarantee the same bottom depth on either side of the sill.
+They have the additional advantage of matching the horizontal range used in the energy budget calculations above, allowing for a comparison of the energy loss associated with form drag with the energy budget loss terms.
+
+Form drag calculated following \eqref{eq:FormDrag} is $\TyAFormDrag\times$\TyAFormDragUnit{} and $\TyBFormDrag\times$\TyBFormDragUnit{} for the 2012 and 2014 towyos, respectively (Table~\ref{tab:results}).
+The negative sign of the form drag indicates the force being directed against the flow.
+Averaged over the integration distance of 17\,km, the corresponding form drag stresses are \TyAFormDragStress{} and \TyBFormDragStress\,\TyBFormDragStressUnit.
+Calculated over the same horizontal range in the model, mean form drag is $\ModelFormDrag\times$\ModelFormDragUnit{} when averaged over the 50\,hour analysis period following model spinup.
+Form drag is relatively stable over this time period with a standard deviation of only $\ModelFormDragSigma\times$\ModelFormDragSigmaUnit.
+Averaging the model form drag over the 17\,km integration distance results in an average stress of \ModelFormDragStress\,\ModelFormDragStressUnit{} exerted by the topography on the flow.
+
+The energy loss due to form drag can be estimated by multiplication with the free upstream flow speed.
+However, for this particular flow, the upstream velocity is not independent of the topography.
+Hydraulic control at the sill sets the upstream flow condition, making it impossible to determine the flow speed one would observe without the topography.
+To gain insight into the energetics associated with the form drag, instead of assuming some arbitrary free flow velocity upstream, we determine the velocity necessary to match up energy loss of the flow found in the energy budget with the form drag.
+Energy loss of the flow as determined in the energy budget is due to turbulent dissipation, bottom drag, and vertical pressure work divergence.
+In terms of form drag considered as a wave drag, the loss terms are thus analogous to local wave breaking and associated energy loss, and radiating waves that dissipate energy outside our control volume.
+Horizontal pressure work is not included in the energy loss terms as we determined that its net effect is to do work on the flow, thus acting as an energy source.
+
+The energy loss terms sum up to \TyALossTerms\,\TyALossTermsUnit~[2012] and \TyBLossTerms\,\TyBLossTermsUnit~[2014] in the observational budget and \ModelLowerLossTerms\,\ModelLowerLossTermsUnit [0.8$^{\circ}$C interface] and \ModelUpperLossTerms\,\ModelUpperLossTermsUnit [0.9$^{\circ}$C interface] in the model budget (compare Fig.~\ref{fig:EnergyBudgetResult} and Table~\ref{tab:results}).
+Dividing the loss terms by form drag yields the velocity necessary to explain all energy loss with form drag.
+Velocities calculated this way are \TyAFormDragMatchVelocity\,\TyAFormDragMatchVelocityUnit{} [2012] and \TyBFormDragMatchVelocity\,\TyBFormDragMatchVelocityUnit{} [2014] for the observations and \ModelLowerFormDragMatchingVelocity\,\ModelLowerFormDragMatchingVelocityUnit{} [0.8$^{\circ}$C interface] and \ModelUpperFormDragMatchingVelocity\,\ModelUpperFormDragMatchingVelocityUnit{} [0.9$^{\circ}$C interface] for the model results.
+Observed velocities a few tens of kilometers upstream of the sill were $\mathcal{O}(0.1)$\,m\,s$^{-1}$~\citep[][Fig.~2b]{alfordetal13c} and thus comparable to the velocities determined to match form drag to flow energy loss here.
+In the model, velocities of the dense bottom layer increase from about 0.06\,m\,s$^{-1}$ at about 100\,km upstream of the sill to a maximum of 0.1\,m\,s$^{-1}$ immediately upstream of the sill.
+The form drag-based velocity estimate of \ModelUpperFormDragMatchingVelocity\,\ModelUpperFormDragMatchingVelocityUnit{} for the 0.9$^{\circ}$C interface energy budget corresponds to a distance of approximately 30\,km upstream of the sill whereas the estimate for the 0.8$^{\circ}$C interface budget exceeds modeled upstream velocities.
+Nevertheless, it appears as if the relationship between flow energy loss and the product of upstream flow speed and form drag generally holds in this type of flow.
+The details of the role of form drag for the energetics of a hydraulically controlled overflow warrant further investigation.
+For example, the role of the horizontal pressure work term in setting upstream wave dynamics, especially with an additional sill about 100\,km upstream possibly causing wave reflection, remains unclear.
+
+\subsection{Momentum Fluxes}
+\label{ssec:MomentumFluxes}
+The drag force discussed in the previous section decelerates the flow and therefore leads to a loss of momentum.
+Here we estimate the upward transport of momentum and compare the associated drag with the form drag results.
+The vertical flux of horizontal momentum $F_{m_z}$, or turbulent Reynolds stress, is calculated as
+\begin{equation}
+    F_{m_z} = \rho v^\prime w^\prime\ .
+\label{eq:MomentumFlux}
+\end{equation}
+Under linear conditions, this component of the Reynolds stress tensor is equal to form drag \citep[e.g.][]{gill82}.
+
+\begin{figure}
+    \centerline{\includegraphics[width=19pc]{momentum_flux.pdf}}
+\caption{
+Vertical flux of horizontal momentum integrated horizontally along isopycnals (for towyo observations) and isotherms (for model output) between kilometer~0 and kilometer~17.
+The dashed line indicates the upper interface of the dense bottom layer at $\sigma_4=45.94$\,kg\,m$^{-3}$ in the observations and, correspondingly in the temperature-only stratified model, $\theta=0.8^{\circ}$ or $\theta=0.9^{\circ}$C.
+}
+\label{fig:MomentumFlux}
+\end{figure}
+
+Both towyos and the model show transport of negative (i.e.~directed upstream) horizontal momentum upwards (Fig.~\ref{fig:MomentumFlux}) with largest amplitudes near the seafloor.
+Shear layer turbulence would tend to transport the positive horizontal momentum of the overflow into the stagnant layer above.
+The sign of the momentum flux opposing the mean flow can be understood by the fact that the Reynolds stress generated by topography is supported by the seabed resisting the force of the pressure drop across the sill \citep[e.g.][]{thorpe96}.
+The vertical divergence of the momentum flux indicates that form drag is propagating up through the overflow and tending to slow it or accelerate a counter current aloft by depositing momentum, either via breaking internal waves or resolved turbulence.
+
+Integrated from kilometer~0 to kilometer~17, peak momentum fluxes near the bottom are \TyAMomentumFlux{} and \TyBMomentumFlux$\times$\TyBMomentumFluxUnit{} for the 2012 and 2014 towyo sections and \ModelMomentumFlux$\times$\ModelMomentumFluxUnit{} on average in the model for the analysis period (Fig.~\ref{fig:MomentumFlux}).
+Divided by the integration distance, these correspond to average turbulent Reynolds stresses ranging from \TyBMomentumFluxAverage{} to \ModelMomentumFluxStress\,N/m$^2$ (Table~\ref{tab:results}).
+Momentum fluxes and the associated stresses diminish upwards to close to zero around the flow interface, thereby depositing momentum within the overflow layer and near the interface. 
+
+Flow deceleration, or acceleration of a counter current aloft, can be approximated via the vertical divergence of the momentum flux as
+\begin{equation}
+    \frac{\partial F_{m_z}}{\partial z} = - \rho \frac{\partial v}{\partial t}\ .
+\end{equation}
+The deposition of 1\,N$\,$m$^{-2}$ over the average dense layer height of about 500\,m would lead to 0.17\,m\,s$^{-1}$ flow when acting for 24~hours and could thereby slow down the mean current within about two days were it not balanced by other acceleration terms in the momentum equations. 
+The momentum deposition drives a counter current above the overflow layer in the model.
+In the observations, counter flow is observed for the 2014 towyo.
+The 2012 towyo section has similarly strong shear at its upper interface but a counter current aloft is not as pronounced.
+
+\section{Discussion}
+\label{sec:Discussion}
+We have applied a baroclinic energy budget to a dense overflow in the Samoan Passage.
+Within the first 17\,km from the sill, the budget shows an overall balance of two thirds of energy due to horizontal pressure work and one third available potential energy flux being converted into roughly one half kinetic energy and one half domain energy loss made up of a combination of turbulent dissipation, bottom drag energy loss, and upward flux of energy due to vertical pressure work.
+These results apply to two towyo sections and to results from a two-dimensional numerical model.
+All three energy budgets show residuals indicating missing energy sinks of about 20\% of the resolved energy source terms.
+
+Unmeasured turbulent dissipation is a likely candidate for missing energy loss in the energy budgets.
+Turbulence is known to be patchy and a proper inventory depends on statistics from a large amount of observations, which we do not have.
+For the model, numerical dissipation can lead to under-reporting of the total model dissipation.
+
+Results from the baroclinic energy budget are broadly comparable with the drop in energy flux associated with the Bernoulli function in the model.
+Energy loss terms (vertical internal wave flux divergence, turbulent dissipation, bottom drag) in the model budget sum up to \ModelLowerLossTerms\,\ModelLowerLossTermsUnit{} when integrated to the 0.8$^{\circ}$C isotherm.
+The drop in Bernoulli flux for the same integration volume, indicating the amount of energy going into these loss terms, shows \ModelBernoulliDrop\,\ModelBernoulliDropUnit.
+The simplified 1.5-layer model is thus within a factor of 2 of the baroclinic energy budget, suggesting that the 1.5-layer Bernoulli flux may be used for a rough estimate of the energy sink.
+This may be useful when available observations lack spatial resolution (e.g.,~only two moorings deployed upstream and downstream of a sill).
+The high variance in Bernoulli flux in the observations does not allow for a similar comparison.
+We note that it is possible to formulate the Bernoulli function for a vertically sheared and stratified fluid \citep{wintersarmi14}.
+This approach adds a pressure term to the Bernoulli function, thereby aligning it closer with the baroclinic energy equation used here and possibly making it more applicable to the Samoan Passage overflow than the 1.5~layer formulation where layer averages smear out flow details.
+Further exploration of the applicability of the Bernoulli function to the Samoan Passage overflow may be a worthwhile topic of a future study.
+For example, \citet[][their Fig.~12a]{wintersarmi14} show the energy balance of a two-dimensional hydraulically controlled flow over a sill where energy gains from pressure work and potential energy divergences across a sill contribute about equally to an increase in kinetic energy of the overflow.
+Their results are thus qualitatively similar to the energy budget presented here.
+
+While highly resolved in space and providing a detailed view on the abyssal overflow far removed from the ocean surface at depths of about 5\,km, the observations presented in this study still provide only a rough estimate of the flow's energy budget.
+Several aspects contribute to relatively large error bars on the energy budget terms.
+While steady to first order owing to weak tides and strong mean flow, the overflow does exhibit a certain degree of temporal variability as visible in the short break in the 2014 towyo around kilometer~12 when the instrument package had to be recovered for a few hours (Fig.~\ref{fig:TowyoObservations}).
+At a sampling time of about two days for the whole towyo line, spatio-temporal aliasing is certainly present in the observations, leading to non-synopticity and contributing to uncertainty in the energy budget. 
+Temporal variability along the towyo line is further discussed in \citet{cusacketal19} based on a few days of moored observations.
+
+The 2014 observations deviate from the 2012 towyo and the model by more than 50\% in flux divergence of kinetic energy and vertical pressure work.
+It is unclear to us whether this is a real feature of the flow or if noisier velocity observations in 2014 contributed to this discrepancy; the 150\,kHz downward looking ADCP from 2012 had to be swapped to a 300\,kHz unit in 2014.
+
+Three-dimensional processes, excluded here for simplicity and due to the lack of sufficient cross-stream observations for a full three-dimensional budget, must also play a role in the flow's energy budget. 
+Fig.~\ref{fig:OverviewMap}c shows the complex topography of the sill region.
+\citet{girtonetal19} present the rich three-dimensional structure of the flow field in this region based on a few cross-stream towyo sections.
+Especially near the sill, the hydraulically controlled flow may be steered towards the western boundary by geostrophy~\citep{tanetal22}.
+The depth-integrated volume transport varies by more than an order of magnitude in the cross-stream direction, mostly attributable to bathymetric features~\citep[e.g.][their Fig.~7]{girtonetal19}.
+Consequently, the assumption of purely two-dimensional flow in this study is only a very crude approximation which, as discussed in section \ref{sec:Results}b, holds only coarsely for a distance of about 17\,km from the sill before flow must be joining from the side to explain a sudden increase in kinetic energy flux.
+This length scale approximately corresponds to a quarter inertial period at average dense layer flow speeds, thus making an appreciable influence of the Coriolis force likely beyond this distance from the sill.
+Additionally, the bottom topography is less complex at this distance and beyond, making bathymetry another likely factor for flow joining laterally.
+Three-dimensional processes have been found to play an important role in other studies on overflow energetics, for example, \citet{klymakgregg04} suspect vortex shedding to be important for the energy budget of the flow through Knight Inlet.
+A number of additional cross- and along-stream towyo sections from the Samoan Passage northern sill region exist \citep{girtonetal19, cusacketal21}.
+A highly resolved numerical model, initialized and validated by these various towyo sections, could provide further insight into the role of three-dimensional aspects of the flow.
+
+The high wavenumber oscillations observed downstream of the sill in both model and observations may be generated by the turbulent region of the hydraulic jump. 
+Theory~\citep{carruthershunt86} and laboratory experiments~\citep{dohansutherland03, aguilarsutherland06, aguilaretal06} show the possibility of near-buoyancy frequency wave generation by vigorous turbulence in the lee of sharp hills.
+\citet{thurnherretal15} show that vertical kinetic energy associated with near-buoyancy waves is very closely related to turbulence in general.
+Although spatially not as well resolved as in our dataset, \citet{nashetal12} find similar high frequency oscillations in the dense outflow from the Mediterranean Sea through the Strait of Gibraltar.
+Based on the observational data presented in this study, \citet{thorpeetal18} discuss high frequency wave generation from Kelvin-Helmholtz billows. 
+Using scaling arguments based on background buoyancy frequency and mean flow amplitude they conclude that the waves are evanescent and trapped within the overflow layer, matching our observation of greatly diminished upward energy flux past the upper interface. 
+
+Flow-topography interaction as studied here is known to generate lee waves at the scale of the topographic obstacle that can radiate energy upwards \citep[e.g.][]{gill82}.
+The dense overflow by itself may be interpreted as a lee wave arrested to topography, however, upward radiation of waves at this scale diminish beyond the interface in the model.
+The observations by themselves are inconclusive on upward wave energy radiation at this scale due to their limited extent in the vertical and the constraint of zero pressure perturbation at the upper integration limit in the hydrostatic equation.
+However, based on the general agreement between model and observations and the lack of appreciable upward energy flux due to vertical pressure work outside the overflow layer in the model, we would not expect to see a substantial amount of upward pressure work energy flux in the observations.
+The energy budget of the 2014 towyo shows 3.2\,kW\,m$^{-1}$ energy flux due to the vertical pressure work term; however, it diminishes beyond the interface to less than 2\,kW\,m$^{-1}$ relatively quickly.
+For both towyo sections and the model vertical energy fluxes due to small-scale internal waves $w''p''$ converge towards zero around the interface.
+The strongly sheared interface may inhibit upward radiation of internal waves by acting as a critical layer \citep[e.g.][]{thorpe81}, shifting the frequency of the waves measured in a fixed reference frame outside the range of $N$ and $f$ where wave propagation is possible.
+The stratified interface may further contribute to trapping the lee wave response to the overflow layer.
+For barotropic flow across a two-dimensional ridge, \citet{jagannathanetal20} find that a density step can inhibit the radiation of internal waves aloft in a numerical simulation.
+We note that the lack of a sizable upward lee wave energy flux beyond the layer interface, likely due to the sharp interface in shear and stratification, sets the energetics apart from lee waves generated for example in the Southern Ocean where barotropic flow of the Antarctic Circumpolar Current interacts with topography and causes increased levels of turbulent mixing via radiation and remote breaking of topographic lee waves \citep{naveiraetal04, cusacketal17}.
+The vertical scale of lee wave energy radiation has been shown to matter not only for near-bottom stratification but also, albeit to a lesser extent, for surface kinetic energy in numerical model simulations \citep{trossmanetal16}.
+
+Topographic form drag, as found in studies on the Mediterranean outflow \citep{johnsonetal94a}, flow over a bank on the Oregon shelf \citep{nashmoum01}, flow over a ridge/headland combination in Puget Sound \citep{warneretal13}, and flow over ridges near Palau \citep{johnstonetal19, voetetal20}, dominated over bottom drag by at least a factor of 2 and up to an order of magnitude.
+Form drag amplitudes between 1 and 2\,N\,m$^{-2}$ in this study are of comparable size as found in \citet[][0.5 to 1.8\,N\,m$^{-2}$]{nashmoum01}, \citet[][1\,N\,m$^{-2}$]{johnstonetal19}, and \citet[][3\,N\,m$^{-2}$]{voetetal20}.
+However, the referenced studies present form drag estimates for peak flow conditions caused either by tidal or other episodic flow events while this study treats form drag caused by the mean flow, thus acting all the time and of much larger amplitude than aforementioned studies when integrated over time. 
+
+The importance of bottom drag for energy and momentum budget of the overflow remains somewhat unclear.
+Our observations reach only within 40\,m of the bottom and thereby do not directly measure drag and dissipation in the turbulent boundary layer.
+However, the energy budget closing to within 20\% puts an upper bound on the bottom drag; it should not be off by more than a factor of two.
+In agreement with our observational result (albeit based on the quadratic drag parameterization), \citet{klymakgregg04} find bottom drag and turbulent dissipation of similar size in Knight Inlet.
+
+Vertical transport of horizontal momentum slows down the flow and drives a counter-current aloft in the model.
+Mountain waves in the atmosphere have been found to deposit momentum aloft, thereby slowing down flow and driving counter currents in a similar manner \citep{welchetal01}.
+Momentum fluxes are approximately twice as large as the form drag estimate for the observations and only half as large as the form drag estimate for the model (Table~\ref{tab:results}).
+One may argue that in the 2D model, momentum has to go upwards and cannot escape to the sides, thereby increasing the modeled momentum fluxes over those estimated from the observations.
+However, following this argument, one might expect vertical internal wave fluxes in the model to dominate over the towyo estimates.
+This is not observed (compare Fig.~\ref{fig:VerticalIWIntegrated}).
+While laterally highly resolved, the observations may not capture enough of the small scale variability present in the model results to properly estimate the full upward momentum flux within the dense layer.
+
+Despite the aforementioned uncertainties, a picture emerges of various processes combining to convert an appreciable amount of energy, contained in the potential energy of the cross-sill density difference and appearing in the baroclinic energy budget as horizontal pressure work and horizontal flux of available potential energy, into turbulent dissipation within the dense overflow and at its interface.
+The hydraulically controlled flow forms a hydraulic jump that is arrested to topography. 
+Small scale internal waves, likely caused by the hydraulic transition, flux energy upwards within the dense layer but dissipate their energy up towards the interface and do not propagate further aloft.
+The associated upward flux of horizontal momentum and its vertical divergence decelerate the overflow and increase the shear at the interface.
+The sustained shear interface appears to act as a critical layer for the larger scale topographic lee wave response, inhibiting any substantial upward energy radiation by internal waves and making most of the energy associated with the overflow across the sill that is not converted into kinetic energy available for turbulent mixing within the overflow and at the interface.
+Furthermore, despite ongoing turbulent mixing at the top of the overflow layer, momentum deposition at the interface and the associated counter current aloft sustain the relatively sharp interface, thereby preventing smoothing of the interface and constantly supplying waters of comparably low density available for mixing with the dense bottom waters.
+These processes thus help explain the efficient transformation of water masses in the Samoan Passage demonstrated in previous studies~\citep[e.g.][]{voetetal15}.
+
+Form drag, estimated solely from the pressure drop across the sill as calculated from hydrographic measurements, predicts the topographic drag on the flow and provides a reasonable estimate for the associated energy loss when multiplied with upstream flow speed.
+It thus integrates over a number of processes highlighted in this study and provides a coarse but simple link between upstream flow speed and turbulent mixing downstream that may be of use when attempting to parameterize water mass transformation in the Samoan Passage Northern Sill overflow, or similar overflow situations, in coarse climate models.
+Given the importance of turbulent diapycnal mixing in abyssal passages for the transformation of dense bottom waters into lighter density classes \citep{brydennurser03, delavergneetal16a, delavergneetal16, prattetal19} and hence for the Global Overturning Circulation, such parameterizations should be developed further to be incorporated into climate models.
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ACKNOWLEDGMENTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\acknowledgments
+We wish to thank John Mickett, Eric Boget, Keith Magness, Trina Litchendorf, Andrew Cookson, Zo\"{e} Parsons, Samuel Fletcher, Andy Pickering, Thomas Decloedt, Kelly Pearson, Janna K\"ohler, Tahmeena Aslam, Deepika Goundar, Tessa Tafua, Alofa Aleta and Vaatele Tauinaola for their assistance in making the measurements; and Captains and crews of R/Vs \emph{Revelle} and \emph{Thompson} for their skill in handling and operating the vessels, without which these measurements would not have been possible.
+We are grateful to Zhongxiang Zhao for running an earlier version of the numerical model.
+We thank Rob Pinkel and Bill Young for fruitful conversations.
+This work was funded by the National Science Foundation under grants OCE-1029268, OCE-1029483, OCE-1657264, OCE-1657795 and OCE-1658027.
+\DIFaddbegin \DIFadd{We thank two anonymous reviewers for their comments that helped improve the paper.
+}\DIFaddend 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DATA AVAILABILITY STATEMENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\datastatement
+All observational data used in this study are archived and openly available at \url{https://doi.org/10.5281/zenodo.7226653}. Analysis code and model data can be obtained from \url{https://github.com/gunnarvoet/sp-overflow-energetics}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% APPENDIXES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\appendix[A]
+\appendixtitle{Model pressure components}
+
+Integrating density anomaly over the lower part of the water column ($z<-4100\,\mathrm{m}$) is a good approximation for bottom pressure perturbation for the model analysis period.
+However, upper ocean and free ocean surface have not settled into a steady state as they keep adjusting for the presence of the near-bottom current, return flows aloft, and other propagating signals within the model domain.
+Various components of pressure in the model at the beginning and end of the analysis period are shown in Fig.~\ref{fig:ModelPressureComponents}.
+Bottom pressure anomaly $p_{B, part}^\prime$ (blue) approximated from density anomaly $\rho^\prime$ via the hydrostatic equation
+\begin{equation}
+    p_{B, part}^\prime = \int_{-d}^{-4100\mathrm{m}} \rho^\prime g dz
+\end{equation}
+integrated over depths greater than 4100\,m down to the bottom at $z=-d$ matches the full bottom pressure (green) calculated from the sum of density anomaly integral over the full water column and pressure anomaly caused by elevation of the free surface $\eta$
+\begin{equation}
+    p_B^\prime = \rho_0 g \eta + \int_{-d}^{0} \rho^\prime g dz
+\end{equation}
+for the whole analysis period, except for a constant offset that cancels out in the form drag calculation in \eqref{eq:FormDrag}.
+Integrating $\rho^\prime$ over the full water column is not a good approximation for bottom pressure at the beginning of the analysis period as the free ocean surface shows a strong contribution to bottom pressure in the vicinity of the sill.
+The model appears to adjust initially via a barotropic mode to the flow near the bottom and then, more slowly and over the course of the analysis period, changes to a more baroclinic adjustment.
+The pressure contribution of the free surface (red) broadens horizontally over this period and thereby shows less influence on the pressure drop immediately above and downstream of the sill.
+As our focus is on the form drag associated with the near bottom flow, and bottom pressure appears to be relatively independent of the adjustment aloft, we do not further investigate this adjustment.
+We note that this inhibits proper analysis of the free ocean surface component of form drag, sometimes termed external form drag \citep[e.g.][]{warneretal13}, and of its influence on the dense overflow in general.
+Analysis of the free surface component in a more realistic and longer running simulation may be more fruitful for this type of analysis.
+The non-hydrostatic pressure component in the model (purple) does not influence the pressure drop across the sill and is therefore irrelevant for form drag calculations as has been found for nonlinear internal waves in previous studies \citep{warneretal13, moumsmyth06}.
+
+\begin{figure}
+\centerline{\includegraphics[width=19pc]{model_pressure.pdf}}
+\caption{Model pressure at beginning (top panel, 100~h) and end (bottom panel, 150~h) of the analysis period.}
+\label{fig:ModelPressureComponents}
+\end{figure}
+
+
+\appendix[B]
+\appendixtitle{Small-scale internal wave fluxes}
+We work with locally defined velocity and pressure perturbations $\mathbf{u''}$ and $p''$ as detailed in section~\ref{sec:Energetics}\ref{sec:EnergyEquation} in \eqref{eq:BaroclinicPressureDecomposition} and \eqref{eq:BaroclinicoVelocityDecomposition} to investigate the role of smaller-scale internal waves for the energetics of the dense layer.
+Varying the window size in the calculation of local mean profiles between 3 and 8\,km in the model changes the magnitude of the horizontally integrated vertical wave flux \DIFdelbegin \DIFdel{as shown in Fig.~\ref{fig:VerticalIWIntegrated}b }\DIFdelend by about a factor of two with diminishing energy flux for smaller window sizes corresponding to smaller lateral scales.
+
+We further validate the method by calculating model $w''$ and $p''$ based on high-pass filtered time series with a 12~hour cutoff period.
+The resulting pattern of the integrated vertical wave flux matches the local profile method, albeit at a somewhat smaller magnitude (Fig.~\ref{fig:VerticalIWIntegrated}b).
+This gives us confidence that the qualitative conclusions drawn from the local profile method, in particular close to zero vertical energy flux driven by small-scale internal waves beyond the overflow interface, are valid for both model and towyo observations.
+A future experiment with similar scope may consider using Lagrangian techniques for determining internal wave fluxes \citep[e.g.][]{shakespearehogg18, bachmanetal20}.
+
+
+\appendix[C]
+\appendixtitle{Full baroclinic energy flux vector}
+In section~\ref{sec:Energetics}\ref{sec:EnergyEquation} we consider the baroclinic energy equation with a reduced number of energy flux terms. The full baroclinic energy flux vector $\mathbf{F'}$ is given by \eqref{eq:FullBaroclinicEnergyFluxTerms}
+\begin{table*}[h!t]
+\begin{equation}
+\mathbf{F'} = \underbrace{\mathbf{u}E'_k + \mathbf{u}E'_p}_\text{Advection} + \underbrace{\mathbf{u''}p'' + \mathbf{u''}q + \mathbf{u'}\rho_0 g \eta }_\text{Pressure Work} + \underbrace{-\nu_H \nabla_H E'_k -\nu_V \frac{\partial E'_k}{\partial z} - \kappa_H \nabla_H E'_p -\kappa_V \frac{\partial E'_p}{\partial z} }_\text{Diffusion} 
+\label{eq:FullBaroclinicEnergyFluxTerms}
+\end{equation}
+\end{table*}
+with contributions from the advection of kinetic and available potential energy, pressure work including contributions from non-hydrostatic pressure $q$ and the free surface $\eta$, and diffusive fluxes of kinetic and potential energy in the horizontal and the vertical.
+
+Diffusive background fluxes are explicitly set in the model through eddy viscosities $\nu_H$, $\nu_V$ and eddy diffusivities $\kappa_H$, $\kappa_V$ acting horizontally and vertically on momentum and mass, respectively.
+These terms are \DIFdelbegin \DIFdel{small and therefore neglected in the budget .
+Estimates of diffusive fluxes }\DIFdelend \DIFaddbegin \DIFadd{inherently small as the bulk of the mixing is accomplished through the KL10 mixing parameterization (see section~\ref{sec:ExperimentalDetails}\ref{sec:Model}).
+Even when calculated with the much larger turbulent diffusivities from the KL10 parameterization, which are calculated as $K_z = \Gamma \varepsilon N^{-2}$ based on a flux coefficient $\Gamma=0.2$ \mbox{%DIFAUXCMD
+\citep{klymaklegg10}}\hskip0pt%DIFAUXCMD
+, the diffusive fluxes of baroclinic potential and kinetic energy are only $\mathcal{O}(1)$\,W\,m$^{-1}$ when integrated over the budget boundaries.
+They are thus orders of magnitude smaller than other budget terms and therefore neglected.
+Diffusive fluxes of baroclinic potential and kinetic energy }\DIFaddend in the observations \DIFdelbegin \DIFdel{are also small and neglected}\DIFdelend \DIFaddbegin \DIFadd{can be estimated in a similar way and are of the same order of magnitude as in the model as the input parameters for the calculation are of similar size.
+We note that using a larger flux coefficient, as may be necessary for near-bottom turbulence \mbox{%DIFAUXCMD
+\citep[e.g.][]{ijichietal20,spingysetal21}}\hskip0pt%DIFAUXCMD
+, does not change the orders-of-magnitude difference to other terms in the energy budget}\DIFaddend .
+
+The contribution of the free ocean surface $\eta$ to the energy budget is not considered in the energy budget.
+The term vanishes when averaging over the full ocean depth as $\int_{-d}^\eta \mathbf{u^\prime}\ dz = 0$ by definition \cite[e.g.][]{kang10}, however, it is non-zero for a partial depth integral.
+It remains unclear to us whether the term carries a real energy flux when considering only part of the water column.
+Calculating the term for the model budget leads to unrealistically high energy fluxes.
+Additionally, it shows relatively strong trends over the model analysis period as the upper ocean and free surface are still adjusting to the dense overflow at depth (see Appendix~A) whereas other terms in the energy budget are much more stable.
+Determining the role of the free surface term in the energy budget turned out to be beyond the scope of this paper and we welcome future contributions discussing its role in a partial depth baroclinic energy budget.
+We neglect the term in the model budget - and have no means of calculating it for the observations due to lacking measurements of $\eta$.
+
+Pressure work due to non-hydrostatic pressure in the model is negligible.
+Information of non-hydrostatic pressure is lacking in the observations.
+Therefore, we do not include this term in the energy budget.
+
+Neglecting diffusive fluxes and the free surface pressure work term, the energy flux vector reduces to
+\begin{equation}
+\mathbf{F'} = \underbrace{\mathbf{u}E'_k + \mathbf{u}E'_p}_\text{Advection} + \underbrace{\mathbf{u^\prime}p^\prime}_{\text{\makebox[0pt]{Pressure work} }}
+\label{eq:BaroclinicEnergyFluxTermsAppendix}
+\end{equation}
+as shown in~\eqref{eq:BaroclinicEnergyFluxTerms}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% REFERENCES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliographystyle{ametsocV6}
+\bibliography{references}
+
+\end{document}
