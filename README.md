@@ -11,7 +11,9 @@ Model data are stored on google drive and can be retrieved via `make` calls.
 
 The source code to run all analysis steps and generate plots for the manuscript is contained in [code/](code/). All analysis steps are documented in the [Makefile](Makefile), type `make help` for an overview. The analysis code is shared under the [MIT License](https://opensource.org/licenses/MIT). 
 
-The source code for the manuscript is contained in [doc/](doc/). A preprint of the manuscript has been posted at https://doi.org/10.31223/X5DH1P. The manuscript has not yet been peer-reviewed and is provided by the contributing Author(s) as a means to ensure timely dissemination of scholarly and technical Work on a noncommercial basis. Copyright and all rights therein are maintained by the Author(s) or by other copyright owners. It is understood that all persons copying this information will adhere to the terms and constraints invoked by each Author's copyright. The manuscript may not be reposted without explicit permission of the copyright owner.
+The source code for the manuscript is contained in [doc/](doc/). The manuscript has been published in the Journal of Physical Oceanography at https://doi.org/10.1175/JPO-D-22-0220.1.
+
+<!-- A preprint of the manuscript has been posted at https://doi.org/10.31223/X5DH1P. The manuscript has not yet been peer-reviewed and is provided by the contributing Author(s) as a means to ensure timely dissemination of scholarly and technical Work on a noncommercial basis. Copyright and all rights therein are maintained by the Author(s) or by other copyright owners. It is understood that all persons copying this information will adhere to the terms and constraints invoked by each Author's copyright. The manuscript may not be reposted without explicit permission of the copyright owner. -->
 
 ----------
 
