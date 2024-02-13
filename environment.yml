@@ -23,6 +23,7 @@ dependencies:
     - datalad-osf
     - gdown
     # Gunnar's code collection
-    - "-e /Users/gunnar/Projects/python/gvpy"
+    - "-e git+https://github.com/gunnarvoet/gvpy.git#egg=gvpy"
+    # - "-e /Users/gunnar/Projects/python/gvpy"
     # Project package
     - "-e ./code/"
